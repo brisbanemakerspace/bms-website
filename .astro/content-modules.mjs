@@ -1,0 +1,15 @@
+
+export default new Map([
+["src/data/blog/building-the-ultimate-css-grid/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fblog%2Fbuilding-the-ultimate-css-grid%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/blog/deploying-with-retro-tools/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fblog%2Fdeploying-with-retro-tools%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/blog/history-of-the-floppy-disk/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fblog%2Fhistory-of-the-floppy-disk%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/blog/mastering-terminal-workflows/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fblog%2Fmastering-terminal-workflows%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/blog/the-art-of-pixel-graphics/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fblog%2Fthe-art-of-pixel-graphics%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/blog/websocket-deep-dive/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fblog%2Fwebsocket-deep-dive%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/projects/database-index-optimization/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fprojects%2Fdatabase-index-optimization%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/projects/headless-cms/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fprojects%2Fheadless-cms%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/projects/monolith-to-aws/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fprojects%2Fmonolith-to-aws%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/projects/observability-dashboard/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fprojects%2Fobservability-dashboard%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/projects/open-source-cli/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fprojects%2Fopen-source-cli%2Findex.mdx&astroContentModuleFlag=true")],
+["src/data/projects/realtime-chat/index.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fdata%2Fprojects%2Frealtime-chat%2Findex.mdx&astroContentModuleFlag=true")]]);
+		

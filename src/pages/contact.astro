@@ -1,0 +1,24 @@
+---
+// Contact (/contact/). Figma "contact-page" frame (node 9:4). Thin route shell: owns BaseLayout +
+// SEO and composes the Sections/Contact blocks in the same shell as index/about (one .site-container
+// + gap rhythm). Fully static (prerendered).
+
+import Faq from "@components/Sections/Contact/Faq.astro";
+import Hero from "@components/Sections/Contact/Hero.astro";
+import InfoCards from "@components/Sections/Contact/InfoCards.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Contact — ${siteData.name}`}
+  description="Drop me a transmission — questions on vintage hardware, a retro-quest collab, or a guest devlog pitch — plus e-mail, Discord and GitHub links and a system FAQ."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <Hero />
+
+    <InfoCards />
+
+    <Faq />
+  </div>
+</BaseLayout>

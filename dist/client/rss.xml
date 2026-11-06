@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>8-BitQuest</title>
+    <link>https://example.com/blog/</link>
+    <description>A retro 8-bit, pixel-art developer portfolio built on Astro 7 and a CSS-first Tailwind v4 token system.</description>
+    <language>en-US</language>
+    <item>
+      <title>Building the Ultimate CSS Grid</title>
+      <link>https://example.com/blog/building-the-ultimate-css-grid/</link>
+      <guid isPermaLink="true">https://example.com/blog/building-the-ultimate-css-grid/</guid>
+      <description>A deep dive into constructing robust, responsive layouts using native CSS grid, without relying on external frameworks.</description>
+      <pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>History of the Floppy Disk</title>
+      <link>https://example.com/blog/history-of-the-floppy-disk/</link>
+      <guid isPermaLink="true">https://example.com/blog/history-of-the-floppy-disk/</guid>
+      <description>Exploring the rise and fall of the iconic storage medium that shaped a generation of computing and gaming.</description>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Deploying with Retro Tools</title>
+      <link>https://example.com/blog/deploying-with-retro-tools/</link>
+      <guid isPermaLink="true">https://example.com/blog/deploying-with-retro-tools/</guid>
+      <description>How we maintain a modern CI/CD pipeline while pretending it&apos;s 1995. A look into our unconventional devops setup.</description>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Mastering Terminal Workflows</title>
+      <link>https://example.com/blog/mastering-terminal-workflows/</link>
+      <guid isPermaLink="true">https://example.com/blog/mastering-terminal-workflows/</guid>
+      <description>Boost your productivity with custom shell scripts, terminal multiplexers, helpful aliases, and tmux configurations.</description>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>The Art of Pixel Graphics</title>
+      <link>https://example.com/blog/the-art-of-pixel-graphics/</link>
+      <guid isPermaLink="true">https://example.com/blog/the-art-of-pixel-graphics/</guid>
+      <description>From early arcade sprites to modern indie games, a deep dive into retro pixel art techniques, palettes, and hardware limits.</description>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>WebSocket Deep Dive</title>
+      <link>https://example.com/blog/websocket-deep-dive/</link>
+      <guid isPermaLink="true">https://example.com/blog/websocket-deep-dive/</guid>
+      <description>Real-time communication patterns, scaling node architectures, Redis pub/sub backends, and critical production gotchas.</description>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

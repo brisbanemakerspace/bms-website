@@ -1,0 +1,1 @@
+function e(e,t){let n=()=>document.querySelectorAll(e).forEach(t);n(),document.addEventListener(`astro:after-swap`,n)}export{e as t};

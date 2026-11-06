@@ -1,0 +1,15 @@
+# 8-BitQuest
+
+> A retro 8-bit, pixel-art developer portfolio built on Astro 7 and a CSS-first Tailwind v4 token system.
+
+## Core pages
+- [Home](https://example.com/)
+- [About](https://example.com/about/)
+- [Blog](https://example.com/blog/)
+- [Projects](https://example.com/projects/)
+- [Contact](https://example.com/contact/)
+
+## Feeds & legal
+- [RSS feed](https://example.com/rss.xml)
+- [Terms](https://example.com/terms/)
+- [Privacy](https://example.com/privacy/)

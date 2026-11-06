@@ -1,0 +1,14 @@
+{"message":"Enabling image processing with Cloudflare Images for production with the \"IMAGES\" Images binding.","label":"@astrojs/cloudflare","level":"info"}
+{"message":"Enabling sessions with Cloudflare KV with the \"SESSION\" KV binding.","label":"@astrojs/cloudflare","level":"info"}
+{"message":"Re-optimizing dependencies because lockfile has changed","label":"vite","level":"info"}
+{"message":"connected.","label":"vite","level":"info"}
+{"message":"Generated 1ms","label":"types","level":"info"}
+{"message":"Syncing content","label":"content","level":"info"}
+{"message":"Astro config changed","label":"content","level":"info"}
+{"message":"Astro version changed","label":"content","level":"info"}
+{"message":"Clearing content store","label":"content","level":"info"}
+{"message":"Synced content","label":"content","level":"info"}
+{"message":"Re-optimizing dependencies because lockfile has changed","label":"vite","level":"info"}
+{"message":"Re-optimizing dependencies because lockfile has changed","label":"vite","level":"info"}
+{"message":" astro  v7.4.7 ready in 1959 ms\n┃ Local    http://localhost:4321/\n┃ Network  use --host to expose","label":"SKIP_FORMAT","level":"info"}
+{"message":"watching for file changes...","label":null,"level":"info"}

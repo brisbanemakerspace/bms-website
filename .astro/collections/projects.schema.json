@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "cardTitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "complete",
+        "in-progress"
+      ]
+    },
+    "moduleId": {
+      "type": "string"
+    },
+    "order": {
+      "type": "number"
+    },
+    "thumbnail": {
+      "type": "string"
+    },
+    "thumbnailAlt": {
+      "type": "string"
+    },
+    "tech": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "specs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "value"
+        ]
+      }
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lead": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "lead",
+          "text"
+        ]
+      }
+    },
+    "archCaption": {
+      "type": "string"
+    },
+    "challenge": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "body"
+      ]
+    },
+    "solution": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "body"
+      ]
+    },
+    "draft": {
+      "type": "boolean"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "tagline",
+    "status",
+    "moduleId",
+    "order",
+    "thumbnail",
+    "thumbnailAlt",
+    "tech",
+    "specs",
+    "features",
+    "archCaption",
+    "challenge",
+    "solution"
+  ]
+}
