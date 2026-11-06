@@ -1,5 +1,5 @@
 // Shared blog-post → card/link mapping for the /blog/ listing, the home Latest Posts grid, and the
-// detail page's prev/next + related sections, so they can't drift. Pure data-shaping — the runtime
+// detail page's prev/next + related sections, so they can't drift. Pure data-shaping - the runtime
 // module the Astro files import; its check lives beside it (postCards.test.ts).
 //
 // All imports below are type-only, so `pnpm test` (Node type-stripping) erases them and this file
@@ -71,7 +71,7 @@ export interface AdjacentLink {
 }
 
 /**
- * Prev (newer) / next (older) neighbours of a post in the date-sorted list — the Figma "◄PREV NEXT►"
+ * Prev (newer) / next (older) neighbours of a post in the date-sorted list - the Figma "◄PREV NEXT►"
  * footer nav. Undefined at the ends so the caller can omit the missing side.
  *
  * @param sorted posts newest-first (see blogData.getSortedPosts)
@@ -89,7 +89,7 @@ export function getAdjacentPosts(
 }
 
 /**
- * Up to `limit` "More Quests" related posts — same category first, then most-recent, excluding the
+ * Up to `limit` "More Quests" related posts - same category first, then most-recent, excluding the
  * current post. Keeps the section fully dynamic (every link resolves), rather than transcribing the
  * mock's two fixed placeholder titles.
  *

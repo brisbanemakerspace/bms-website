@@ -2,7 +2,7 @@
 // Project detail (/projects/<slug>/). Thin route shell: owns BaseLayout + SEO and composes the Figma
 // "project-realtime-chat" frame (node 72:191) via <ProjectArticle>, one instance per collection
 // entry. `getStaticPaths` keys each route on the entry id, and `toProjectCard` builds the listing
-// links off the SAME id — so the grid links and the generated routes can never drift. The glob
+// links off the SAME id - so the grid links and the generated routes can never drift. The glob
 // loader gives single-segment ids (`<slug>` for `<slug>/index.mdx`), so a plain `[slug]` param fits.
 import ProjectArticle from "@components/Sections/Project/ProjectArticle.astro";
 import siteData from "@config/siteData.json";
@@ -24,7 +24,7 @@ const { Content } = await render(entry);
 ---
 
 <BaseLayout
-  title={`${entry.data.title} — ${siteData.name}`}
+  title={`${entry.data.title} - ${siteData.tabTitle}`}
   description={entry.data.description}
   image={entry.data.thumbnail}
 >

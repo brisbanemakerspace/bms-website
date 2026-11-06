@@ -3,11 +3,11 @@ import { z } from "astro/zod";
 import { defineCollection, reference } from "astro:content";
 
 /**
- * Blog — the "Latest Posts" listing (Figma node 76:4) + per-post article pages (node 5:128).
+ * Blog - the "Latest Posts" listing (Figma node 76:4) + per-post article pages (node 5:128).
  * Entries live at src/data/blog/<slug>/index.mdx (entry id => "<slug>").
  *
  * Unlike `projects` (whose detail is fixed slots), the blog article body is genuine free-form prose
- * — headings, lists, blockquotes, code — so it IS the MDX body (rendered via `render()` → `<Content />`,
+ * - headings, lists, blockquotes, code - so it IS the MDX body (rendered via `render()` → `<Content />`,
  * styled by the `.blog-prose` class). Frontmatter carries only what the layout lays out in slots:
  * the byline (`authors`), the retro `category` tag (drives the card + article badge tone via
  * postCards.categoryMeta), the footer `tags`, and the hero image. `pubDate` sorts the listing.
@@ -29,7 +29,7 @@ const blogCollection = defineCollection({
       // post without one degrades the listing and the OG image at once
       heroImage: image(),
       heroImageAlt: z.string(),
-      // the retro category tag ("Quest" / "Lore" / "Tech" / "Guide" / "Dev Log") — see categoryMeta
+      // the retro category tag ("Quest" / "Lore" / "Tech" / "Guide" / "Dev Log") - see categoryMeta
       category: z.string(),
       tags: z.array(z.string()).default([]), // footer hashtags (#pixel, #gamedev)
       draft: z.boolean().optional(),
@@ -37,12 +37,12 @@ const blogCollection = defineCollection({
 });
 
 /**
- * Projects — the "Project Log" (Figma node 72:7) + per-project detail pages (node 72:191).
+ * Projects - the "Project Log" (Figma node 72:7) + per-project detail pages (node 72:191).
  * Entries live at src/data/projects/<slug>/index.mdx (entry id => "<slug>").
  *
  * The free-form "Project Overview" prose is the MDX BODY (rendered via `render()`); everything the
- * detail page lays out in fixed slots — the spec table, the feature list, the challenge/solution
- * pair — is structured frontmatter so it can be validated and rendered without parsing prose.
+ * detail page lays out in fixed slots - the spec table, the feature list, the challenge/solution
+ * pair - is structured frontmatter so it can be validated and rendered without parsing prose.
  * `status` drives the retro card badge; `order` sorts the listing (see @components/Sections/Project).
  */
 const projectsCollection = defineCollection({
@@ -74,7 +74,7 @@ const authorsCollection = defineCollection({
     z.object({
       name: z.string(),
       avatar: image().optional(),
-      authorLink: z.string(), // author's public URL — becomes the JSON-LD Article author.url
+      authorLink: z.string(), // author's public URL - becomes the JSON-LD Article author.url
     }),
 });
 

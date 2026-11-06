@@ -1,13 +1,13 @@
-// src/components/ui/_dialog.ts — shared open/close controller for Dialog and Sheet.
+// src/components/ui/_dialog.ts - shared open/close controller for Dialog and Sheet.
 // Both render a native <dialog>; this single delegated listener wires the three behaviors they share:
-//   • openers — any element with [data-dialog-open="<id>"] → dialog.showModal()
-//   • closers — any element with [data-dialog-close] inside a <dialog> → dialog.close()
-//   • backdrop light-dismiss — a click whose target IS the <dialog> and lands outside its panel box
+//   • openers - any element with [data-dialog-open="<id>"] → dialog.showModal()
+//   • closers - any element with [data-dialog-close] inside a <dialog> → dialog.close()
+//   • backdrop light-dismiss - a click whose target IS the <dialog> and lands outside its panel box
 // Escape-to-close is native to <dialog>, so it needs no JS. Delegated on `document`, so it binds ONCE
-// and survives <ClientRouter /> view transitions — no astro:after-swap re-init (unlike Tabs, which
+// and survives <ClientRouter /> view transitions - no astro:after-swap re-init (unlike Tabs, which
 // binds per element). Imported as a side effect from both Dialog.astro and Sheet.astro; the module is
 // an ES singleton, so the listener is attached exactly once however many <dialog>s are on the page.
-// The entry/exit animations and the modal scroll-lock are CSS — see `_overlay.css`.
+// The entry/exit animations and the modal scroll-lock are CSS - see `_overlay.css`.
 
 function handleClick(event: MouseEvent): void {
   const target = event.target;

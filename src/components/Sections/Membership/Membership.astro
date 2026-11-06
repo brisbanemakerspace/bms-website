@@ -1,0 +1,231 @@
+---
+// src/components/Sections/Membership/Membership.astro - the Membership page body: maker plans for
+// hobbyists and coworking plans for professionals. Copy, prices and links are carried over from the
+// old brisbanemaker.space/membership/. One-off section copy lives here as typed literals (see AGENTS.md
+// "content tiers"); edit the `makerPlans` / `coworkingPlans` arrays to change a plan or a price.
+//
+// Both groups are shown one after the other (the old page switched between them with tabs), so the page
+// needs no JavaScript. Hobbyist plans sign up through the member portal; coworking plans go through
+// the contact page.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+
+const { portalSignup, routes, wikiPages } = siteData.links;
+const eventsUrl = routes.events;
+const contactUrl = routes.contact;
+const feesUrl = wikiPages.fees;
+const fairUseUrl = wikiPages.fairUse;
+const toolsUrl = wikiPages.lasercutterTools;
+
+/** A feature line: plain text, or text followed by a link. */
+type Feature = string | { text: string; label: string; href: string };
+interface Plan {
+  name: string;
+  price: number;
+  href: string;
+  features: readonly Feature[];
+}
+
+const fees: Feature = {
+  text: "Additional charges may occur for some tools.",
+  label: "Check here.",
+  href: feesUrl,
+};
+const tools = "Access to 3D printers, laser cutter, electronics and more*";
+const minTerm = "3 month minimum term (cancel anytime after that)";
+
+const makerPlans: readonly Plan[] = [
+  {
+    name: "Concession",
+    price: 42,
+    href: portalSignup,
+    features: [
+      tools,
+      fees,
+      "A warm fuzzy feeling for supporting our community",
+      minTerm,
+      "24/7 access",
+      "Personal commercial use^",
+      "Must present concession or healthcare card during signup",
+    ],
+  },
+  {
+    name: "Maker Lite",
+    price: 49,
+    href: portalSignup,
+    features: [
+      tools,
+      fees,
+      "A warm fuzzy feeling for supporting our community",
+      minTerm,
+      "24/7 access",
+      "No commercial use",
+    ],
+  },
+  {
+    name: "Maker Plus",
+    price: 69,
+    href: portalSignup,
+    features: [
+      tools,
+      fees,
+      "A warm fuzzy feeling for supporting our community",
+      minTerm,
+      "24/7 access",
+      "Personal commercial use^",
+    ],
+  },
+];
+
+const deskTerm = "3 month minimum term with pay by invoice available (cancel anytime after that)";
+const deskCommon: readonly Feature[] = [
+  tools,
+  fees,
+  {
+    text: "Commercial use as per our",
+    label: "Fair Use Policy",
+    href: fairUseUrl,
+  },
+  deskTerm,
+  "High speed WiFi, unlimited visits and 24/7 access",
+  "Free meeting room use",
+];
+
+const coworkingPlans: readonly Plan[] = [
+  {
+    name: "Hot Desk",
+    price: 159,
+    href: contactUrl,
+    features: ["A hot desk anytime you need", ...deskCommon],
+  },
+  {
+    name: "Dedicated Desk",
+    price: 269,
+    href: contactUrl,
+    features: ["Your own dedicated desk", ...deskCommon],
+  },
+];
+
+const link = "text-info hover:text-success underline transition-colors";
+const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+---
+
+<HeroPanel
+  headingId="membership-hero-heading"
+  tagline="Join Us"
+  heading="Membership"
+  intro="Find the membership that’s right for you."
+/>
+
+<section aria-labelledby="membership-intro-heading">
+  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
+    <h2 id="membership-intro-heading" class="h3 text-foreground">Do I need a membership?</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      You don't need a membership to attend our public <a href={eventsUrl} class={link}
+        >meetups and events</a
+      > or chat online. If you're a non-profit group looking for a meetup space, <a
+        href={contactUrl}
+        class={link}>get in touch</a
+      >. Unfortunately, to use any of our tools, you must become a member due to training and insurance requirements.
+    </p>
+
+    <p class="text-foreground/90 leading-relaxed">
+      It's also good to know that we're 100% volunteer run so things can take a bit longer than expected. We do our best to keep the space clean and tidy, but we rely on members to help out with cleaning and maintenance. If you're after a professional workshop space, membership may not be right for you.
+    </p>
+
+    <nav aria-label="Membership types" class="flex flex-wrap gap-3">
+      <a href="#maker-plans" class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase">
+        Hobbyists &amp; Makers
+      </a>
+      <a href="#coworking-plans" class="pixel-btn px-5 py-3 text-xs uppercase">
+        Full-time Professionals
+      </a>
+    </nav>
+  </PixelPanel>
+</section>
+
+{
+  [
+    {
+      id: "maker-plans",
+      title: "Maker plans for hobbyists & independent makers",
+      intro:
+        "Join our community and connect with other makers. For individuals who want access to our space for personal use and social reasons. You can also select a discounted yearly plan when signing up through the portal.",
+      plans: makerPlans,
+      cols: "lg:grid-cols-3",
+      footnote: (
+        <>
+          * Our <a href={toolsUrl} class={link} {...ext}>fair use policy</a> applies. Tools require safety
+          induction before use. ^ Personal commercial use allows low volumes of sales on Etsy, at local
+          markets, etc.
+        </>
+      ),
+    },
+    {
+      id: "coworking-plans",
+      title: "Coworking plans for full-time professionals",
+      intro:
+        "Whilst we provide membership options that permit commercial use, we do so to help us fund our primary charitable objectives. Our facilities are volunteer run and may not have the same level of service you'd expect with a typical commercial lease and are priced with this in mind.",
+      plans: coworkingPlans,
+      cols: "md:grid-cols-2",
+      footnote: (
+        <>
+          * Our <a href={toolsUrl} class={link} {...ext}>fair use policy</a> applies. Tools require safety
+          induction before use. Limited additional storage options available from $100/mth with dedicated
+          desk memberships.
+        </>
+      ),
+    },
+  ].map((group) => (
+    <section id={group.id} aria-labelledby={`${group.id}-heading`} class="scroll-mt-24">
+      <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-3">
+          <h2 id={`${group.id}-heading`} class="h3 text-foreground">
+            {group.title}
+          </h2>
+          <p class="text-foreground/90 leading-relaxed">{group.intro}</p>
+        </div>
+
+        <ul class={`grid gap-6 ${group.cols}`}>
+          {group.plans.map((plan) => (
+            <li class="flex">
+              <PixelPanel class="flex w-full flex-col gap-4 p-6">
+                <h3 class="font-display text-info text-sm uppercase">{plan.name}</h3>
+                <p class="text-foreground flex items-baseline gap-2">
+                  <span class="font-display text-3xl">${plan.price}</span>
+                  <span class="text-muted-foreground text-sm">/ month</span>
+                </p>
+                <a
+                  href={plan.href}
+                  class="pixel-btn pixel-btn--green flex px-5 py-3 text-xs uppercase"
+                  {...(plan.href.startsWith("http") ? ext : {})}
+                >
+                  Sign Up
+                </a>
+                <ul class="text-foreground/90 list-disc space-y-2 pl-5 text-sm leading-relaxed">
+                  {plan.features.map((feature) => (
+                    <li>
+                      {typeof feature === "string" ? (
+                        feature
+                      ) : (
+                        <>
+                          {feature.text}{" "}
+                          <a href={feature.href} class={link} {...ext}>
+                            {feature.label}
+                          </a>
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </PixelPanel>
+            </li>
+          ))}
+        </ul>
+
+        <p class="text-muted-foreground text-xs leading-relaxed">{group.footnote}</p>
+      </div>
+    </section>
+  ))
+}

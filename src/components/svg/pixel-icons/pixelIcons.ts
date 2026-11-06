@@ -1,15 +1,15 @@
-// Pixel-art glyph registry — hand-ported from the Figma "1300 Free Pixel Icons" community set
+// Pixel-art glyph registry - hand-ported from the Figma "1300 Free Pixel Icons" community set
 // (file CsRVZj1WwtKNAuqZEE2NT0). These are FILL-based icons on their own native, often non-square
-// viewBox — they deliberately do NOT go through the 24×24 stroke-based `svg/icons` registry, which
+// viewBox - they deliberately do NOT go through the 24×24 stroke-based `svg/icons` registry, which
 // would distort the non-square ones (youtube/email) and break the pixel grid. `<PixelIcon>` renders
 // them with `shape-rendering: crispEdges` and `fill: currentColor`, so `text-*` tokens recolor them.
 //
 // Each entry keeps its source viewBox verbatim (crisp pixels) and its path `d` verbatim (the compound
-// paths in youtube/email carry knockout subpaths — the play triangle, the envelope flap). Only the
+// paths in youtube/email carry knockout subpaths - the play triangle, the envelope flap). Only the
 // `#BFFB4F` lime fill and Figma ids were stripped; the svg's own `fill="currentColor"` takes over.
 
 export interface PixelIcon {
-  /** Source viewBox — preserved so the pixel grid stays intact (may be non-square). */
+  /** Source viewBox - preserved so the pixel grid stays intact (may be non-square). */
   viewBox: string;
   /** Inner SVG markup (paths), color-neutral so it inherits `currentColor`. */
   body: string;
@@ -27,10 +27,6 @@ export const PIXEL_ICONS = {
   linkedin: {
     viewBox: "0 0 32 32",
     body: '<path d="M32 3.05H30.47V28.95H32V3.05Z"/><path d="M30.47 28.95H28.95V30.48H30.47V28.95Z"/><path d="M30.47 1.52H28.95V3.05H30.47V1.52Z"/><path d="M28.95 4.57H27.42V27.43H28.95V4.57Z"/><path d="M28.95 30.48H3.04V32H28.95V30.48Z"/><path d="M27.42 27.43H4.57V28.95H27.42V27.43Z"/><path d="M22.85 15.24H21.33V13.71H18.28V15.24H16.76V13.71H13.71V22.86H16.76V18.29H18.28V16.76H19.81V18.29H21.33V22.86H24.38V16.76H22.85V15.24Z"/><path d="M10.66 13.71H7.61V22.86H10.66V13.71Z"/><path d="M10.66 9.14H7.61V12.19H10.66V9.14Z"/><path d="M27.42 3.05H4.57V4.57H27.42V3.05Z"/><path d="M28.95 0H3.04V1.52H28.95V0Z"/><path d="M4.57 4.57H3.04V27.43H4.57V4.57Z"/><path d="M3.04 28.95H1.52V30.48H3.04V28.95Z"/><path d="M3.04 1.52H1.52V3.05H3.04V1.52Z"/><path d="M1.52 3.05H0V28.95H1.52V3.05Z"/>',
-  },
-  rss: {
-    viewBox: "0 0 28.95 28.95",
-    body: '<path d="M27.43 13.71H25.91V10.66H24.38V9.14H22.86V7.62H21.33V6.09H19.81V4.57H18.29V3.05H15.24V1.52H10.67V0H1.53V3.05H10.67V4.57H15.24V6.09H18.29V7.62H19.81V9.14H21.33V10.66H22.86V13.71H24.38V18.28H25.91V27.43H28.95V18.28H27.43V13.71Z"/><path d="M1.53 6.09V9.14H9.14V10.66H12.19V12.19H15.24V13.71H16.76V16.76H18.29V19.81H19.81V27.43H22.86V19.81H21.33V16.76H19.81V13.71H18.29V12.19H16.76V10.66H15.24V9.14H12.19V7.62H9.14V6.09H1.53Z"/><path d="M1.53 15.24H7.62V16.76H10.67V18.28H12.19V21.33H13.72V27.43H16.76V21.33H15.24V18.28H13.72V16.76H12.19V15.24H10.67V13.71H7.62V12.19H1.53V15.24Z"/><path d="M1.53 22.85H0V27.43H1.53V28.95H6.1V27.43H7.62V22.85H6.1V21.33H1.53V22.85Z"/>',
   },
   youtube: {
     viewBox: "0 0 32 22.86",
@@ -85,8 +81,45 @@ export const PIXEL_ICONS = {
     body: '<path d="M28.945 11.435V12.955H30.475V9.90498H25.905V6.85498H24.375V11.435H28.945Z"/><path d="M28.945 12.9548H27.425V14.4748H28.945V12.9548Z"/><path d="M27.425 14.4749H25.905V16.0049H27.425V14.4749Z"/><path d="M25.905 16.0049H24.375V22.0949H25.905V16.0049Z"/><path d="M24.375 22.095H22.855V25.145H24.375V22.095Z"/><path d="M24.375 5.33496H22.855V6.85496H24.375V5.33496Z"/><path d="M22.855 25.145H21.335V26.665H22.855V25.145Z"/><path d="M22.855 3.81494H21.335V5.33494H22.855V3.81494Z"/><path d="M21.3351 26.6648H19.8051V28.1948H21.3351V26.6648Z"/><path d="M21.335 8.38501H18.285V11.435H21.335V8.38501Z"/><path d="M4.56504 28.1948V26.6648H3.04504V29.7148H19.805V28.1948H4.56504Z"/><path d="M21.335 2.28491H15.235V3.81491H21.335V2.28491Z"/><path d="M15.235 3.81494H13.715V5.33494H15.235V3.81494Z"/><path d="M13.715 5.33496H12.185V6.85496H13.715V5.33496Z"/><path d="M12.185 11.435V6.85498H10.665V9.90498H9.14502V11.435H12.185Z"/><path d="M9.14505 22.0949H10.6651V20.575H7.61505V23.625H9.14505V22.0949Z"/><path d="M9.14505 8.38501H7.61505V9.90501H9.14505V8.38501Z"/><path d="M7.61503 23.625H6.09503V25.145H7.61503V23.625Z"/><path d="M7.61503 19.0449H6.09503V20.5749H7.61503V19.0449Z"/><path d="M7.61503 6.85498H6.09503V8.38498H7.61503V6.85498Z"/><path d="M6.095 25.145H4.565V26.665H6.095V25.145Z"/><path d="M6.095 17.5249H4.565V19.0449H6.095V17.5249Z"/><path d="M6.095 5.33496H4.565V6.85496H6.095V5.33496Z"/><path d="M4.56504 16.0049H3.04504V17.5249H4.56504V16.0049Z"/><path d="M3.04502 5.33494H4.56502V3.81494H1.52502V16.0049H3.04502V5.33494Z"/>',
   },
   github: {
-    viewBox: "0 0 24 24",
+    viewBox: "0.75 0.75 22.5 22.5",
     body: '<polygon points="23 9 23 15 22 15 22 17 21 17 21 19 20 19 20 20 19 20 19 21 18 21 18 22 16 22 16 23 15 23 15 18 14 18 14 17 15 17 15 16 17 16 17 15 18 15 18 14 19 14 19 9 18 9 18 6 16 6 16 7 15 7 15 8 14 8 14 7 10 7 10 8 9 8 9 7 8 7 8 6 6 6 6 9 5 9 5 14 6 14 6 15 7 15 7 16 9 16 9 18 7 18 7 17 6 17 6 16 4 16 4 17 5 17 5 19 6 19 6 20 9 20 9 23 8 23 8 22 6 22 6 21 5 21 5 20 4 20 4 19 3 19 3 17 2 17 2 15 1 15 1 9 2 9 2 7 3 7 3 5 4 5 4 4 5 4 5 3 7 3 7 2 9 2 9 1 15 1 15 2 17 2 17 3 19 3 19 4 20 4 20 5 21 5 21 7 22 7 22 9 23 9"/>',
+  },
+  // The official Discord mark (Simple Icons, CC0 path data) rather than a pixel redraw - a blocky
+  // version never read as Discord. Fixed Discord blurple (#5865F2) rather than `currentColor`. `crispEdges` (the set default) gives its curves a light 8-bit
+  // jag. The viewBox is cropped to the mark's own bounds (y≈2.8–21.4) so it renders ~25% larger
+  // than the 24×24 box at the same icon height.
+  discord: {
+    viewBox: "0 2.6 24 18.9",
+    body: '<path fill="#5865F2" d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>',
+  },
+  // Australian Aboriginal flag. Hand-drawn on a 24×16 unit grid (no Figma source). Unlike the monochrome glyphs it carries
+  // its own `fill` colours, which override the svg's `currentColor`.
+  "flag-aboriginal": {
+    viewBox: "0 0 24 16",
+    body: '<path fill="#000000" d="M0 0h24v1h-24zM0 1h24v1h-24zM0 2h24v1h-24zM0 3h11v1h-11zM13 3h11v1h-11zM0 4h9v1h-9zM15 4h9v1h-9zM0 5h8v1h-8zM16 5h8v1h-8zM0 6h8v1h-8zM16 6h8v1h-8zM0 7h7v1h-7zM17 7h7v1h-7z"/><path fill="#ffff00" d="M11 3h2v1h-2zM9 4h6v1h-6zM8 5h8v1h-8zM8 6h8v1h-8zM7 7h10v1h-10zM7 8h10v1h-10zM8 9h8v1h-8zM8 10h8v1h-8zM9 11h6v1h-6zM11 12h2v1h-2z"/><path fill="#e50000" d="M0 8h7v1h-7zM17 8h7v1h-7zM0 9h8v1h-8zM16 9h8v1h-8zM0 10h8v1h-8zM16 10h8v1h-8zM0 11h9v1h-9zM15 11h9v1h-9zM0 12h11v1h-11zM13 12h11v1h-11zM0 13h24v1h-24zM0 14h24v1h-24zM0 15h24v1h-24z"/>',
+  },
+  // Torres Strait Islander flag. Hand-drawn on a 31×20 unit grid (no Figma source). Unlike the monochrome glyphs it carries
+  // its own `fill` colours, which override the svg's `currentColor`.
+  "flag-torres-strait": {
+    viewBox: "0 0 31 20",
+    body: '<path fill="#2d6a4a" d="M0 0h31v1h-31zM0 1h31v1h-31zM0 2h31v1h-31zM0 3h31v1h-31zM0 16h31v1h-31zM0 17h31v1h-31zM0 18h31v1h-31zM0 19h31v1h-31z"/><path fill="#000000" d="M0 4h31v1h-31zM0 15h31v1h-31z"/><path fill="#0b2161" d="M0 5h12v1h-12zM19 5h12v1h-12zM0 6h10v1h-10zM21 6h10v1h-10zM0 7h9v1h-9zM13 7h5v1h-5zM22 7h9v1h-9zM0 8h9v1h-9zM12 8h3v1h-3zM16 8h3v1h-3zM22 8h9v1h-9zM0 9h9v1h-9zM12 9h1v1h-1zM18 9h1v1h-1zM22 9h9v1h-9zM0 10h9v1h-9zM12 10h2v1h-2zM17 10h2v1h-2zM22 10h9v1h-9zM0 11h9v1h-9zM13 11h1v1h-1zM15 11h1v1h-1zM17 11h1v1h-1zM22 11h9v1h-9zM0 12h10v1h-10zM13 12h5v1h-5zM21 12h10v1h-10zM0 13h10v1h-10zM13 13h5v1h-5zM21 13h10v1h-10zM0 14h8v1h-8zM13 14h5v1h-5zM23 14h8v1h-8z"/><path fill="#ffffff" d="M12 5h7v1h-7zM10 6h11v1h-11zM9 7h4v1h-4zM18 7h4v1h-4zM9 8h3v1h-3zM15 8h1v1h-1zM19 8h3v1h-3zM9 9h3v1h-3zM13 9h5v1h-5zM19 9h3v1h-3zM9 10h3v1h-3zM14 10h3v1h-3zM19 10h3v1h-3zM9 11h4v1h-4zM14 11h1v1h-1zM16 11h1v1h-1zM18 11h4v1h-4zM10 12h3v1h-3zM18 12h3v1h-3zM10 13h3v1h-3zM18 13h3v1h-3zM8 14h5v1h-5zM18 14h5v1h-5z"/>',
+  },
+  // Progress Pride flag. Hand-drawn on a 30×18 unit grid (no Figma source). Unlike the monochrome glyphs it carries
+  // its own `fill` colours, which override the svg's `currentColor`.
+  "flag-progress-pride": {
+    viewBox: "0 0 30 18",
+    body: '<path fill="#613915" d="M0 0h2v1h-2zM1 1h2v1h-2zM2 2h2v1h-2zM3 3h2v1h-2zM4 4h2v1h-2zM5 5h2v1h-2zM6 6h2v1h-2zM7 7h2v1h-2zM8 8h2v1h-2zM8 9h2v1h-2zM7 10h2v1h-2zM6 11h2v1h-2zM5 12h2v1h-2zM4 13h2v1h-2zM3 14h2v1h-2zM2 15h2v1h-2zM1 16h2v1h-2zM0 17h2v1h-2z"/><path fill="#000000" d="M2 0h2v1h-2zM3 1h2v1h-2zM4 2h2v1h-2zM5 3h2v1h-2zM6 4h2v1h-2zM7 5h2v1h-2zM8 6h2v1h-2zM9 7h2v1h-2zM10 8h2v1h-2zM10 9h2v1h-2zM9 10h2v1h-2zM8 11h2v1h-2zM7 12h2v1h-2zM6 13h2v1h-2zM5 14h2v1h-2zM4 15h2v1h-2zM3 16h2v1h-2zM2 17h2v1h-2z"/><path fill="#e40303" d="M4 0h26v1h-26zM5 1h25v1h-25zM6 2h24v1h-24z"/><path fill="#74d7ee" d="M0 1h1v1h-1zM0 2h2v1h-2zM1 3h2v1h-2zM2 4h2v1h-2zM3 5h2v1h-2zM4 6h2v1h-2zM5 7h2v1h-2zM6 8h2v1h-2zM6 9h2v1h-2zM5 10h2v1h-2zM4 11h2v1h-2zM3 12h2v1h-2zM2 13h2v1h-2zM1 14h2v1h-2zM0 15h2v1h-2zM0 16h1v1h-1z"/><path fill="#ffafc8" d="M0 3h1v1h-1zM0 4h2v1h-2zM1 5h2v1h-2zM2 6h2v1h-2zM3 7h2v1h-2zM4 8h2v1h-2zM4 9h2v1h-2zM3 10h2v1h-2zM2 11h2v1h-2zM1 12h2v1h-2zM0 13h2v1h-2zM0 14h1v1h-1z"/><path fill="#ff8c00" d="M7 3h23v1h-23zM8 4h22v1h-22zM9 5h21v1h-21z"/><path fill="#ffffff" d="M0 5h1v1h-1zM0 6h2v1h-2zM0 7h3v1h-3zM0 8h4v1h-4zM0 9h4v1h-4zM0 10h3v1h-3zM0 11h2v1h-2zM0 12h1v1h-1z"/><path fill="#ffed00" d="M10 6h20v1h-20zM11 7h19v1h-19zM12 8h18v1h-18z"/><path fill="#008026" d="M12 9h18v1h-18zM11 10h19v1h-19zM10 11h20v1h-20z"/><path fill="#004dff" d="M9 12h21v1h-21zM8 13h22v1h-22zM7 14h23v1h-23z"/><path fill="#750787" d="M6 15h24v1h-24zM5 16h25v1h-25zM4 17h26v1h-26z"/>',
+  },
+  // Hand-drawn on a 16×16 unit grid (no Figma source): Instagram (rounded square, lens ring, flash dot)
+  // and Facebook (rounded square with the "f" knocked out). One 1×1-unit row-run per path, so they stay
+  // on the pixel grid like the set above.
+  instagram: {
+    viewBox: "0 0 16 16",
+    body: '<path d="M1 0h14v1h-14zM0 1h16v1h-16zM0 2h3v1h-3zM13 2h3v1h-3zM0 3h2v1h-2zM11 3h2v1h-2zM14 3h2v1h-2zM0 4h2v1h-2zM6 4h4v1h-4zM11 4h2v1h-2zM14 4h2v1h-2zM0 5h2v1h-2zM5 5h6v1h-6zM14 5h2v1h-2zM0 6h2v1h-2zM4 6h3v1h-3zM9 6h3v1h-3zM14 6h2v1h-2zM0 7h2v1h-2zM4 7h2v1h-2zM10 7h2v1h-2zM14 7h2v1h-2zM0 8h2v1h-2zM4 8h2v1h-2zM10 8h2v1h-2zM14 8h2v1h-2zM0 9h2v1h-2zM4 9h2v1h-2zM10 9h2v1h-2zM14 9h2v1h-2zM0 10h2v1h-2zM4 10h3v1h-3zM9 10h3v1h-3zM14 10h2v1h-2zM0 11h2v1h-2zM5 11h6v1h-6zM14 11h2v1h-2zM0 12h2v1h-2zM6 12h4v1h-4zM14 12h2v1h-2zM0 13h3v1h-3zM13 13h3v1h-3zM0 14h16v1h-16zM1 15h14v1h-14z"/>',
+  },
+  facebook: {
+    viewBox: "0 0 16 16",
+    body: '<path d="M1 0h14v1h-14zM0 1h16v1h-16zM0 2h16v1h-16zM0 3h9v1h-9zM14 3h2v1h-2zM0 4h8v1h-8zM11 4h1v1h-1zM14 4h2v1h-2zM0 5h8v1h-8zM11 5h5v1h-5zM0 6h8v1h-8zM11 6h5v1h-5zM0 7h6v1h-6zM13 7h3v1h-3zM0 8h6v1h-6zM13 8h3v1h-3zM0 9h8v1h-8zM11 9h5v1h-5zM0 10h8v1h-8zM11 10h5v1h-5zM0 11h8v1h-8zM11 11h5v1h-5zM0 12h8v1h-8zM11 12h5v1h-5zM0 13h8v1h-8zM11 13h5v1h-5zM0 14h8v1h-8zM11 14h5v1h-5zM1 15h7v1h-7zM11 15h4v1h-4z"/>',
   },
 } as const satisfies Record<string, PixelIcon>;
 

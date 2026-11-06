@@ -1,0 +1,74 @@
+---
+// src/components/Sections/Events/Events.astro - the Events page body: the makerspace's public Google
+// Calendar (agenda view) embedded in a pixel panel, plus the accessibility note from the old
+// brisbanemaker.space/events/. Edit the calendar id / link at the top to point at another calendar.
+//
+// The calendar is Google's own embed (an iframe), so loading this page contacts Google. It is
+// lazy-loaded, and the "Open in Google Calendar" link below it works without the embed.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+
+const calendarId =
+  "c_cd5b396a49a4864b4ab61ce2a59a4046b3f79d2cdf21cf9d8d96b71f0a38e9b5@group.calendar.google.com";
+const timeZone = "Australia/Brisbane";
+
+// base64url-free `src` param as Google expects: the calendar id, base64-encoded.
+const src = btoa(calendarId).replace(/=+$/, "");
+const embedParams = new URLSearchParams({
+  height: "600",
+  wkst: "1",
+  ctz: timeZone,
+  bgcolor: "#ffffff",
+  showTitle: "0",
+  showPrint: "0",
+  showCalendars: "0",
+  showTz: "0",
+  mode: "AGENDA",
+  color: "#009688",
+});
+// `src` appended raw: it is already URL-safe, and URLSearchParams would re-encode it.
+const embedUrl = `https://calendar.google.com/calendar/embed?${embedParams}&src=${src}`;
+const openUrl = `https://calendar.google.com/calendar/u/0?cid=${src}`;
+
+const { routes } = siteData.links;
+const link = "text-info hover:text-success underline transition-colors";
+---
+
+<HeroPanel
+  headingId="events-hero-heading"
+  tagline="What's On"
+  heading="Events"
+  intro="Workshops, social nights and working bees. Public events are open to everyone - no membership needed."
+/>
+
+<section aria-labelledby="events-note-heading">
+  <PixelPanel class="flex flex-col gap-2 p-6">
+    <h2 id="events-note-heading" class="font-display text-info text-sm uppercase">Important note</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      We have very limited parking on site that is available to members only. If you are attending a public event, please use public transport or nearby street parking. See <a href={routes.visit} class={link}>how to visit</a> for more information.
+    </p>
+  </PixelPanel>
+</section>
+
+<section aria-labelledby="events-calendar-heading">
+  <PixelPanel class="flex flex-col gap-4 p-4 md:p-6">
+    <h2 id="events-calendar-heading" class="h3 text-foreground">Upcoming events</h2>
+    <iframe
+      src={embedUrl}
+      title="Brisbane Makerspace events calendar"
+      loading="lazy"
+      class="border-border h-[600px] w-full border-4 bg-white"></iframe>
+    <p class="text-muted-foreground text-sm">
+      Times are shown in Brisbane time. Prefer your own calendar app? <a
+        href={openUrl}
+        class={link}
+        target="_blank"
+        rel="noopener noreferrer">Add it to Google Calendar</a
+      >. New here? See <a href={routes.visit} class={link}>how to visit</a> or <a
+        href={routes.membership}
+        class={link}>membership options</a
+      >.
+    </p>
+  </PixelPanel>
+</section>

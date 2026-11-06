@@ -6,21 +6,21 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 
 // The production domain, which `site` below feeds to canonical, OG, JSON-LD, the sitemap,
-// robots.txt and llms.txt — six things one wrong value poisons at once, and none of them visibly
+// robots.txt and llms.txt - six things one wrong value poisons at once, and none of them visibly
 // broken in review. A fresh clone builds on the placeholder so a buyer can see the site before
 // owning a domain; a production deploy refuses to, so the placeholder cannot reach a live domain.
 //
 // This template is host-agnostic, so "is this a production deploy?" reads each host's own build
 // variable rather than assuming one. None of these is set by a local `pnpm build` or by a deploy
 // preview, so previews and local work build freely. On a host not listed here, set DEPLOY_ENV
-// yourself (see .env.example) — the gate is only as good as the signal it can see.
+// yourself (see .env.example) - the gate is only as good as the signal it can see.
 const site = process.env.SITE_URL ?? "https://example.com";
 const isProductionDeploy =
   process.env.CONTEXT === "production" || // Netlify
   process.env.VERCEL_ENV === "production" || // Vercel
-  process.env.DEPLOY_ENV === "production"; // anything else — set it in your host's build env
+  process.env.DEPLOY_ENV === "production"; // anything else - set it in your host's build env
 
-// Match the placeholder by exact hostname, not `site.includes("example.com")` — a substring test both
+// Match the placeholder by exact hostname, not `site.includes("example.com")` - a substring test both
 // misses real domains that merely contain it and green-lights hosts like `example.com.evil.test`. An
 // unparseable SITE_URL is treated as still-placeholder so a malformed value fails the gate too.
 const placeholderHosts = new Set(["example.com", "www.example.com"]);
@@ -74,7 +74,7 @@ export default defineConfig({
   trailingSlash: "always",
 
   // mdx() renders .mdx content.
-  // sitemap filter: never list noindex pages — the dev-only /examples catalog and 404s
+  // sitemap filter: never list noindex pages - the dev-only /examples catalog and 404s
   // both set `noindex` in the markup, so a sitemap entry for them would contradict it.
   integrations: [
     mdx(),

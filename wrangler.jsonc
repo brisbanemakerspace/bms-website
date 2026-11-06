@@ -2,17 +2,35 @@
 // owns the build wiring: `main` is the adapter's unified dev+prod entrypoint (never a dist/ path),
 // static assets, the SESSION KV and IMAGES bindings are all injected into the generated config under
 // dist/ at build time, and `wrangler deploy` reads that via .wrangler/deploy/config.json.
-// Contact secrets are NOT set here — set them once per account with:
+// Contact secrets are NOT set here - set them once per account with:
 //   pnpm wrangler secret put RESEND_API_KEY
 //   pnpm wrangler secret put CONTACT_TO_EMAIL
-//   pnpm wrangler secret put CONTACT_FROM_EMAIL   (optional — defaults to onboarding@resend.dev)
+//   pnpm wrangler secret put CONTACT_FROM_EMAIL   (optional - defaults to onboarding@resend.dev)
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "8-bitquest",
+  "name": "bms-website",
   "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-07-25",
   "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "preview_urls": true,
   "observability": {
     "enabled": true,
+    "head_sampling_rate": 1,
+    "redact_query_string": false,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true,
+    },
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+    },
+    "issues": {
+      "enabled": true,
+    },
   },
 }

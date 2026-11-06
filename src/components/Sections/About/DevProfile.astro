@@ -1,9 +1,9 @@
 ---
-// src/components/Sections/About/DevProfile.astro — Figma "Character Profile Section" (node 5:303).
+// src/components/Sections/About/DevProfile.astro - Figma "Character Profile Section" (node 5:303).
 //
 // The About page's "character sheet": the DEV PROFILE heading, a pixel avatar tile, and a stats
 // card of ROLE / YRS rows plus two HP-style skill bars (FRONTEND / BACKEND). Near the top of the
-// page (just below the Hero), so NO <Reveal> — a scroll-timeline element already in view renders
+// page (just below the Hero), so NO <Reveal> - a scroll-timeline element already in view renders
 // mid-progress. Tokens only, so the light theme flips for free.
 //
 // CONTENT: the ROLE / YRS values and the skill %s come from portfolioData.profile (buyer-editable);
@@ -20,7 +20,7 @@ const specs = [
 ] as const;
 
 // Skill bars: label + percentage (from portfolioData). The track is the fixed black pixel surface
-// (bg-border), the fill the info blue — both read on the card in either theme (the card flips, the
+// (bg-border), the fill the info blue - both read on the card in either theme (the card flips, the
 // track stays black).
 const bars = skills;
 ---

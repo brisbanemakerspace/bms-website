@@ -1,14 +1,14 @@
-// AUTO-GENERATED — do not edit by hand. 553 icons.
-// Source: Figma "Stratis UI Icons" (Community) — the UI line icons. Attribution and licence terms
+// AUTO-GENERATED - do not edit by hand. 553 icons.
+// Source: Figma "Stratis UI Icons" (Community) - the UI line icons. Attribution and licence terms
 // for this file live in ../../../THIRD-PARTY.md; read it before redistributing.
 // Ported in batches: General, Arrows (partial), Media & Devices, Alerts, Security, Images, Files,
 // Charts, Development, Communication, Editor
-// — see ./README.md for what's still to import and how to regenerate / extend.
+// - see ./README.md for what's still to import and how to regenerate / extend.
 //
 // The 18 filled Social/brand marks from a second Figma file ("Social Media Icons 24x24") were
 // REMOVED by hand after generation: a trademarked brand mark is governed by the brand owner's own
 // guidelines regardless of what the Figma file permits, and no page in the theme used one. Don't
-// re-add them without clearing each mark yourself. `youtube` survives as a Stratis *line* icon —
+// re-add them without clearing each mark yourself. `youtube` survives as a Stratis *line* icon -
 // still a trademark, still unused by the theme; see THIRD-PARTY.md.
 //
 // Each value is the inner markup of a 24x24 icon. Paths use `currentColor` (recolor with
@@ -911,7 +911,6 @@ export const ICONS = {
     '<path d="M5.81615 14.4L2.4 18L5.81615 21.6M2.4 18H19.2C20.5255 18 21.6 16.9255 21.6 15.6V12M18.1838 9.6L21.6 6L18.1839 2.4M21.6 6L4.8 6C3.47452 6 2.4 7.07452 2.4 8.4L2.4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
   "refresh-02":
     '<path d="M6 19.2001C4.01177 19.2001 2.4 17.5883 2.4 15.6001V8.4C2.4 6.41177 4.01178 4.8 6 4.8H11.4M16.2 4.8H18C19.9882 4.8 21.6 6.41178 21.6 8.4V15.6001C21.6 17.5883 19.9882 19.2001 18 19.2001H10.2M12.6 21.6L10.2 19.2001L12.6 16.8M10.2 7.2L12.6 4.8L10.2 2.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
-  rss: '<path d="M4 4C12.8366 4 20 11.1634 20 20M4 12C8.41828 12 12 15.5817 12 20M4 20H4.04688" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
   "save-01":
     '<path d="M6.9375 19.875V14.8125C6.9375 14.1912 7.44118 13.6875 8.0625 13.6875H15.9375C16.5588 13.6875 17.0625 14.1912 17.0625 14.8125V20.4375M14.8125 7.5L8.0625 7.5C7.44118 7.5 6.9375 6.99632 6.9375 6.375L6.9375 3M20.4351 6.93513L17.0649 3.56487C16.7032 3.20319 16.2127 3 15.7012 3H4.92857C3.86344 3 3 3.86344 3 4.92857V19.0714C3 20.1366 3.86344 21 4.92857 21H19.0714C20.1366 21 21 20.1366 21 19.0714V8.29883C21 7.78734 20.7968 7.2968 20.4351 6.93513Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
   "save-02":

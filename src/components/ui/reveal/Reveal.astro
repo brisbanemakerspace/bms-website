@@ -1,8 +1,8 @@
 ---
-// src/components/ui/reveal/Reveal.astro — astro-boiler primitive (see ../README.md).
+// src/components/ui/reveal/Reveal.astro - astro-boiler primitive (see ../README.md).
 // Scroll-reveal wrapper. Composes the owned motion catalog (styles/motion/index.css): an entrance
 // `animate-*` driven by the NATIVE scroll timeline (`timeline-view` = `animation-timeline: view()`),
-// so it is ZERO-JS — the element animates as it scrolls into view, progress mapped to `animate-range-*`.
+// so it is ZERO-JS - the element animates as it scrolls into view, progress mapped to `animate-range-*`.
 //
 // Two guards, by design:
 //   • `motion-reduce:animate-none` degrades to static content. This is REQUIRED (not just belt-and-
@@ -12,7 +12,7 @@
 //     wrapper. The `animate` prop overrides per call site (keeps the primitive usable config-free).
 //
 // ponytail: native scroll timelines are Chromium + Safari; where unsupported (e.g. Firefox), the
-// animation ignores the timeline and simply plays once on load — content still ends visible (graceful
+// animation ignores the timeline and simply plays once on load - content still ends visible (graceful
 // degradation, no JS fallback shipped). For above-the-fold content prefer a plain `animate-*` utility.
 import { siteSettings } from "@config/siteSettings.json";
 import type { HTMLAttributes } from "astro/types";
@@ -20,7 +20,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 type Props = HTMLAttributes<"div"> &
   VariantProps<typeof reveal> & {
-    /** Render element (wrapper needs a box — `display:contents` would break the timeline). */
+    /** Render element (wrapper needs a box - `display:contents` would break the timeline). */
     as?: keyof HTMLElementTagNameMap;
     /** Per-call override of the `siteSettings.useAnimations` master switch. */
     animate?: boolean;

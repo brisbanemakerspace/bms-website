@@ -1,5 +1,5 @@
-// Self-check for postCards.ts — the category→badge map, the entry→card mapping, and the prev/next
-// + related selectors (house rule: non-trivial logic leaves ONE runnable check behind — see
+// Self-check for postCards.ts - the category→badge map, the entry→card mapping, and the prev/next
+// + related selectors (house rule: non-trivial logic leaves ONE runnable check behind - see
 // AGENTS.md). No framework: `pnpm test` runs this under Node's type-stripping.
 import assert from "node:assert/strict";
 
@@ -92,4 +92,4 @@ assert.ok(
   "the current post is never related to itself",
 );
 
-console.log("postCards.test.ts — all assertions passed");
+console.log("postCards.test.ts - all assertions passed");

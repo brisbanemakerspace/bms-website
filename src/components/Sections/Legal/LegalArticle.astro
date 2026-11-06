@@ -1,12 +1,12 @@
 ---
-// Shared renderer for the legal documents (Terms, Privacy). Layout-free section: the route
-// owns BaseLayout + SEO, reads the legalData record, and passes it in as `page` — so one
+// Shared renderer for the legal documents (currently just the Privacy Policy). Layout-free section: the route
+// owns BaseLayout + SEO, reads the legalData record, and passes it in as `page` - so one
 // component serves both documents. Content is config-driven: edit
 // src/config/legalData.json.ts, not this component.
 //
 // ponytail: sections render as a heading + paragraphs only (no nested lists/tables). For richer
 // legal docs, promote legalData to a markdown content collection and render <Content /> here.
-import { type LegalPageProps } from "@config/types/configDataTypes";
+import { type LegalBlock, type LegalPageProps } from "@config/types/configDataTypes";
 import { formatDate } from "@js/textUtils";
 
 interface Props {
@@ -14,6 +14,9 @@ interface Props {
 }
 
 const { page } = Astro.props as Props;
+
+const has = <K extends string>(b: LegalBlock, key: K): b is Extract<LegalBlock, Record<K, unknown>> =>
+  typeof b !== "string" && key in b;
 ---
 
 <article class="site-container mx-auto max-w-3xl py-16 md:py-24">
@@ -27,14 +30,42 @@ const { page } = Astro.props as Props;
 
   <p class="description mt-8 text-balance">{page.intro}</p>
 
+  {
+    page.introBlocks && page.introBlocks.length > 0 && (
+      <div class="mt-6 flex flex-col gap-3">
+        {page.introBlocks.map((block) =>
+          typeof block === "string" ? (
+            <p class="text-foreground/90 leading-relaxed">{block}</p>
+          ) : has(block, "list") ? (
+            <ul class="text-foreground/90 list-disc space-y-1 pl-6 leading-relaxed">
+              {block.list.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          ) : null,
+        )}
+      </div>
+    )
+  }
+
   <div class="mt-8 flex flex-col gap-8">
     {
       page.sections.map((section) => (
         <section class="flex flex-col gap-3">
           <h2 class="h3 text-foreground">{section.heading}</h2>
-          {section.body.map((paragraph) => (
-            <p class="text-foreground/90 leading-relaxed">{paragraph}</p>
-          ))}
+          {section.body.map((block) =>
+            typeof block === "string" ? (
+              <p class="text-foreground/90 leading-relaxed">{block}</p>
+            ) : has(block, "subheading") ? (
+              <h3 class="text-foreground mt-2 font-bold">{block.subheading}</h3>
+            ) : (
+              <ul class="text-foreground/90 list-disc space-y-1 pl-6 leading-relaxed">
+                {block.list.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            ),
+          )}
         </section>
       ))
     }

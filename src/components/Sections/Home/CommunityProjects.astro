@@ -1,0 +1,42 @@
+---
+// src/components/Sections/Home/CommunityProjects.astro — "Some of the projects our community have
+// worked on": a small photo grid. Photos come from the old brisbanemaker.space homepage (location
+// metadata stripped). Plain <img> on the Vite-fingerprinted imports (no Sharp needed).
+import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
+import { Reveal } from "@components/ui/reveal";
+import print3d from "@images/community-3d-print.jpg";
+import dinoSign from "@images/community-dino-sign.jpeg";
+import esp32Board from "@images/community-esp32-board.jpg";
+import laserCoasters from "@images/community-laser-coasters.jpeg";
+
+const projects = [
+  { image: laserCoasters, alt: "Four laser-engraved acrylic coasters with mountain and night-sky designs." },
+  { image: dinoSign, alt: "A layered acrylic sign reading “Neo’s Park” in a Jurassic Park style." },
+  { image: esp32Board, alt: "A custom ESP32 controller board with wiring, a relay and a buzzer." },
+  { image: print3d, alt: "A blue 3D-printed rock with a white spiral shell and stars on a window ledge." },
+] as const;
+---
+
+<Reveal as="section" aria-labelledby="community-projects-heading" class="flex flex-col gap-6">
+  <SectionHeading id="community-projects-heading" title="Community projects" />
+  <p class="text-muted-foreground max-w-3xl text-base">
+    Some of the projects our community have worked on.
+  </p>
+  <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
+    {
+      projects.map((project) => (
+        <li>
+          <img
+            src={project.image.src}
+            width={project.image.width}
+            height={project.image.height}
+            alt={project.alt}
+            loading="lazy"
+            decoding="async"
+            class="border-border shadow-pixel aspect-[4/3] w-full border-4 object-cover"
+          />
+        </li>
+      ))
+    }
+  </ul>
+</Reveal>

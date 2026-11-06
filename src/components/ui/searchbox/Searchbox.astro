@@ -1,5 +1,5 @@
 ---
-// src/components/ui/searchbox/Searchbox.astro — astro-boiler primitive (see ../README.md).
+// src/components/ui/searchbox/Searchbox.astro - astro-boiler primitive (see ../README.md).
 // Command palette: a trigger that opens the Dialog primitive (native <dialog>, rung 2) holding a
 // search input over a role="listbox" of <SearchboxItem>s. Typing filters items (substring match on
 // their text); ↑/↓ move the active item via aria-activedescendant, Enter activates it (a link
@@ -9,7 +9,7 @@ import { Dialog, DialogTrigger } from "@components/ui/dialog";
 import type { HTMLAttributes } from "astro/types";
 import { tv, type VariantProps } from "tailwind-variants";
 
-// The palette's inner parts (trigger, dialog) reuse the Dialog/DialogTrigger recipes — this small
+// The palette's inner parts (trigger, dialog) reuse the Dialog/DialogTrigger recipes - this small
 // recipe is only the outer wrapper, so a consumer can merge layout overrides (block/inline) the
 // tailwind-merge way. Don't clone Dialog's parts into their own recipes here.
 export const searchbox = tv({ base: "inline-block" });
@@ -111,7 +111,7 @@ const listId = `${id}-list`;
   let uid = 0;
   let shortcutBound = false;
 
-  // ponytail: ⌘K opens the FIRST searchbox on the page — enough for the common one-palette-per-app
+  // ponytail: ⌘K opens the FIRST searchbox on the page - enough for the common one-palette-per-app
   // case. For multiple palettes, key each off a distinct shortcut / data attribute instead.
   function bindShortcut() {
     if (shortcutBound) return;

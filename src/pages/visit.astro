@@ -1,0 +1,17 @@
+---
+// Visit Us (/visit/). Thin route shell: owns BaseLayout + SEO and composes Sections/Visit in the same
+// shell as the other pages (one .site-container + gap rhythm). Static (prerendered). Content carried
+// over from the old brisbanemaker.space/visit-us/.
+import Visit from "@components/Sections/Visit/Visit.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Visit Us - ${siteData.tabTitle}`}
+  description={`Visit ${siteData.name} at ${siteData.location}. Open to the public every Monday night - plus how to get there by car, public transport or bike.`}
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <Visit />
+  </div>
+</BaseLayout>

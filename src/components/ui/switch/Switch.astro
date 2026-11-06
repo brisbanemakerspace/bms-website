@@ -1,12 +1,12 @@
 ---
-// src/components/ui/switch/Switch.astro — astro-boiler primitive (see ../README.md).
+// src/components/ui/switch/Switch.astro - astro-boiler primitive (see ../README.md).
 // Toggle built from a native checkbox (role=switch) hidden with `sr-only` as the `peer`; the track and
 // thumb are styled siblings driven by `peer-checked` / `peer-focus-visible`. The root <label> makes the
-// whole control clickable — give the input an accessible name via `aria-label` or an associated Label
+// whole control clickable - give the input an accessible name via `aria-label` or an associated Label
 // (`id`/`for`). Zero-JS. Tokens only.
 //
 // Two class targets, kept explicit: the consumer `class` merges into the ROOT <label> (the sizing/box,
-// like every other primitive — rule 5), while `{...rest}` (checked/disabled/aria-*) lands on the native
+// like every other primitive - rule 5), while `{...rest}` (checked/disabled/aria-*) lands on the native
 // <input>. The track's own styling is the exported `switchTrack` recipe (data-slot=switch-track); the
 // h-6/w-11 dimensions and the thumb's peer-checked:translate-x-5 travel are tuned together, so restyle
 // the track through the recipe/slot rather than resizing via the root class.

@@ -9,7 +9,7 @@ category: "Tech"
 tags: ["websockets", "backend"]
 ---
 
-HTTP asks and waits. WebSockets hold the line open — a true duplex channel where the server is free
+HTTP asks and waits. WebSockets hold the line open - a true duplex channel where the server is free
 to speak first.
 
 ## Scaling the Socket
@@ -19,7 +19,7 @@ _many_ nodes to feel like one.
 
 - **Sticky routing vs. shared state:** pin a client to a node, or make every node stateless behind a
   shared backplane.
-- **Redis pub/sub:** the pragmatic backplane — publish an event once and every subscribed node fans
+- **Redis pub/sub:** the pragmatic backplane - publish an event once and every subscribed node fans
   it out to its own clients.
 - **Backpressure:** a slow client must never stall the broadcast; queue, coalesce, or drop
   deliberately.

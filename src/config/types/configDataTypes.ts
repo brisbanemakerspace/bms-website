@@ -1,3 +1,4 @@
+import type { PixelIconName } from "@components/svg/pixel-icons";
 /**
  * * Types for the typed config data files in src/config/.
  * Add interfaces here as you add data files (faq, testimonials, team, …).
@@ -7,8 +8,10 @@
 // site data (meta / branding)
 export interface SiteDataProps {
   name: string;
-  title: string;
+  tabTitle: string; // browser-tab title: whole <title> on the home page, suffix on the others
+  title: string; // home page title for search results + link previews (og:title / twitter:title)
   description: string;
+  location: string; // shortened physical address for the site
   // used for blog post / article metadata
   author: {
     name: string;
@@ -19,6 +22,35 @@ export interface SiteDataProps {
   defaultImage: {
     src: string;
     alt: string;
+  };
+  // links used on more than one page (own routes + the makerspace's separately hosted services)
+  links: {
+    portal: string;
+    portalSignup: string;
+    status: string;
+    wiki: string;
+    wikiPages: Record<
+      | "policies"
+      | "orgStructure"
+      | "findSomeone"
+      | "gettingThere"
+      | "dgrDonation"
+      | "donationPolicy"
+      | "fees"
+      | "fairUse"
+      | "lasercutterTools",
+      string
+    >;
+    routes: Record<
+      | "visit"
+      | "events"
+      | "workshops"
+      | "membership"
+      | "contact"
+      | "donate"
+      | "privacy",
+      string
+    >;
   };
   // social/profile URLs for the site's Organization JSON-LD (`sameAs`). Empty is fine.
   sameAs?: readonly string[];
@@ -35,20 +67,22 @@ export interface NavItemProps {
 // social platforms (label + glyph + how the URL resolves). See src/config/socialData.json.ts.
 export interface SocialPlatformProps {
   label: string; // accessible name / chip label, e.g. "Twitter/X"
-  // pixel-icon glyph name; omitted for a platform with no glyph in the 18-icon set (Discord)
-  icon?: string;
+  // pixel-icon glyph name; omitted for a platform with no glyph in the pixel set
+  icon?: PixelIconName;
   // host substring(s) identifying this platform inside siteData.sameAs
   match: string | readonly string[];
-  // where the link points when sameAs has no match — a platform home page, not a profile
+  // where the link points when sameAs has no match - a platform home page, not a profile
   fallback: string;
 }
 
 // --------------------------------------------------------
-// legal pages (terms, privacy), keyed by document
+// legal pages (privacy), keyed by document
+// a body entry: a plain string is a <p>; `subheading` an <h3>; `list` a <ul>
+export type LegalBlock = string | { subheading: string } | { list: string[] };
+
 export interface LegalSection {
   heading: string;
-  // each entry renders as its own <p>
-  body: string[];
+  body: LegalBlock[];
 }
 
 export interface LegalPageProps {
@@ -56,15 +90,16 @@ export interface LegalPageProps {
   description: string; // meta description (SEO)
   lastUpdated: string; // ISO date (YYYY-MM-DD); formatted at render via formatDate
   intro: string;
+  introBlocks?: LegalBlock[]; // optional extra intro content (paragraphs / lists) after `intro`
   sections: LegalSection[];
 }
 
-// the two documents each locale's legalData file must provide
-export type LegalData = Record<"terms" | "privacy", LegalPageProps>;
+// the documents the legalData file must provide
+export type LegalData = Record<"privacy", LegalPageProps>;
 
 // --------------------------------------------------------
 // portfolio data (buyer-customized copy + values). See src/config/portfolioData.json.ts.
-// Only the facts a buyer is expected to make their own — identity, biography, experience/stat values,
+// Only the facts a buyer is expected to make their own - identity, biography, experience/stat values,
 // the home intro, and the contact prompt. Presentational labels (SYS_SPECS, "Role:", stat colours)
 // stay in their components. First-person singular voice throughout (one developer's portfolio).
 export interface PortfolioDataProps {

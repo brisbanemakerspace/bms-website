@@ -9,4 +9,4 @@ assert.equal(readingTime("word ".repeat(200)), 1, "200 words ≈ 1 minute");
 assert.equal(readingTime("word ".repeat(400)), 2, "400 words ≈ 2 minutes");
 assert.equal(readingTime("word ".repeat(1000)), 5, "1000 words ≈ 5 minutes");
 
-console.log("readingTime.test.ts — all assertions passed");
+console.log("readingTime.test.ts - all assertions passed");

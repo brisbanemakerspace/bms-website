@@ -1,0 +1,105 @@
+---
+// src/components/Sections/Global/NewsletterSignup.astro - the Mailchimp newsletter signup, shown in
+// the footer. A plain native <form method="post"> straight to Mailchimp's hosted subscribe endpoint
+// (the same audience + tag as the brisbanemaker.space embed), so it needs no JS and no server code:
+// submitting opens Mailchimp's confirmation page in a new tab. Styled with the site's own pixel
+// fields + `.pixel-btn`, not Mailchimp's embed CSS. To point it at another audience, replace the
+// `action` URL, the `tags` value and the honeypot field name (`b_<u>_<id>`) with the new embed code's.
+import { PixelIcon } from "@components/svg/pixel-icons";
+import { Input } from "@components/ui/input";
+import { Label } from "@components/ui/label";
+import { socialLink } from "@config/socialData.json";
+
+const action =
+  "https://space.us5.list-manage.com/subscribe/post?u=53abe625ad6dbf036f8815e97&id=bc5371e651&f_id=0041bdedf0";
+const honeypot = "b_53abe625ad6dbf036f8815e97_bc5371e651";
+const tag = "3701034";
+
+// Instagram + Facebook icons beside the Subscribe button. `undefined` (dropped) when a platform is
+// commented out of `socialPlatforms`.
+const socials = [socialLink("instagram"), socialLink("facebook")].filter(
+  (link) => link !== undefined,
+);
+
+const fieldClass =
+  "bg-accent border-border rounded-none border-4 px-3 text-sm placeholder:text-muted-foreground";
+---
+
+<section aria-labelledby="newsletter-heading" class="site-container pt-8">
+  <div class="flex flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left">
+    <div class="flex flex-col gap-1">
+      <h2 id="newsletter-heading" class="font-display text-info text-xs uppercase">
+        Join our newsletter
+      </h2>
+      <p class="text-muted-foreground text-xs">News, events and classes from Brisbane Makerspace.</p>
+    </div>
+
+    <form
+      action={action}
+      method="post"
+      target="_blank"
+      class="flex w-full flex-col gap-3 sm:flex-row sm:items-end md:w-auto"
+    >
+      <div class="flex flex-col gap-1 text-left">
+        <Label for="mce-FNAME" class="text-info font-display text-[8px] tracking-[2px] uppercase">
+          First name
+        </Label>
+        <Input
+          id="mce-FNAME"
+          name="FNAME"
+          type="text"
+          autocomplete="given-name"
+          required
+          class={`${fieldClass} h-11 sm:w-44`}
+        />
+      </div>
+      <div class="flex flex-col gap-1 text-left">
+        <Label for="mce-EMAIL" class="text-info font-display text-[8px] tracking-[2px] uppercase">
+          Email
+        </Label>
+        <Input
+          id="mce-EMAIL"
+          name="EMAIL"
+          type="email"
+          autocomplete="email"
+          required
+          class={`${fieldClass} h-11 sm:w-56`}
+        />
+      </div>
+
+      <input type="hidden" name="tags" value={tag} />
+      {/* Mailchimp's bot trap: off-screen (not display:none), hidden from humans + assistive tech. */}
+      <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+        <input type="text" name={honeypot} tabindex="-1" autocomplete="off" />
+      </div>
+
+      <button
+        type="submit"
+        name="subscribe"
+        class="pixel-btn pixel-btn--blue h-11 px-5 text-xs uppercase"
+      >
+        Subscribe
+      </button>
+
+      {
+        socials.length > 0 && (
+          <ul class="flex h-11 items-center gap-3">
+            {socials.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${link.label} (opens in a new tab)`}
+                  class="primary-focus text-info hover:text-success block transition-colors"
+                >
+                  <PixelIcon name={link.name} size="lg" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </form>
+  </div>
+</section>

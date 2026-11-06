@@ -1,6 +1,6 @@
-// src/components/ui/_listbox.ts — shared client-side helpers for the filterable-listbox primitives
+// src/components/ui/_listbox.ts - shared client-side helpers for the filterable-listbox primitives
 // (ComboBox, Searchbox, AdvancedSelect). Pure functions plus one small roving-active-descendant
-// factory, imported into each component's bundled <script>. Not a primitive — the leading `_` marks it
+// factory, imported into each component's bundled <script>. Not a primitive - the leading `_` marks it
 // an internal shared module, mirroring _field.ts (shared field look) and _dialog.ts (shared controller).
 
 /**

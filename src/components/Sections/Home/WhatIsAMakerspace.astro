@@ -1,0 +1,35 @@
+---
+// src/components/Sections/Home/WhatIsAMakerspace.astro — "What is a makerspace / hackerspace?".
+// Copy carried over from the old brisbanemaker.space homepage.
+import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import { Reveal } from "@components/ui/reveal";
+
+const link = "text-info hover:text-success underline transition-colors";
+---
+
+<Reveal as="section" aria-labelledby="makerspace-heading" class="flex flex-col gap-6">
+  <SectionHeading id="makerspace-heading" title="What is a makerspace?" />
+  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
+    <p class="text-foreground/90 leading-relaxed">
+      A makerspace or hackerspace generally refer to the same thing. According to <a
+        href="https://hackerspaces.org"
+        class={link}
+        target="_blank"
+        rel="noopener noreferrer">hackerspaces.org</a
+      >, they are “community-operated physical places, where people share their interest in tinkering
+      with technology, meet and work on their projects, and learn from each other.”
+    </p>
+    <p class="text-foreground/90 leading-relaxed">
+      We think the phrase “makerspace” is more inclusive and friendly than “hackerspace” as the latter
+      often has a negative connotation. There are several makerspaces or hackerspaces in Brisbane. We
+      hope to differentiate ourselves by fostering a friendly and engaging community that is fun to be a
+      part of.
+    </p>
+    <p class="text-foreground/90 leading-relaxed">
+      Whether you want to call it a hackerspace or makerspace, we think everyone will have a great time
+      and make new connections. We encourage you to come along to one of our social events or community
+      open nights to learn more and see what all the fuss is about!
+    </p>
+  </PixelPanel>
+</Reveal>

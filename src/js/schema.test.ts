@@ -1,5 +1,5 @@
 /**
- * Runnable self-check for the JSON-LD builders in ./schema.ts — no test framework.
+ * Runnable self-check for the JSON-LD builders in ./schema.ts - no test framework.
  * Run:  `pnpm test` (which discovers every src/**\/*.test.ts), or directly
  *       `node --experimental-strip-types src/js/schema.test.ts`.
  * Exits non-zero (throws) if any invariant breaks; prints "schema.test: ok" otherwise.

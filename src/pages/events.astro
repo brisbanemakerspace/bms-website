@@ -1,0 +1,17 @@
+---
+// Events (/events/). Thin route shell: owns BaseLayout + SEO and composes Sections/Events in the same
+// shell as the other pages (one .site-container + gap rhythm). Static (prerendered). Content carried
+// over from the old brisbanemaker.space/events/ (an embedded public Google Calendar).
+import Events from "@components/Sections/Events/Events.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Events - ${siteData.tabTitle}`}
+  description="Upcoming Brisbane Makerspace events: workshops, social nights and working bees. Public events are open to everyone - no membership needed."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <Events />
+  </div>
+</BaseLayout>

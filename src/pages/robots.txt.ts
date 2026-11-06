@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 
 /**
- * Dynamic robots.txt — kept as an endpoint (not a static /public file) so the Sitemap
+ * Dynamic robots.txt - kept as an endpoint (not a static /public file) so the Sitemap
  * line resolves against `site` in astro.config.mjs and never drifts from the real domain.
  * Prerenders to a static /robots.txt at build.
  */

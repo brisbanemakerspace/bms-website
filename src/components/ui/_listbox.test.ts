@@ -1,5 +1,5 @@
 /**
- * Runnable self-check for the shared listbox keyboard math in ./_listbox.ts — `nextIndex` is the
+ * Runnable self-check for the shared listbox keyboard math in ./_listbox.ts - `nextIndex` is the
  * roving-active-descendant step behind ↑/↓/Home/End in ComboBox, Searchbox, and AdvancedSelect.
  * Run: `pnpm test`, or `node --experimental-strip-types src/components/ui/_listbox.test.ts`.
  * (filterByText / createActiveDescendant are DOM-bound and covered by the browser catalog, not here.)

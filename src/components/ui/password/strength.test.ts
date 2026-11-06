@@ -1,4 +1,4 @@
-// src/components/ui/password/strength.test.ts — the one runnable check for scorePassword (no framework).
+// src/components/ui/password/strength.test.ts - the one runnable check for scorePassword (no framework).
 // Run: `node --experimental-strip-types src/components/ui/password/strength.test.ts` (Node >= 22.12).
 import assert from "node:assert/strict";
 

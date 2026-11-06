@@ -1,17 +1,17 @@
 /**
- * * Motion catalog — the template's owned animation vocabulary.
+ * * Motion catalog - the template's owned animation vocabulary.
  *
  * A dependency-free port of `tailwind-animations` (Tailwind v4 CSS-first), adapted to
  * astro-boiler's conventions. We OWN this rather than adding the package: same rung as the
- * Marquee keyframes in `tailwind-theme.css` — a keyframe library is content, not infrastructure,
+ * Marquee keyframes in `tailwind-theme.css` - a keyframe library is content, not infrastructure,
  * and the template's ethos is self-contained + vendor-free (see AGENTS.md: motion is owned).
  *
- * Upstream: tailwind-animations © Miguel Ángel Durán (@midudev) & community — MIT.
+ * Upstream: tailwind-animations © Miguel Ángel Durán (@midudev) & community - MIT.
  * https://tailwind-animations.com · https://github.com/midudev/tailwind-animations
- * Ported verbatim except: (1) `--animate-pulse` dropped — identical to Tailwind's built-in
+ * Ported verbatim except: (1) `--animate-pulse` dropped - identical to Tailwind's built-in
  * `animate-pulse` (used by Skeleton); (2) a global `prefers-reduced-motion` guard added at the
- * bottom (the upstream ships none — non-negotiable a11y here); (3) an owned scroll-driven
- * extension — keyframes shaped for timeline scrubbing (`progress`, `parallax-*`, `ken-burns`,
+ * bottom (the upstream ships none - non-negotiable a11y here); (3) an owned scroll-driven
+ * extension - keyframes shaped for timeline scrubbing (`progress`, `parallax-*`, `ken-burns`,
  * `fade-through`, `wipe-in-*`), named-timeline utilities, and a `@supports` fallback guard.
  *
  * Every `--animate-*` becomes an `animate-*` utility (e.g. `animate-fade-in-up`), tunable with the
@@ -30,7 +30,7 @@
 @import "./keyframes.css";
 
 @theme inline {
-  /* Animation Delay Values — `tw-anim-` prefix avoids clashing with Tailwind's transition `delay-*` */
+  /* Animation Delay Values - `tw-anim-` prefix avoids clashing with Tailwind's transition `delay-*` */
   --tw-anim-delay-none: 0ms;
   --tw-anim-delay-0: 0ms;
   --tw-anim-delay-100: 100ms;
@@ -121,7 +121,7 @@
   --tw-anim-range-brisk: 30% 70%;
   --tw-anim-range-rapid: 40% 60%;
 
-  /* Timeline Values (native scroll-driven animation — powers <Reveal>) */
+  /* Timeline Values (native scroll-driven animation - powers <Reveal>) */
   --tw-timeline-none: none;
   --tw-timeline-auto: auto;
   --tw-timeline-scroll: scroll();
@@ -227,14 +227,14 @@
   --animate-impulse-rotation-left: impulse-rotation-left 1s ease-in-out both;
   --animate-dancing: dancing 1s ease-in-out both;
   --animate-jelly: jelly 1s ease-out forwards;
-  /* NOTE: upstream `--animate-pulse` is intentionally omitted — it is identical to Tailwind's
+  /* NOTE: upstream `--animate-pulse` is intentionally omitted - it is identical to Tailwind's
      built-in `animate-pulse` (used by the Skeleton primitive). Use `animate-pulse` directly. */
 
-  /* ---- Scroll-driven extension (ours, not upstream) — designed for `timeline-*` scrubbing.
+  /* ---- Scroll-driven extension (ours, not upstream) - designed for `timeline-*` scrubbing.
      `linear` on purpose: a scrubbed animation should map scroll progress 1:1 (the "easing" is the
      user's scroll). Duration is inert once a timeline is attached; it only matters for the
      time-based fallback. Anything driven by `timeline-*` must also carry
-     `motion-reduce:animate-none` — the reduced-motion guard below zeroes *time*, which cannot
+     `motion-reduce:animate-none` - the reduced-motion guard below zeroes *time*, which cannot
      stop a scroll-progressed animation. Scroll-only entries (non-identity end state) are listed
      in the `@supports` guard at the bottom. */
   --animate-progress: progress 1s linear both;
@@ -249,7 +249,7 @@
 }
 
 /* ============================================
-   Modifier utilities — tune any `animate-*` (names match tailwind-animations.com docs 1:1)
+   Modifier utilities - tune any `animate-*` (names match tailwind-animations.com docs 1:1)
    ============================================ */
 
 @utility animate-delay-* {
@@ -333,7 +333,7 @@
   view-timeline-axis: --value(--tw-view-timeline-axis-*, [ident], [*]);
 }
 
-/* Named timelines (ours, not upstream) — drive an animation from ANOTHER element's scroll/visibility.
+/* Named timelines (ours, not upstream) - drive an animation from ANOTHER element's scroll/visibility.
    Declare on the tracked element (`view-timeline-name-[--article]`), hoist with
    `timeline-scope-[--article]` on a common ancestor, consume anywhere in that scope with the existing
    `timeline-[--article]`. Canonical use: a fixed reading-progress bar tracking an article. */
@@ -354,11 +354,11 @@
 }
 
 /* ============================================
-   Scroll-timeline support guard — where scroll timelines are unsupported (Firefox), an
+   Scroll-timeline support guard - where scroll timelines are unsupported (Firefox), an
    `animation-timeline` declaration is dropped and the animation runs once, time-based. That is fine
-   for entrances (they end at identity — content ends visible; this is <Reveal>'s documented
+   for entrances (they end at identity - content ends visible; this is <Reveal>'s documented
    degradation) but NOT for the scroll-only shapes: a played-once parallax leaves content offset and
-   fade-through ends invisible. So those are inert here instead. `progress` is exempt — its identity
+   fade-through ends invisible. So those are inert here instead. `progress` is exempt - its identity
    end state (a full bar) is exactly what `animation: none` would render anyway.
    ponytail: substring match so variant-prefixed uses (`md:animate-parallax-up`) are covered; the
    ceiling is a false positive on any future class *containing* one of these names. Add new
@@ -374,10 +374,10 @@
 }
 
 /* ============================================
-   Reduced-motion guard — NOT in the upstream library; added here because a11y is non-negotiable.
+   Reduced-motion guard - NOT in the upstream library; added here because a11y is non-negotiable.
    Near-zero (not `none`) durations so `animationend`/`transitionend` listeners still fire; also
    neutralizes `scroll-behavior: smooth` (set on <html> in global.css). This is the single global
-   source for reduced-motion resets — individual primitives keep their `motion-reduce:` for clarity.
+   source for reduced-motion resets - individual primitives keep their `motion-reduce:` for clarity.
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
   *,

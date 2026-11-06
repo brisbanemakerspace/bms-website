@@ -1,5 +1,5 @@
 /**
- * * The Resend send boundary for the contact action — extracted so its three outcomes (success /
+ * * The Resend send boundary for the contact action - extracted so its three outcomes (success /
  * provider error / network-or-timeout) are testable with an injected fetch. Framework-free: it never
  * throws and never logs, returning a discriminated {@link SendResult}. The action handler
  * (`src/actions/index.ts`) owns the Astro `ActionError` and the server-side logging of the detail.
@@ -27,7 +27,7 @@ export type SendResult =
   | { ok: false; reason: "network"; detail: string }
   | { ok: false; reason: "provider"; status: number; detail: string };
 
-/** Injectable seams — default to the platform fetch and the real timeout. */
+/** Injectable seams - default to the platform fetch and the real timeout. */
 export interface SendDeps {
   fetchImpl?: typeof fetch;
   timeoutMs?: number;

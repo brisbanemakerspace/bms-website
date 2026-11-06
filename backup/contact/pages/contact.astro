@@ -17,13 +17,13 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title={`Contact — ${siteData.name}`}
-  description="Drop me a transmission — questions on vintage hardware, a retro-quest collab, or a guest devlog pitch — plus e-mail, Discord and GitHub links and a system FAQ."
+  title={`Contact - ${siteData.name}`}
+  description="Drop me a transmission - questions on vintage hardware, a retro-quest collab, or a guest devlog pitch - plus e-mail, Discord and GitHub links and a system FAQ."
 >
   <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
     <Hero />
 
-    {/* Figma FormAndInfoContainer: form grows, info column is a fixed 340px — stacks below lg. */}
+    {/* Figma FormAndInfoContainer: form grows, info column is a fixed 340px - stacks below lg. */}
     <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
       <Form />
       <InfoCards />

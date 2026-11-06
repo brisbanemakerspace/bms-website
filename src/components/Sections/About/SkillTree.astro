@@ -1,5 +1,5 @@
 ---
-// src/components/Sections/About/SkillTree.astro — Figma "Skill Tree Section" (node 5:331).
+// src/components/Sections/About/SkillTree.astro - Figma "Skill Tree Section" (node 5:331).
 //
 // Section heading + three centred "skill cards" (tag + icon + name). Distinct from the home
 // TechStack's inline PixelChips: these are larger vertical cards, so the layout is reproduced here
@@ -7,12 +7,12 @@
 //
 // The tag is a small pixel tag: a WHITE surface in light mode (dark keeps the mock's inverted black
 // surface), with a coloured frame + label. It doesn't map to the ui/badge `pixel` variant (tone bg +
-// dark ink) — it's a small whole-class tone map here. On the white light surface the green/pink tones
+// dark ink) - it's a small whole-class tone map here. On the white light surface the green/pink tones
 // are deepened to their -700 step for contrast; the neon shades ride under `dark:` for the dark tag.
-// CONTENT: retro flavour (typed local) — a curated three, using the same pixel `svg/pixel-icons`
+// CONTENT: retro flavour (typed local) - a curated three, using the same pixel `svg/pixel-icons`
 // glyphs the home TechStack picked (JS→code, Python→flash, React→component). NOTE: this is an
 // independent literal from TechStack's (three toned cards here vs eight chips there, a different
-// curation), so the two are NOT kept in sync automatically — edit both if you want them aligned.
+// curation), so the two are NOT kept in sync automatically - edit both if you want them aligned.
 import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
 import { PixelIcon, type PixelIconName } from "@components/svg/pixel-icons";
 import { PixelPanel } from "@components/ui/pixel-panel";
@@ -25,8 +25,8 @@ const skills: readonly { name: string; icon: PixelIconName; tone: Tone }[] = [
   { name: "React", icon: "component", tone: "info" },
 ];
 
-// Whole static classes per tone (never interpolate a class name — invisible to the compiler). The
-// tag composes both; the icon takes just the text colour — one source for each so they can't drift.
+// Whole static classes per tone (never interpolate a class name - invisible to the compiler). The
+// tag composes both; the icon takes just the text colour - one source for each so they can't drift.
 // Light/dark pairs: the deepened -700 tones read on the white light-mode tag (and card), the neon
 // semantics ride under `dark:` for the inverted dark tag. `info` already flips deep→airy, no pair.
 const toneText: Record<Tone, string> = {

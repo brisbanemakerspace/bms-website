@@ -1,1 +1,3 @@
 node_modules
+
+.wrangler/state/v3/observability/miniflare-wobs-trace-store/

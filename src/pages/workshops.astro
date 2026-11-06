@@ -1,0 +1,17 @@
+---
+// Workshops (/workshops/). Thin route shell: owns BaseLayout + SEO and composes Sections/Workshops in
+// the same shell as the other pages (one .site-container + gap rhythm). Static (prerendered). Content
+// carried over from the old brisbanemaker.space/workshops/.
+import Workshops from "@components/Sections/Workshops/Workshops.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Workshops — ${siteData.tabTitle}`}
+  description="Hands-on beginner workshops at Brisbane Makerspace: laser cutting, 3D printing and laser cut LED lamps, from $59. Proceeds fund our charity."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <Workshops />
+  </div>
+</BaseLayout>

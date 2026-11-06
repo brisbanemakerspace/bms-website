@@ -1,10 +1,10 @@
 import { type PortfolioDataProps } from "./types/configDataTypes";
 
-// Buyer-facing portfolio copy + values — the facts you're expected to make your own: identity,
+// Buyer-facing portfolio copy + values - the facts you're expected to make your own: identity,
 // biography, the experience/stat numbers, the home intro, and the contact prompt. Presentational
 // labels (SYS_SPECS captions, "Role:" / "Yrs:", scoreboard colours) stay in their components; this
 // file holds only what a buyer edits. The voice is first-person singular throughout (one developer's
-// portfolio) — keep it consistent if you rewrite.
+// portfolio) - keep it consistent if you rewrite.
 const portfolioData = {
   profile: {
     tagline: "Dev 01",
@@ -42,7 +42,7 @@ const portfolioData = {
 
   contact: {
     prompt:
-      "Want to chat about a project, a retro build, or just share a favorite game?",
+      "Got a question, an idea for a workshop, or want to get involved? Get in touch, or come along to a Monday open night.",
   },
 } satisfies PortfolioDataProps;
 

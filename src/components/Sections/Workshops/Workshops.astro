@@ -1,0 +1,95 @@
+---
+// src/components/Sections/Workshops/Workshops.astro — the Workshops page body: three beginner classes
+// with prices and Book Now buttons. Copy, prices and booking links are carried over from the old
+// brisbanemaker.space/workshops/. One-off section copy lives here as typed literals (see AGENTS.md
+// "content tiers"); edit the `workshops` array to change a class, price or booking link.
+//
+// The Book Now buttons go to the old site's booking pages (there is no booking system on this site
+// yet) — swap the hrefs when those move. The old page's photos and its "Recent Reviews" screenshots
+// are not carried over.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+
+interface Workshop {
+  title: string;
+  price: string;
+  description: readonly string[];
+  bookingUrl: string;
+}
+
+const workshops: readonly Workshop[] = [
+  {
+    title: "Laser Cutting for Beginners",
+    price: "Sessions from $69 ($65 for 2 or more!)",
+    description: [
+      "Have you ever wanted to laser cut or engrave your own creations? Learn all the basics of laser cutting for beginners in this hands-on Brisbane workshop.",
+      "In this two-hour workshop, you will learn everything you need to know to get started with laser cutting. We’ll cover all of the basics, including how laser cutting works, the different types of machines and some tips and tricks for getting started. By the end of this workshop, you’ll know how to operate our laser cutter and have a custom engraved keychain or drink coaster!",
+    ],
+    bookingUrl: "https://brisbanemaker.space/book-a-laser-cutting-workshop-for-beginners/",
+  },
+  {
+    title: "3D Printing for Beginners",
+    price: "Sessions from $69 ($65 for 2 or more!)",
+    description: [
+      "Dive into the world of innovative technology in this 3D printing workshop in Brisbane, designed for beginners.",
+      "In this two-hour workshop, you’ll learn everything you need to know to get started with 3D printing. We cover various topics, including the types of 3D printers available, what materials to use, some basic print settings and show you a typical 3D printing workflow. We’ll cover all of the basics, and by the end of this workshop, you’ll know how to operate a 3D printer!",
+    ],
+    bookingUrl: "https://brisbanemaker.space/book-a-3d-printing-workshop-for-beginners-brisbane/",
+  },
+  {
+    title: "Laser Cut LED Lamp Workshop",
+    price: "Sessions from $59 ($55 for 2 or more!)",
+    description: [
+      "Have you ever wanted to laser cut a personalised LED lamp? These DIY customised lamps make for truly unique gift ideas or the perfect addition to your home decor. In this 1.5 hour workshop at Brisbane Makerspace, you will laser cut and assemble your own customised LED lamp.",
+      "We’ll spend the first half helping you customise and perfect your design, then we’ll cut out and engrave a piece of beautiful clear acrylic on our laser cutter. Each lamp base includes a multi coloured LED strip with a remote control.",
+    ],
+    bookingUrl: "https://brisbanemaker.space/book-a-laser-cut-led-lamp-workshop-brisbane/",
+  },
+];
+---
+
+<HeroPanel
+  headingId="workshops-hero-heading"
+  tagline="Learn & Make"
+  heading="Workshops"
+  intro="Learn how to make something amazing!"
+/>
+
+<section aria-labelledby="workshops-intro-heading">
+  <PixelPanel class="flex flex-col gap-3 p-6 md:p-8">
+    <h2 id="workshops-intro-heading" class="h3 text-foreground">Beginner Classes</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      We run a variety of workshops catering from projects to beginner classes. Proceeds from these
+      workshops help fund the continued operation of our charity.
+    </p>
+    <p class="font-display text-info text-sm uppercase">From $59 - $69</p>
+  </PixelPanel>
+</section>
+
+<section aria-label="Workshops">
+  <ul class="grid gap-6 lg:grid-cols-3">
+    {
+      workshops.map((workshop) => (
+        <li class="flex">
+          <PixelPanel class="flex w-full flex-col gap-4 p-6">
+            <h3 class="h3 text-foreground">{workshop.title}</h3>
+            <p class="font-display text-info text-xs leading-relaxed uppercase">{workshop.price}</p>
+            <div class="text-foreground/90 flex flex-col gap-3 text-sm leading-relaxed">
+              {workshop.description.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </div>
+            <a
+              href={workshop.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="pixel-btn pixel-btn--green mt-auto flex px-5 py-3 text-xs uppercase"
+            >
+              Book Now
+            </a>
+          </PixelPanel>
+        </li>
+      ))
+    }
+  </ul>
+</section>

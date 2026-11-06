@@ -1,5 +1,5 @@
 ---
-// src/components/UiCatalog/MotionCatalog.astro — DEV-ONLY. The "Motion" section of the UI catalog,
+// src/components/UiCatalog/MotionCatalog.astro - DEV-ONLY. The "Motion" section of the UI catalog,
 // extracted from UiCatalog.astro so the demo of the owned animation catalog (styles/motion/index.css) owns
 // its own data + markup instead of enlarging the catalog monolith. Rendered by UiCatalog; 404s out of
 // prod with it. Root is a <section> so it slots into the catalog's flex-col-gap-14 flow unchanged.
@@ -7,7 +7,7 @@ import Reveal from "@components/ui/reveal";
 
 // Mirrors the `--animate-*` list in styles/motion/index.css. Literal `group-hover:animate-*` strings so
 // Tailwind's scanner emits them (a class built by interpolation would be invisible to the compiler);
-// hover a tile to replay. ponytail: this is a second copy of the animation names — CSS keyframe names
+// hover a tile to replay. ponytail: this is a second copy of the animation names - CSS keyframe names
 // can't be imported into TS, so a full showcase can't share one source. Add here when you add there.
 const motionClasses = [
   "group-hover:animate-blurred-fade-in",
@@ -98,7 +98,7 @@ const motionClasses = [
 <section class="flex flex-col gap-4">
   <h2 class="h3">Motion <span class="text-base-500 text-sm">({motionClasses.length})</span></h2>
   <p class="description">
-    Owned <code>animate-*</code> catalog — no dependency. Hover a tile to replay; tune with
+    Owned <code>animate-*</code> catalog - no dependency. Hover a tile to replay; tune with
     <code>animate-duration-*</code>, <code>animate-delay-*</code>, <code>animate-bezier-*</code>,
     <code>animate-iteration-count-*</code>. All honor <code>prefers-reduced-motion</code>.
   </p>
@@ -134,7 +134,7 @@ const motionClasses = [
       animation="fade-in-up"
       class="bg-card border-border text-muted-foreground rounded-md border px-4 py-3 text-sm"
     >
-      <code>&lt;Reveal&gt;</code> — native <code>view()</code> scroll timeline, zero-JS
+      <code>&lt;Reveal&gt;</code> - native <code>view()</code> scroll timeline, zero-JS
     </Reveal>
     <Reveal
       animation="blurred-fade-in"
@@ -146,7 +146,7 @@ const motionClasses = [
   </div>
 
   <p class="description mt-2">
-    Scroll-driven — the scroll position is the playhead: keyframes scrubbed by the native CSS{" "}
+    Scroll-driven - the scroll position is the playhead: keyframes scrubbed by the native CSS{" "}
     <code>scroll()</code>/<code>view()</code> timelines, zero-JS. Chromium + Safari; in Firefox the scroll-only
     shapes are inert (the <code>@supports</code> guard in <code>motion/index.css</code>).
   </p>
@@ -157,14 +157,14 @@ const motionClasses = [
       >
       </div>
       <p class="text-muted-foreground p-3 text-xs">
-        <code>animate-progress timeline-scroll origin-left</code> — reading-progress bar driven by the
-        nearest scroll container (this box — scroll it). For a page-level bar, put it on a fixed element
+        <code>animate-progress timeline-scroll origin-left</code> - reading-progress bar driven by the
+        nearest scroll container (this box - scroll it). For a page-level bar, put it on a fixed element
         instead. To track a single article, name a timeline:{" "}
         <code>view-timeline-name-[--article]</code> on the article,{" "}
         <code>timeline-scope-[--article]</code> on a common ancestor,{" "}
         <code>timeline-[--article]</code> on the bar. Gotcha worth knowing:{" "}
         <code>overflow-hidden</code> creates a scroll container, so a <code>view()</code> timeline inside
-        one tracks that box (which never scrolls) and freezes — clip decorative frames with{" "}
+        one tracks that box (which never scrolls) and freezes - clip decorative frames with{" "}
         <code>overflow-clip</code> instead, as the two demos beside this one do.
       </p>
     </div>
@@ -199,7 +199,7 @@ const motionClasses = [
         >fade-through · timeline-view · range-cover</code
       >
       <p class="text-muted-foreground mt-1 text-xs">
-        Fades in entering the viewport, back out leaving it — watch this card while scrolling past.
+        Fades in entering the viewport, back out leaving it - watch this card while scrolling past.
       </p>
     </div>
   </div>

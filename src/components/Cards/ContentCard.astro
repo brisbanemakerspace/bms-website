@@ -1,8 +1,8 @@
 ---
-// src/components/Cards/ContentCard.astro — content-aware card (see ./README.md).
+// src/components/Cards/ContentCard.astro - content-aware card (see ./README.md).
 //
 // The Figma "Article - Post Card" / "Project Card" (nodes 5:39, 14:41): the shared pixel-card LINK
-// shell (PixelCardLink — hover-lift <a> + ui/pixel-panel surface + thumbnail) with a content BODY: a
+// shell (PixelCardLink - hover-lift <a> + ui/pixel-panel surface + thumbnail) with a content BODY: a
 // retro category badge, a Press Start 2P title, a clamped excerpt, optional tag pills (projects), and
 // a "READ →" / "VIEW →" link. Posts and projects share the shell; only the badge tone, the optional
 // tags, and the CTA word differ. The blog "More Quests" cards share the same PixelCardLink shell.
@@ -28,7 +28,7 @@ export interface ContentCardProps {
   description: string;
   /** Project tech tags; omit for posts. */
   tags?: readonly string[];
-  /** Link verb — "Read" for posts, "View" for projects. */
+  /** Link verb - "Read" for posts, "View" for projects. */
   cta?: string;
 }
 const {

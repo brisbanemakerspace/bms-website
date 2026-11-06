@@ -2,7 +2,7 @@
 // images with fixed alts, defined ONCE so the image↔alt pairing can't drift between the two grids.
 // The shape matches ContentCardProps (`image` + `imageAlt`), so a card spreads a thumb directly:
 // `{ ...demoThumbs.retroChat, title: … }`. Plain Vite image imports (no Sharp), like the home demo
-// imagery — swap these for real per-card art when the projects/achievements have their own.
+// imagery - swap these for real per-card art when the projects/achievements have their own.
 import cssGrid from "@images/demo/post-css-grid.jpg";
 import floppyDisk from "@images/demo/post-floppy-disk.jpg";
 import retroDeploy from "@images/demo/post-retro-deploy.jpg";

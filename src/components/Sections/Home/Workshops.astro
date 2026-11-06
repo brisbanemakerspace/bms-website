@@ -1,0 +1,34 @@
+---
+// src/components/Sections/Home/Workshops.astro — the beginner & project workshops teaser. Copy carried
+// over from the old brisbanemaker.space homepage. The button goes to the /workshops/ page.
+import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import { Reveal } from "@components/ui/reveal";
+import siteData from "@config/siteData.json";
+
+const workshopsUrl = siteData.links.routes.workshops;
+const topics = ["Laser cutting", "3D printing", "Laser cut LED lamps"] as const;
+---
+
+<Reveal as="section" aria-labelledby="workshops-heading" class="flex flex-col gap-6">
+  <SectionHeading id="workshops-heading" title="Workshops" />
+  <PixelPanel class="flex flex-col items-start gap-4 p-6 md:p-8">
+    <p class="font-display text-info text-sm uppercase">
+      Want to learn a new skill? Try one of our beginner workshops.
+    </p>
+    <h3 class="h3 text-foreground">Beginner &amp; Project Workshops</h3>
+    <p class="text-muted-foreground leading-relaxed">
+      Not looking for a membership? We run a range of workshops to help you learn new skills and gain more confidence in using tools like 3D printers and laser cutters. We run both beginner introductions, and project
+      specific workshops that cover many topics like:
+    </p>
+    <ul class="text-muted-foreground list-disc space-y-1 pl-6">
+      {topics.map((topic) => <li>{topic}</li>)}
+    </ul>
+    <a
+      href={workshopsUrl}
+      class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase"
+    >
+      View Workshops
+    </a>
+  </PixelPanel>
+</Reveal>

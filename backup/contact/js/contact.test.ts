@@ -46,13 +46,13 @@ assert.equal(
   false,
 );
 
-// spam gate — honeypot: any non-empty _gotcha rejects
+// spam gate - honeypot: any non-empty _gotcha rejects
 assert.equal(
   spamReason({ _gotcha: "i-am-a-bot", _ts: 0 }, 10_000),
   "Message rejected.",
 );
 
-// spam gate — time: a submit faster than MIN_FILL_MS rejects; slower passes
+// spam gate - time: a submit faster than MIN_FILL_MS rejects; slower passes
 const rendered = 10_000;
 assert.ok(spamReason({ _ts: rendered }, rendered + MIN_FILL_MS - 1) !== null);
 assert.equal(spamReason({ _ts: rendered }, rendered + MIN_FILL_MS), null);
@@ -63,7 +63,7 @@ const mail = buildEmail(
   "8-BitQuest",
 );
 assert.equal(mail.replyTo, "a@b.co");
-assert.ok(mail.subject.startsWith("[8-BitQuest] Hi & bye — <script>")); // subject is a header, not HTML
+assert.ok(mail.subject.startsWith("[8-BitQuest] Hi & bye - <script>")); // subject is a header, not HTML
 assert.ok(mail.html.includes("&lt;script&gt;"));
 assert.ok(mail.html.includes("1 &lt; 2"));
 assert.ok(!mail.html.includes("<script>"));

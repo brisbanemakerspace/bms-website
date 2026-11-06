@@ -1,7 +1,7 @@
 /**
- * * Contact form — the trust boundary.
+ * * Contact form - the trust boundary.
  *
- * Pure and framework-free on purpose: no `import.meta.env`, no `fetch`, no Astro imports — so it
+ * Pure and framework-free on purpose: no `import.meta.env`, no `fetch`, no Astro imports - so it
  * type-strips for `pnpm test` and the action handler (`src/actions/index.ts`) starts from data that
  * is already validated and, for the email, already escaped. One Zod schema is the ONLY definition of
  * a valid submission; the action re-runs it, never trusts the client.
@@ -38,7 +38,7 @@ export const contactSchema = z.object({
     .trim()
     .min(10, "Tell me a little more than that.")
     .max(5000, "That transmission is too long."),
-  /** Honeypot — permissive on purpose, so a filled value becomes a readable form-level rejection. */
+  /** Honeypot - permissive on purpose, so a filled value becomes a readable form-level rejection. */
   _gotcha: z.string().optional(),
   /** Render timestamp for the time gate; coerced from the hidden field's string. */
   _ts: z.coerce.number().int().positive(),
@@ -53,7 +53,7 @@ export type RepopulatedField = "name" | "email" | "subject" | "message";
  * * Pull the visitor's submitted values back out of a raw `FormData`, so a validation failure
  * re-renders the form filled in rather than blank.
  *
- * Needed because Astro's `isInputError(error)` exposes `.fields` — the messages — but never the input
+ * Needed because Astro's `isInputError(error)` exposes `.fields` - the messages - but never the input
  * that produced them. Without this a bad email address discards up to 5000 characters of message,
  * which is exactly the no-JS path the template advertises.
  *
@@ -62,7 +62,7 @@ export type RepopulatedField = "name" | "email" | "subject" | "message";
  * rejects every resubmission of a form that was slow to fill.
  *
  * @param form the submitted FormData, or `null` on a fresh GET render
- * @returns every repopulated field as a string — `""` where absent or where the entry was a File
+ * @returns every repopulated field as a string - `""` where absent or where the entry was a File
  */
 export function repopulate(
   form: Pick<FormData, "get"> | null,
@@ -88,7 +88,7 @@ export const MIN_FILL_MS = 3000;
  * the visitor's device. Returns a rejection reason, or `null` to proceed.
  *
  * The time gate has no upper bound (a form left open an hour still submits) and `_ts` is a forgeable
- * hidden field: this stops drive-by bots, not a targeted attacker. `ponytail:` ceiling — add
+ * hidden field: this stops drive-by bots, not a targeted attacker. `ponytail:` ceiling - add
  * Cloudflare Turnstile (both keys or neither) if drive-by volume becomes a problem; it costs the
  * no-JS path, so it's deliberately left out here.
  *
@@ -102,7 +102,7 @@ export function spamReason(
 ): string | null {
   if (_gotcha) return "Message rejected.";
   if (now - _ts < MIN_FILL_MS)
-    return "That was quick — please take another look and resend.";
+    return "That was quick - please take another look and resend.";
   return null;
 }
 
@@ -116,7 +116,7 @@ export function escapeHtml(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
-/** The Resend payload pieces built from validated fields — every value escaped, `replyTo` verbatim. */
+/** The Resend payload pieces built from validated fields - every value escaped, `replyTo` verbatim. */
 export interface ContactEmail {
   subject: string;
   html: string;
@@ -140,7 +140,7 @@ export function buildEmail(
   siteName: string,
 ): ContactEmail {
   return {
-    subject: `[${siteName}] ${subject} — ${name}`,
+    subject: `[${siteName}] ${subject} - ${name}`,
     replyTo: email,
     html: [
       `<h2>New transmission from ${escapeHtml(name)}</h2>`,

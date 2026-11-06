@@ -1,11 +1,11 @@
 {
-  "name": "8-bitquest",
+  "name": "bms-website",
   "type": "module",
   "version": "0.1.0",
   "license": "SEE LICENSE IN LICENSE",
   "packageManager": "pnpm@11.9.0",
   "engines": {
-    "node": ">=22.13.0"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "dev": "astro dev",

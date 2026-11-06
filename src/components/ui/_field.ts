@@ -1,6 +1,6 @@
-// src/components/ui/_field.ts — shared form-field contract for the input-like primitives.
+// src/components/ui/_field.ts - shared form-field contract for the input-like primitives.
 // Input and Textarea (and future Checkbox / Select / File Input, etc.) compose these so the field
-// look and the validation states have a single source of truth. Not a primitive itself — the
+// look and the validation states have a single source of truth. Not a primitive itself - the
 // leading underscore marks it as an internal shared module, not a ui/ component folder.
 
 /** Base look shared by all text-field primitives (layout, typography, focus ring, disabled). */

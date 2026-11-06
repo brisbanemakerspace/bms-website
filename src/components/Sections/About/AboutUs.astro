@@ -1,0 +1,158 @@
+---
+// src/components/Sections/About/AboutUs.astro - the About page body for Brisbane Makerspace: what we
+// do, who we are, how we operate. Copy and links are carried over from the old
+// brisbanemaker.space/about-us/. One-off section copy lives here as typed literals (see AGENTS.md
+// "content tiers"); edit this file to change the wording.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import { policyLinks } from "@config/policyData.json";
+import siteData from "@config/siteData.json";
+import { socialHref } from "@config/socialData.json";
+import makerspaceTour from "@images/makerspace-tour.jpg";
+import members from "@images/members.jpeg";
+import smartHomeMeetup from "@images/smart-home-meetup.jpg";
+
+const discord = socialHref("discord");
+const eventsUrl = siteData.links.routes.events;
+const { policies: policiesUrl, orgStructure: orgStructureUrl, findSomeone: findSomeoneUrl } =
+  siteData.links.wikiPages;
+
+const interests = [
+  "Digital fabrication including CAD, 3D printing, laser cutting, CNC tools, Cricut vinyl cutter, etc.",
+  "Electronics projects like making PCBs, circuits, LEDs, ESP32/Arduinos, IoT sensors, robots, etc.",
+  "Arts and crafts including cosplay, sewing, cross stitching, paper crafts, drawing, etc.",
+  "Computers and coding like building/repairing computers, writing code and software, etc.",
+  "Sooo much more that we can’t fit on this list!",
+];
+
+const link = "text-info hover:text-success underline transition-colors";
+const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+---
+
+<HeroPanel
+  headingId="about-hero-heading"
+  tagline="About Us"
+  heading="Brisbane Makerspace"
+  intro="An incorporated association and registered charity in Brisbane/Meanjin, run entirely by volunteers and built around our shared love of making."
+/>
+
+<section aria-labelledby="what-we-do-heading">
+  <PixelPanel class="flow-root p-6 md:p-8">
+    <h2 id="what-we-do-heading" class="h3 text-foreground mb-4">What We Do</h2>
+    <!-- Photo floats right on md+, level with the first paragraph, text wrapping around it (same as the
+         other two sections); stacked above the text on mobile. -->
+    <img
+      src={makerspaceTour.src}
+      width={makerspaceTour.width}
+      height={makerspaceTour.height}
+      alt="A member pointing out equipment to a seated group during a tour of the makerspace."
+      loading="lazy"
+      class="border-border mb-6 h-auto w-full border-4 md:float-right md:mb-8 md:ml-8 md:w-72 lg:w-80"
+    />
+    <div class="[&>*+*]:mt-4">
+    <p class="text-foreground/90 leading-relaxed">
+      We’re run entirely by volunteers with an aim to bring people together around
+      our common love of making. Whether it’s 3D printing, electronics, arts & craft, or wood/metal work projects, everyone is welcome. Our hope is that by bringing people together, we can help combat loneliness and social
+      isolation that is so prevalent in today’s world.
+    </p>
+    <p class="text-foreground/90 leading-relaxed">
+      We are primarily a <strong>social community group</strong>. That means our focus is on helping people create and maintain
+      social connections. We run regular workshops, social events and working bees, and members often run into
+      each other throughout the week. Creating a safe space for everyone is a core part of our culture and is codified in our Safe Space Policy and Code of Conduct.
+    </p>
+    <p class="text-foreground/90">
+      You also don’t need membership to be part of our community! You can:
+    </p>
+    <ul class="text-foreground/90 list-disc space-y-1 pl-6 leading-relaxed">
+      <li>
+        Come to a social event (check our events <a href={eventsUrl} class={link}>here</a
+        >).
+      </li>
+      <li>
+        Join our Discord server (<a href={discord} class={link} {...ext}>tap here</a>) to chat with members and our wider community.
+      </li>
+    </ul>
+    </div>
+  </PixelPanel>
+</section>
+
+<section aria-labelledby="who-we-are-heading">
+  <PixelPanel class="flow-root p-6 md:p-8">
+    <h2 id="who-we-are-heading" class="h3 text-foreground mb-4">Who We Are</h2>
+    <!-- Images float right on md+ so the text wraps around them; stacked above the text on mobile. -->
+    <div class="mb-6 flex flex-col gap-4 md:float-right md:mb-8 md:ml-8 md:w-72 lg:w-80">
+          <img
+        src={members.src}
+        width={members.width}
+        height={members.height}
+        alt="Four members playing a board game around a table, with a Progress Pride flag on the wall behind them."
+        loading="lazy"
+        class="border-border h-auto w-full border-4"
+      />
+    </div>
+    <div class="[&>*+*]:mt-4">
+      <p class="text-foreground/90 leading-relaxed">
+        We are a collective of friendly, like-minded makers. We help each other out, and we love
+        talking about nerdy stuff! We have people interested in pretty much anything you can think of and a diverse range of
+        members from all sorts of backgrounds. It doesn’t matter who you are, you’ll be welcomed
+        into our community.
+      </p>
+      <p class="text-foreground/90 leading-relaxed">
+        You can read more about how we keep the space welcoming in our <a
+          href={policyLinks.safeSpace.href}
+          class={link}
+          {...ext}>{policyLinks.safeSpace.label}</a
+        > and <a href={policyLinks.codeOfConduct.href} class={link} {...ext}
+          >{policyLinks.codeOfConduct.label}</a
+        >.
+      </p>
+      <p class="text-foreground/90">
+        Our community has people interested in:
+      </p>
+      <ul class="text-foreground/90 list-disc space-y-1 pl-6 leading-relaxed">
+        {interests.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="text-foreground/90 leading-relaxed">
+        Interested in something not on the list? Someone in our community probably is too! <a
+          href={discord}
+          class={link}
+          {...ext}>Tap here</a
+        > to join our Discord server and start chatting!
+      </p>
+    </div>
+  </PixelPanel>
+</section>
+
+<section aria-labelledby="how-we-operate-heading">
+  <PixelPanel class="flow-root p-6 md:p-8">
+    <h2 id="how-we-operate-heading" class="h3 text-foreground mb-4">How We Operate</h2>
+    <!-- Photo floats right on md+, level with the first paragraph (like Who We Are), and the text wraps around it; stacked above
+         the text on mobile. Same size + border as the Who We Are photo. -->
+    <img
+      src={smartHomeMeetup.src}
+      width={smartHomeMeetup.width}
+      height={smartHomeMeetup.height}
+      alt="About a dozen members seated around a large table in the workshop at a smart home meetup."
+      loading="lazy"
+      class="border-border mb-6 h-auto w-full border-4 md:float-right md:mb-8 md:ml-8 md:w-72 lg:w-80"
+    />
+    <div class="[&>*+*]:mt-4">
+      <p class="text-foreground/90 leading-relaxed">
+      We operate using consensus-based decision-making, which aims to come up with the most equitable
+      solutions for everyone. Members get a direct say in how we operate, and can propose policies and
+      purchases at meetings. All of our policies and operating procedures can be found on our community-maintained
+      wiki <a href={policiesUrl} class={link} {...ext}>right here</a>.
+    </p>
+    <p class="text-foreground/90 leading-relaxed">
+      We have a management committee that handles the governance but our volunteers handle the day-to-day
+      operations. Volunteering is also part of the fun and a great way to learn new skills and make
+      new friends. You can learn more about our organisational structure <a
+        href={orgStructureUrl}
+        class={link}
+        {...ext}>here</a
+      > or find the right person to contact <a href={findSomeoneUrl} class={link} {...ext}>here</a> if you
+      need to get in touch.
+    </p>
+    </div>
+  </PixelPanel>
+</section>

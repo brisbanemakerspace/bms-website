@@ -1,5 +1,5 @@
 // Shared project → card mapping for the listing grid (Sections/Project) and the home Featured
-// Projects section, so the two grids can't drift. Pure data-shaping — the only runtime module the
+// Projects section, so the two grids can't drift. Pure data-shaping - the only runtime module the
 // two Astro files import; its check lives beside it (projectCards.test.ts).
 //
 // All imports below are type-only, so `pnpm test` (Node type-stripping) erases them and this file
@@ -12,7 +12,7 @@ export type ProjectStatus = "complete" | "in-progress";
 
 /**
  * A project's `status` → its retro card badge: label + a ui/badge tone.
- * COMPLETE reads green (success), IN PROGRESS amber (warning) — the Figma "Status Tag" colours.
+ * COMPLETE reads green (success), IN PROGRESS amber (warning) - the Figma "Status Tag" colours.
  *
  * @param status the entry's `status` field
  * @returns the badge label (bracketed, retro) and the tone variant

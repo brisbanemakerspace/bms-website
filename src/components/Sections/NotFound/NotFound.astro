@@ -2,14 +2,14 @@
 // 404 content. Layout-free section: src/pages/404.astro owns BaseLayout + SEO (noindex) and
 // passes the title/description copy down (it doubles as the page's meta tags).
 //
-// Re-skinned to the theme (it was the one page still in the generic stock language — ui/button, a
+// Re-skinned to the theme (it was the one page still in the generic stock language - ui/button, a
 // text gradient and a 239-line non-pixel illustration). Now it reuses what every other page uses:
 // the PixelPanel surface, a pixel Badge tag, and a `.pixel-btn` CTA matching Home/Hero. Centred
 // rather than left-aligned like HeroPanel, because a dead end should read as a full-screen stop.
 //
 // The big 404 is set in the display face (Press Start 2P) instead of an illustration: the font IS
 // the pixel treatment, so it costs no new asset and can never drift from the theme's palette. It is
-// aria-hidden — the <h1> carries the real message for a screen reader.
+// aria-hidden - the <h1> carries the real message for a screen reader.
 import { Badge } from "@components/ui/badge";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { siteSettings } from "@config/siteSettings.json";

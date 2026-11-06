@@ -1,7 +1,7 @@
 ---
-// src/components/ui/input-number/InputNumber.astro — astro-boiler primitive (see ../README.md).
+// src/components/ui/input-number/InputNumber.astro - astro-boiler primitive (see ../README.md).
 // Native <input type="number"> flanked by decrement / increment steppers. Reuses the `input` field
-// look and the `button` look (ladder rung 2 — no new configs). The small bundled script drives
+// look and the `button` look (ladder rung 2 - no new configs). The small bundled script drives
 // stepDown()/stepUp() (which honor native min/max/step), keeps the field in sync, and disables a
 // stepper once its bound is reached. Without JS it degrades to a plain number field with the OS
 // spinners. Give it an accessible name via an associated <Label> (`id`/`for`) or `aria-label`.
@@ -78,7 +78,7 @@ const stepper = button({ variant: "outline", size, class: "aspect-square shrink-
 
     const step = (dir: 1 | -1) => {
       if (field.disabled) return;
-      // A blank/invalid field has no number to step from — seed it at min (or 0) first.
+      // A blank/invalid field has no number to step from - seed it at min (or 0) first.
       if (Number.isNaN(field.valueAsNumber)) field.value = field.min || "0";
       else if (dir > 0) field.stepUp();
       else field.stepDown();

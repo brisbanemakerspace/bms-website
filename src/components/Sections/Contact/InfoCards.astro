@@ -1,5 +1,5 @@
 ---
-// src/components/Sections/Contact/InfoCards.astro — Figma "InfoCardsContainer" (node 9:53).
+// src/components/Sections/Contact/InfoCards.astro - Figma "InfoCardsContainer" (node 9:53).
 //
 // Three pixel info cards beside the form: a retro tag, a title, a one-line blurb, and a linked
 // value box. Reuses the shared pixel surface + badge; the value box is a real <a> that goes green on
@@ -24,14 +24,22 @@ const discord = socialHref("discord");
 /** Strip scheme + trailing slash for the displayed value (the box still links to the full URL). */
 const display = (url: string): string => url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
-const cards: readonly {
+type Card = {
   tag: string;
   tone: BadgeVariant;
   title: string;
   blurb: string;
   value: string;
   href: string;
-}[] = [
+};
+
+/** A platform card, or `undefined` when the platform is commented out of `socialPlatforms`. */
+const platformCard = (
+  href: string | undefined,
+  card: Omit<Card, "value" | "href">,
+): Card | undefined => (href ? { ...card, value: display(href), href } : undefined);
+
+const candidates: readonly (Card | undefined)[] = [
   {
     tag: "E-Mail",
     tone: "info",
@@ -40,29 +48,30 @@ const cards: readonly {
     value: email,
     href: `mailto:${email}`,
   },
-  {
+  platformCard(discord, {
     tag: "Community",
     tone: "success",
     title: "Discord Bar",
     blurb: "Hang out with fellow retro hackers",
-    value: display(discord),
-    href: discord,
-  },
-  {
+  }),
+  platformCard(github, {
     tag: "Codebase",
     tone: "secondary",
     title: "GitHub Hub",
     blurb: "Inspect my open-source pipelines",
-    value: display(github),
-    href: github,
-  },
+  }),
 ];
+const cards = candidates.filter((card) => card !== undefined);
 ---
 
-<div class:list={["grid gap-6", !stacked && "md:grid-cols-3"]}>
+{/* Wide layout is a centred flex-wrap (not a 3-col grid) so 1–2 remaining cards stay centred when a
+    platform is commented out; each card keeps a third of the row. */}
+<div class:list={["gap-6", stacked ? "grid" : "flex flex-wrap justify-center"]}>
   {
     cards.map((card) => (
-      <PixelPanel class="flex flex-col items-start gap-4 p-6">
+      <PixelPanel
+        class:list={["flex flex-col items-start gap-4 p-6", !stacked && "w-full md:w-[calc((100%-3rem)/3)]"]}
+      >
         <Badge pixel variant={card.tone}>
           {card.tag}
         </Badge>

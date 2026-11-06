@@ -1,0 +1,45 @@
+---
+// src/components/Sections/Home/Offer.astro — "Bring your projects to life…": three numbered cards
+// (tools, events, meetup space) and the Visit Us / Pricing CTAs. Copy carried over from the old
+// brisbanemaker.space homepage; edit the `offers` array to change it.
+import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import { Reveal } from "@components/ui/reveal";
+
+
+const offers = [
+  {
+    title: "Makerspace Tools",
+    body: "We have lasercutting, 3D printing, electronics, arts & crafts and more!",
+  },
+  {
+    title: "Meetups & Events",
+    body: "Events for people to socialise around our common love of making.",
+  },
+  {
+    title: "Community Meetup Space",
+    body: "We have space available for non profit groups to host meetups and meetings.",
+  },
+] as const;
+---
+
+<Reveal as="section" aria-labelledby="offer-heading" class="flex flex-col gap-6">
+  <SectionHeading id="offer-heading" title="What we offer" />
+  <p class="text-muted-foreground max-w-3xl text-base">
+    Bring your projects to life and hang out with other makers.
+  </p>
+
+  <ul class="grid gap-6 md:grid-cols-3">
+    {
+      offers.map((offer, i) => (
+        <li class="flex">
+          <PixelPanel class="flex w-full flex-col gap-3 p-6">
+            <span class="font-display text-secondary text-sm">{String(i + 1).padStart(2, "0")}.</span>
+            <h3 class="h3 text-foreground">{offer.title}</h3>
+            <p class="text-muted-foreground text-sm leading-relaxed">{offer.body}</p>
+          </PixelPanel>
+        </li>
+      ))
+    }
+  </ul>
+</Reveal>

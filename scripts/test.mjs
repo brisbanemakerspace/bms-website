@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Runs every `.test.ts` self-check under `src/` with Node's type stripping — no test framework, no
+ * Runs every `.test.ts` self-check under `src/` with Node's type stripping - no test framework, no
  * config, no fixtures (house rule, see AGENTS.md: non-trivial logic leaves ONE runnable check
  * behind). Discovery-based, so a check written next to the code it covers runs without being
  * registered anywhere; sorted, so failures always report in the same order.
@@ -25,7 +25,7 @@ const tests = readdirSync(src, { recursive: true })
 // stop finding the checks it is supposed to run.
 if (tests.length === 0) {
   console.error(
-    "No checks found under src/ — expected at least one *.test.ts file.",
+    "No checks found under src/ - expected at least one *.test.ts file.",
   );
   process.exit(1);
 }

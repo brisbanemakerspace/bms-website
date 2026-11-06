@@ -3,48 +3,53 @@
  *
  * Kept in its own file so it can ALSO be imported into a `.astro` <style> block.
  * Two jobs here:
- *   1. `@theme`        — the brand palette ramps as direct hex (primary / base / status),
+ *   1. `@theme`        - the brand palette ramps as direct hex (primary / base / status),
  *                        so a rebrand is repointing these hexes (one edit per ramp).
- *   2. `@theme inline` — bridge the semantic runtime vars (defined in global.css) to
+ *   2. `@theme inline` - bridge the semantic runtime vars (defined in global.css) to
  *                        utilities, so `bg-background`/`text-primary` resolve to the
  *                        `:root`/`.dark` variables and flip with the theme.
  *
- * Rule for markup: use `bg-primary`, `text-foreground`, `text-base-700` — NEVER raw
+ * Rule for markup: use `bg-primary`, `text-foreground`, `text-base-700` - NEVER raw
  * `bg-violet-700`/`text-zinc-300`, which bypass theming + dark mode.
  */
 @theme {
-  /* PRIMARY — the retro action/heading blue. Anchored on the two Figma blues:
-     `-300` #99cbff (headings/links, the airy blue) and `-500` #41a6f6 (buttons/badges).
-     Rebrand by repointing these hexes; the semantic `--primary` (global.css) reads `-500`. */
-  --color-primary-50: #eaf4ff;
-  --color-primary-100: #cfe4ff;
-  --color-primary-200: #b3d6ff;
-  --color-primary-300: #99cbff;
-  --color-primary-400: #62b4f8;
-  --color-primary-500: #41a6f6;
-  --color-primary-600: #2b8ae0;
-  --color-primary-700: #1f6cc0;
-  --color-primary-800: #114e90;
-  --color-primary-900: #00395e;
-  --color-primary-950: #003354;
+  /* PRIMARY - BMS blue, from the brand Design Guide: the gradient's top-right #0072DC is `-500`
+     (buttons, badges, the dark-mode action colour). The ramp runs light → deep around it; `-300`
+     is the airy blue for dark-mode headings/links, `-700` the light-mode action blue.
+     Rebrand by repointing these hexes; the semantic `--primary` (global.css) reads them. */
+  --color-primary-50: #e8f4ff;
+  --color-primary-100: #cce6ff;
+  --color-primary-200: #99ceff;
+  --color-primary-300: #5cb3ff;
+  --color-primary-400: #2e92f0;
+  --color-primary-500: #0072dc;
+  --color-primary-600: #005fba;
+  --color-primary-700: #004d99;
+  --color-primary-800: #003a75;
+  --color-primary-900: #002650;
+  --color-primary-950: #001a38;
 
-  /* SECONDARY — the retro pink. `-200` #ffb2ba (SAY HI button / accents), `-600` #892037
-     (LORE badge bg), `-800` #670120 (dark text on pink). */
-  --color-secondary-50: #fff1f3;
-  --color-secondary-100: #ffdfe3;
-  --color-secondary-200: #ffb2ba;
-  --color-secondary-300: #ff9da8;
-  --color-secondary-400: #f4677a;
-  --color-secondary-500: #d83f56;
-  --color-secondary-600: #892037;
-  --color-secondary-700: #6d182b;
-  --color-secondary-800: #670120;
-  --color-secondary-900: #45001a;
-  --color-secondary-950: #2c000d;
+  /* SECONDARY - BMS cyan, the Design Guide gradient's bottom-left #00BFDC is `-500`. Used for
+     accent buttons/surfaces (`-200` face, `-800` dark ink on it, `-400` inset depth). */
+  --color-secondary-50: #e6fcff;
+  --color-secondary-100: #c2f6ff;
+  --color-secondary-200: #7fe3f2;
+  --color-secondary-300: #4fd6ec;
+  --color-secondary-400: #1ccbe6;
+  --color-secondary-500: #00bfdc;
+  --color-secondary-600: #0099b3;
+  --color-secondary-700: #007a8f;
+  --color-secondary-800: #00596a;
+  --color-secondary-900: #003c47;
+  --color-secondary-950: #002830;
 
-  /* SUCCESS — the retro green. The one STATUS colour promoted to a full ramp (warning/error stay
+  /* BMS BLUE GRADIENT (Design Guide): starts bottom-left #00BFDC, runs diagonally to top-right
+     #0072DC. Use as `bg-(image:--gradient-bms)` or `background-image: var(--gradient-bms)`. */
+  --gradient-bms: linear-gradient(to top right, #00bfdc, #0072dc);
+
+  /* SUCCESS - the retro green. The one STATUS colour promoted to a full ramp (warning/error stay
      semantic-only until something needs them) because the pixel SEND MESSAGE button needs fixed,
-     non-flipping green anchors — `--success` the semantic flips per theme, so the button can't use
+     non-flipping green anchors - `--success` the semantic flips per theme, so the button can't use
      it. Anchored on the Figma greens: `-400` #63de86 (dark success + button face), `-600` #2f9e57
      (light success + button depth), `-900` #00401b (dark ink on green). The semantic `--success`
      (global.css) reads these, so the values live in one place. */
@@ -60,10 +65,10 @@
   --color-success-900: #00401b;
   --color-success-950: #002d12;
 
-  /* BASE / ink — the single cool navy ramp both themes are cut from. DARK uses the deep end for
+  /* BASE / ink - the single cool navy ramp both themes are cut from. DARK uses the deep end for
      surfaces (`-900` page, `-800` panels, `-700` input, `-600` tags) + the light end for text
      (`-100`/`-200`). LIGHT is the reverse: the light end for surfaces (`-100` page, `-50` cards,
-     `-200` muted) + the deep end for ink (`-900`). No separate light palette — light mode is a
+     `-200` muted) + the deep end for ink (`-900`). No separate light palette - light mode is a
      cool inversion of dark, not a cream "paper" theme. */
   --color-base-50: #f4f4fb;
   --color-base-100: #e1e1f7;
@@ -98,7 +103,7 @@
     "Space Mono", ui-monospace, "SFMono-Regular", "Menlo", "Monaco", "Consolas",
     "Liberation Mono", "Courier New", monospace;
 
-  /* PIXEL SHADOW — the signature hard offset shadow (zero blur), the retro "sticker" depth on
+  /* PIXEL SHADOW - the signature hard offset shadow (zero blur), the retro "sticker" depth on
      every panel/card/button/badge. The COLOR is theme-aware via `--pixel-shadow` (global.css):
      pure black in dark mode, a soft slate-navy in light mode (the SAME color as `--border`, so the
      border and its shadow read as one gentler mark). Falls back to black if the var is ever missing.
@@ -107,7 +112,7 @@
   --shadow-pixel: 4px 4px 0 0 var(--pixel-shadow, #000);
   --shadow-pixel-lg: 8px 8px 0 0 var(--pixel-shadow, #000);
 
-  /* animation tokens — the Marquee primitive's seamless-loop scroll (see ui/marquee/Marquee.astro).
+  /* animation tokens - the Marquee primitive's seamless-loop scroll (see ui/marquee/Marquee.astro).
      `--marquee-duration` is the per-instance speed knob (set by the `speed` variant). Each track
      shifts one full copy width + one gap (`-100% - gap`); with identical copies laid side by side the
      next copy is already in place when one scrolls out, so the loop has no seam. `--marquee-gap` must

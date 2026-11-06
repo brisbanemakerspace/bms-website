@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 
 import { isActive } from "./nav.ts";
 
-// home matches only itself — never as a prefix of every route
+// home matches only itself - never as a prefix of every route
 assert.equal(isActive("/", "/"), true);
 assert.equal(isActive("/about/", "/"), false);
 

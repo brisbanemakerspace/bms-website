@@ -1,7 +1,7 @@
 # Third-party notices
 
 The 8-BitQuest template is licensed under [`LICENSE`](./LICENSE). The material listed here is **not**
-covered by that licence — it belongs to other people and carries their terms. Section 6 of `LICENSE`
+covered by that licence - it belongs to other people and carries their terms. Section 6 of `LICENSE`
 makes complying with those terms the licensee's responsibility.
 
 Two things in this file need your attention before you redistribute or deploy commercially: the Figma
@@ -10,17 +10,17 @@ demo images in section 5, whose provenance is not recorded in this repository.
 
 ---
 
-## 1. Fonts — bundled and served
+## 1. Fonts - bundled and served
 
 Both fonts are installed as npm packages and their `.woff2` files are copied into the build output, so
 they travel with every deployment.
 
-**Press Start 2P** — Copyright (c) 2012 Cody "CodeMan38" Boisclair.
+**Press Start 2P** - Copyright (c) 2012 Cody "CodeMan38" Boisclair.
 Licensed under the SIL Open Font License, Version 1.1.
 Shipped via [`@fontsource/press-start-2p`](https://www.npmjs.com/package/@fontsource/press-start-2p);
 the full licence text is at `node_modules/@fontsource/press-start-2p/LICENSE`.
 
-**Space Mono** — Copyright (c) 2016 Colophon Foundry.
+**Space Mono** - Copyright (c) 2016 Colophon Foundry.
 Licensed under the SIL Open Font License, Version 1.1.
 Shipped via [`@fontsource/space-mono`](https://www.npmjs.com/package/@fontsource/space-mono); the full
 licence text is at `node_modules/@fontsource/space-mono/LICENSE`.
@@ -29,20 +29,20 @@ The OFL permits bundling and web-serving. It requires that the font files keep t
 and licence, that a Reserved Font Name is not reused on a modified version, and that the fonts are not
 sold on their own. Serving them as part of a website is exactly the intended use.
 
-## 2. Icons — from Figma Community files
+## 2. Icons - from Figma Community files
 
 > **Verify these before redistributing.** Figma Community licences are set per file by their author
-> and are not uniform — some are CC BY (attribution required), some are non-commercial, and an author
+> and are not uniform - some are CC BY (attribution required), some are non-commercial, and an author
 > can change the terms after publication. The Licensor has not obtained a written licence grant from
 > either author. Open each file's Community listing, read the licence stated there, and satisfy
 > yourself that your use is covered. If a listing turns out to be non-commercial, delete the set
 > rather than ship it.
 
-### Stratis UI Icons — `src/components/svg/icons/`
+### Stratis UI Icons - `src/components/svg/icons/`
 
 553 24×24 line icons, generated into `icons.ts`. Source: the "Stratis UI Icons" Figma Community file.
 
-This set is **stock for your customisation** — no page in the theme uses it. It is referenced only by
+This set is **stock for your customisation** - no page in the theme uses it. It is referenced only by
 the `/examples/ui` catalog, which the README tells you to delete before deploying. If the licence
 question is not worth resolving for you, delete `src/components/svg/icons/` and the catalog sections
 that import it; nothing in the theme breaks.
@@ -51,17 +51,17 @@ that import it; nothing in the theme breaks.
 section 3.
 
 An earlier version of this template also shipped 18 filled brand marks from a second Figma Community
-file, "Social Media Icons 24x24" — `facebook`, `instagram`, `tiktok`, `threads`, `messenger`,
+file, "Social Media Icons 24x24" - `facebook`, `instagram`, `tiktok`, `threads`, `messenger`,
 `whatsapp`, `telegram`, `behance`, `github`, `discord`, `linkedin`, `slack`, `line`, `apple`,
 `google`, `pinterest`, `google-play`, `bluesky`. **They have been removed** and that file is no longer
 a dependency of this template. Do not re-add them without reading section 3 first.
 
-### 1300 Free Pixel Icons — `src/components/svg/pixel-icons/`
+### 1300 Free Pixel Icons - `src/components/svg/pixel-icons/`
 
 18 pixel-art glyphs, hand-ported into `pixelIcons.ts`. Source: the "1300 Free Pixel Icons" Figma
 Community file, `CsRVZj1WwtKNAuqZEE2NT0`.
 
-Unlike the set above, **this one is load-bearing** — it is the theme's real icon system. All 18 glyphs
+Unlike the set above, **this one is load-bearing** - it is the theme's real icon system. All 18 glyphs
 are used: the theme toggle, the footer social row, the home contact chips, the tech-stack and
 skill-tree lists, and the blog/project article navigation. It cannot be deleted without rebuilding
 those.
@@ -70,8 +70,8 @@ Four of the 18 are brand marks: `linkedin`, `youtube`, `twitter`, `github`. See 
 
 ## 3. Trademarks
 
-The brand marks noted above — `linkedin`, `youtube`, `twitter`, `github` in the pixel set, and
-`youtube` in the line set — are **trademarks of their respective owners**. Neither `LICENSE` nor any
+The brand marks noted above - `linkedin`, `youtube`, `twitter`, `github` in the pixel set, and
+`youtube` in the line set - are **trademarks of their respective owners**. Neither `LICENSE` nor any
 Figma Community licence grants you a right to use them: a trademark is governed by the brand owner's
 own guidelines, independently of the copyright in the drawing.
 
@@ -88,7 +88,7 @@ Replacing them with generic glyphs is a contained change.
 
 ## 4. Code ports
 
-### tailwind-animations — `src/styles/motion/`
+### tailwind-animations - `src/styles/motion/`
 
 The animation catalog is a dependency-free port of **tailwind-animations**, adapted to Tailwind v4
 CSS-first syntax and this template's conventions. The MIT licence requires its copyright and
@@ -119,15 +119,15 @@ Changes from upstream are listed in the header comment of `src/styles/motion/ind
 `--animate-pulse` dropped as a duplicate of Tailwind's built-in, a global `prefers-reduced-motion`
 guard added, and an owned scroll-driven extension added.
 
-### "Pure CSS 8bit Button Style" — `src/styles/global.css`
+### "Pure CSS 8bit Button Style" - `src/styles/global.css`
 
 The `.pixel-btn` class is a port of the CodePen pen "Pure CSS 8bit Button Style" by Maximuz
 (<https://codepen.io/Maximuz/pen/BdqXXN>).
 
 **No licence is stated on the pen.** CodePen's terms make a pen's author its copyright holder; pens
 posted publicly may be viewed and learned from, but that is not the same as a licence to redistribute.
-The port here is a reimplementation of a widely-known technique — a flat face, an inset shadow for
-depth, and two pseudo-elements drawing a notched border — rather than a copy of the original
+The port here is a reimplementation of a widely-known technique - a flat face, an inset shadow for
+depth, and two pseudo-elements drawing a notched border - rather than a copy of the original
 stylesheet, and the tokens, variants, focus handling, and sizing are this template's own. It is a
 small amount of CSS expressing a common idea, which is a weak subject for copyright.
 
@@ -135,7 +135,7 @@ That reasoning is offered so you can evaluate it, not as a legal opinion. If you
 rely on it, the class is self-contained at `src/styles/global.css` and roughly 50 lines; rewriting the
 border geometry from scratch is straightforward.
 
-## 5. Demo images — provenance not recorded
+## 5. Demo images - provenance not recorded
 
 **Action required by the template owner.** These ten raster files ship in the repository, and this
 repository records nothing about where they came from or under what terms:
@@ -146,7 +146,7 @@ repository records nothing about where they came from or under what terms:
 - `src/assets/images/demo/project-cli-quest.png`, `project-pixel-art.png`, `project-retro-chat.png`
 
 If they are the owner's own work or AI-generated, say so here and the matter is closed. If any came
-from a stock library, an image search, or another template, its terms must be checked and stated —
+from a stock library, an image search, or another template, its terms must be checked and stated -
 or the file replaced.
 
 They are placeholder content in any case: every one is demo material the buyer is expected to swap
@@ -154,7 +154,7 @@ They are placeholder content in any case: every one is demo material the buyer i
 
 ## 6. Build and runtime dependencies
 
-The npm packages this template depends on are not redistributed by it — they install from the registry
+The npm packages this template depends on are not redistributed by it - they install from the registry
 into the buyer's own `node_modules`, each with its own licence file. At the time of writing, every
 direct dependency is MIT: `astro`, `@astrojs/cloudflare`, `@astrojs/mdx`, `@astrojs/sitemap`,
 `tailwindcss`, `@tailwindcss/vite`, `tailwind-merge`, and `tailwind-variants`, plus the dev

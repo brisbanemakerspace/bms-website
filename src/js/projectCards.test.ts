@@ -1,5 +1,5 @@
-// Self-check for projectCards.ts — the status→badge map and the entry→card mapping (house rule:
-// non-trivial logic leaves ONE runnable check behind — see AGENTS.md). No framework:
+// Self-check for projectCards.ts - the status→badge map and the entry→card mapping (house rule:
+// non-trivial logic leaves ONE runnable check behind - see AGENTS.md). No framework:
 // `pnpm test` runs this under Node's type-stripping.
 import assert from "node:assert/strict";
 
@@ -18,7 +18,7 @@ assert.deepEqual(statusMeta("in-progress"), {
 });
 
 // toProjectCard: a minimal stub entry (only the fields the mapper reads). The cast is compile-time
-// only — Node strips it, leaving a plain object at runtime.
+// only - Node strips it, leaving a plain object at runtime.
 const stub = {
   id: "realtime-chat",
   data: {
@@ -70,4 +70,4 @@ assert.equal(
 assert.equal(card2.badgeLabel, "[In Progress]");
 assert.equal(card2.badgeVariant, "warning");
 
-console.log("projectCards.test.ts — all assertions passed");
+console.log("projectCards.test.ts - all assertions passed");

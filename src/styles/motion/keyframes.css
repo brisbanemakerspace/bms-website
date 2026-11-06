@@ -1,14 +1,14 @@
 /**
- * * Motion keyframes — the raw `@keyframes` definitions for the owned animation catalog.
+ * * Motion keyframes - the raw `@keyframes` definitions for the owned animation catalog.
  *
  * Split out of `./index.css` (which stays the entry + tunable vocabulary): this is the bulk,
- * homogeneous, rarely-edited half — ~80 keyframes ported from tailwind-animations. The `--animate-*`
+ * homogeneous, rarely-edited half - ~80 keyframes ported from tailwind-animations. The `--animate-*`
  * shorthands that reference these names, the modifier `@utility`s, and the reduced-motion guard all
  * live in `./index.css`, which `@import`s this file.
  *
  * Kept inside `@theme` so Tailwind still tree-shakes them: a keyframe is emitted only when an
  * `animate-*` utility that uses it is actually present in the markup (cross-`@theme`-block name
- * resolution is fine — the `--animate-*` tokens live in `./index.css`). Add a keyframe here and its
+ * resolution is fine - the `--animate-*` tokens live in `./index.css`). Add a keyframe here and its
  * `--animate-<name>` shorthand in `./index.css` together.
  */
 
@@ -861,11 +861,11 @@
 }
 
 /* ============================================
-   Scroll-driven extension — OURS, not upstream. Keyframes shaped for scrubbing by a scroll/view
+   Scroll-driven extension - OURS, not upstream. Keyframes shaped for scrubbing by a scroll/view
    timeline (`timeline-*` + `animate-range-*`) rather than playing over time: continuous
    progress↔position maps (progress, parallax-*, ken-burns) and an enter+exit shape (fade-through).
    The wipe-in-* clip reveals are dual-use (fine as time-based entrances too). The scroll-ONLY ones
-   end away from identity, so they're disabled where scroll timelines are unsupported — see the
+   end away from identity, so they're disabled where scroll timelines are unsupported - see the
    `@supports` guard in ./index.css. Their `--animate-*` tokens live there with the rest.
    ============================================ */
 @theme inline {
@@ -880,7 +880,7 @@
   }
   /* parallax drift (±15% of own height): child sized ~130% of its clipping frame; pair with
      `timeline-view animate-range-cover`. Clip the frame with `overflow-clip`, NEVER
-     `overflow-hidden` — a hidden box is a scroll container, so `view()` would track the frame
+     `overflow-hidden` - a hidden box is a scroll container, so `view()` would track the frame
      (which never scrolls) instead of the page and the animation freezes. */
   @keyframes parallax-up {
     0% {
@@ -921,7 +921,7 @@
       opacity: 0;
     }
   }
-  /* clip-path wipes — the reveal front moves in the named direction */
+  /* clip-path wipes - the reveal front moves in the named direction */
   @keyframes wipe-in-up {
     0% {
       clip-path: inset(100% 0 0 0);

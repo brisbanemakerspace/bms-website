@@ -1,8 +1,8 @@
-// src/components/ui/_popover.ts — shared placement controller for anchored top-layer popovers
+// src/components/ui/_popover.ts - shared placement controller for anchored top-layer popovers
 // (Dropdown's menu, MegaMenu's panel). The Popover API handles open/close/light-dismiss/Escape
 // natively; this only does placement + aria-expanded sync (which flips the trigger chevron) +
 // Dropdown's arrow-key roving + close-on-item-activate. Delegated on document/window, so it binds ONCE and survives
-// <ClientRouter /> view transitions — no astro:after-swap re-init. Imported as a side effect from
+// <ClientRouter /> view transitions - no astro:after-swap re-init. Imported as a side effect from
 // Dropdown.astro and MegaMenu.astro; the module is an ES singleton, so listeners attach exactly once.
 
 const GAP = 4;
@@ -57,7 +57,7 @@ function isAnchored(node: EventTarget | null): node is HTMLElement {
 
 const openPanels = new Set<HTMLElement>();
 
-// `toggle` / `beforetoggle` don't bubble — capture catches them via the document.
+// `toggle` / `beforetoggle` don't bubble - capture catches them via the document.
 document.addEventListener(
   "beforetoggle",
   (event) => {
@@ -79,7 +79,7 @@ document.addEventListener(
       openPanels.add(panel);
       trigger?.setAttribute("aria-expanded", "true");
       // Dropdown menus focus their first item; a mega-menu panel has none, so focus stays on the
-      // trigger and Tab walks the panel's links in natural order — the right model for a link grid.
+      // trigger and Tab walks the panel's links in natural order - the right model for a link grid.
       menuItems(panel)[0]?.focus();
     } else {
       openPanels.delete(panel);
@@ -94,7 +94,7 @@ window.addEventListener("scroll", reflow, true);
 window.addEventListener("resize", reflow);
 
 // Activating an item dismisses its popover (menu semantics; links then navigate). Light dismiss
-// can't do this — clicks INSIDE a popover never light-dismiss it. Hiding while focus is inside
+// can't do this - clicks INSIDE a popover never light-dismiss it. Hiding while focus is inside
 // natively returns focus to the trigger.
 document.addEventListener("click", (event) => {
   if (!(event.target instanceof Element)) return;
@@ -107,7 +107,7 @@ document.addEventListener("click", (event) => {
   if (panel?.matches(":popover-open")) panel.hidePopover();
 });
 
-// Arrow-key roving is Dropdown-only (role="menu" semantics) — it keys on dropdown-menu, so a
+// Arrow-key roving is Dropdown-only (role="menu" semantics) - it keys on dropdown-menu, so a
 // mega-menu panel keeps natural Tab order.
 document.addEventListener("keydown", (event) => {
   if (!(event.target instanceof HTMLElement)) return;

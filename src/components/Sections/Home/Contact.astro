@@ -1,5 +1,5 @@
 ---
-// src/components/Sections/Home/Contact.astro — Figma "Contact Section" (node 14:137).
+// src/components/Sections/Home/Contact.astro - Figma "Contact Section" (node 14:137).
 //
 // Section heading + a centred prompt, two pixel CTAs (EMAIL ME blue / LET'S TALK pink), and a row of
 // social chips (PixelChip links). Below-the-fold → <Reveal>. Buttons stack on phones. Tokens only.
@@ -16,7 +16,17 @@ import { socialLink } from "@config/socialData.json";
 
 import PixelChip from "./PixelChip.astro";
 
-const socials = [socialLink("github"), socialLink("twitter"), socialLink("linkedin")];
+// Platforms commented out of `socialPlatforms` come back `undefined` and are skipped.
+const socials = [
+  socialLink("github"),
+  socialLink("discord"),
+  socialLink("instagram"),
+  socialLink("facebook"),
+  socialLink("twitter"),
+  socialLink("linkedin"),
+].filter(
+  (link) => link !== undefined,
+);
 ---
 
 <Reveal as="section" aria-labelledby="contact-heading" class="flex flex-col gap-6">
@@ -27,13 +37,13 @@ const socials = [socialLink("github"), socialLink("twitter"), socialLink("linked
 
     <div class="flex flex-col gap-4 sm:flex-row">
       <a
-        href={`mailto:${siteData.author.email}`}
+        href={siteData.links.routes.visit}
         class="pixel-btn pixel-btn--blue px-5 py-4 text-sm uppercase sm:text-base"
       >
-        Email Me
+        Visit Us
       </a>
-      <a href="/contact/" class="pixel-btn px-5 py-4 text-sm uppercase sm:text-base">
-        Let's Talk
+      <a href={siteData.links.routes.contact} class="pixel-btn px-5 py-4 text-sm uppercase sm:text-base">
+        Contact Us
       </a>
     </div>
 

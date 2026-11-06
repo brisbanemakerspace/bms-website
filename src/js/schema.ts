@@ -1,5 +1,5 @@
 /**
- * JSON-LD structured-data builders (schema.org) — dependency-free.
+ * JSON-LD structured-data builders (schema.org) - dependency-free.
  *
  * The template emits structured data with native `<script type="application/ld+json">`
  * tags, the same "owned, not vendored" stance as the meta/OG tags in BaseHead (no SEO
@@ -9,7 +9,7 @@
  * `serializeJsonLd`, which escapes `<` as `\u003c`, so the JSON is safe to inline in a `<script>`
  * without a `</script>` breakout.
  *
- * SEO is owned, not vendored — see AGENTS.md.
+ * SEO is owned, not vendored - see AGENTS.md.
  */
 
 /**
@@ -41,7 +41,7 @@ export interface SeoProps {
    * brackets and costs BaseHead a normalizing ternary on every render.
    */
   schema?: JsonLdNode[];
-  /** present on article pages — drives og:type=article + the article:* meta */
+  /** present on article pages - drives og:type=article + the article:* meta */
   article?: ArticleMeta;
 }
 
@@ -52,7 +52,7 @@ export function organizationId(siteUrl: string): string {
 
 export interface OrganizationInput {
   name: string;
-  /** any absolute URL on the site — only its origin is used */
+  /** any absolute URL on the site - only its origin is used */
   url: string;
   /** absolute URL of the brand logo */
   logo: string;
@@ -61,7 +61,7 @@ export interface OrganizationInput {
 }
 
 /**
- * * Organization node — the publishing entity behind the site.
+ * * Organization node - the publishing entity behind the site.
  * @returns a JSON-LD Organization keyed by a stable `@id` so WebSite/Article can reference it.
  *
  * ```ts
@@ -87,7 +87,7 @@ export function getOrganizationSchema({
 
 export interface WebSiteInput {
   name: string;
-  /** any absolute URL on the site — only its origin is used */
+  /** any absolute URL on the site - only its origin is used */
   url: string;
   description?: string;
   /** BCP-47 language tag, e.g. "en-US" */
@@ -97,7 +97,7 @@ export interface WebSiteInput {
 }
 
 /**
- * * WebSite node — the site itself, linked to its publisher Organization.
+ * * WebSite node - the site itself, linked to its publisher Organization.
  * @returns a JSON-LD WebSite keyed by a stable `@id`.
  */
 export function getWebSiteSchema({
@@ -121,7 +121,7 @@ export function getWebSiteSchema({
 
 export interface SiteSchemaInput {
   name: string;
-  /** any absolute URL on the site — only its origin is used */
+  /** any absolute URL on the site - only its origin is used */
   url: string;
   description?: string;
   /** BCP-47 language tag, e.g. "en-US" */
@@ -203,7 +203,7 @@ export function getArticleSchema({
     mainEntityOfPage: url,
     inLanguage,
     datePublished,
-    // only emit dateModified when the content was actually updated — never invent it from datePublished
+    // only emit dateModified when the content was actually updated - never invent it from datePublished
     ...(dateModified ? { dateModified } : {}),
     author: {
       "@type": "Person",

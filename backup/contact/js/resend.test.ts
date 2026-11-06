@@ -1,5 +1,5 @@
 /**
- * Runnable self-check for the Resend send boundary in ./resend.ts — no test framework, no network.
+ * Runnable self-check for the Resend send boundary in ./resend.ts - no test framework, no network.
  * A fake `fetchImpl` drives the three outcomes. Run: `pnpm test`, or directly
  * `node --experimental-strip-types src/js/resend.test.ts`.
  */
@@ -9,7 +9,7 @@ import type { ContactEmail } from "./contact.ts";
 import { sendContactEmail } from "./resend.ts";
 
 const email: ContactEmail = {
-  subject: "[8-BitQuest] Hi — A",
+  subject: "[8-BitQuest] Hi - A",
   html: "<p>hi</p>",
   replyTo: "a@b.com",
 };

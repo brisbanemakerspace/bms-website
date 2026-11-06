@@ -1,7 +1,7 @@
 /**
- * src/components/ui/_overlay.css — open/close transitions + modal scroll-lock for the Dialog and
+ * src/components/ui/_overlay.css - open/close transitions + modal scroll-lock for the Dialog and
  * Sheet primitives (both native <dialog>). Imported (once, deduped) from Dialog.astro and Sheet.astro
- * frontmatter. Plain global CSS — these rules need `@starting-style`, `::backdrop`, `:has()`, and
+ * frontmatter. Plain global CSS - these rules need `@starting-style`, `::backdrop`, `:has()`, and
  * `allow-discrete`, which don't express cleanly as utilities. Colors come from the token theme
  * (`var(--color-…)`), never raw hex. Unlayered, so it wins over Tailwind utilities for the animated
  * properties (opacity / scale / translate), which is what we want.
@@ -56,7 +56,7 @@
   }
 }
 
-/* Edge Sheet: slides in from its `data-side` (the panel itself doesn't fade — just the backdrop). */
+/* Edge Sheet: slides in from its `data-side` (the panel itself doesn't fade - just the backdrop). */
 [data-slot="sheet"][data-side="right"] {
   translate: 100% 0;
 }

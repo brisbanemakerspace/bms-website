@@ -1,5 +1,5 @@
 /**
- * * Global stylesheet — the single CSS entry point (imported once in BaseLayout).
+ * * Global stylesheet - the single CSS entry point (imported once in BaseLayout).
  *
  * Token architecture lives across two files:
  *   - tailwind-theme.css  → LAYER 1 palette aliases + LAYER 3 `@theme inline` bridge
@@ -16,21 +16,21 @@
 @import "./tailwind-theme.css";
 
 /* motion catalog: keyframes + `animate-*` utilities + the global reduced-motion guard (owned,
-   dependency-free port of tailwind-animations — see motion/index.css) */
+   dependency-free port of tailwind-animations - see motion/index.css) */
 @import "./motion/index.css";
 
 /* explicit layer order */
 @layer theme, base, components, utilities;
 
 @layer base {
-  /* LAYER 2 — semantic vars mapped onto the palette aliases. Edit these to retheme.
+  /* LAYER 2 - semantic vars mapped onto the palette aliases. Edit these to retheme.
      8-BitQuest is a committed retro pixel theme cut from ONE cool navy ramp. `.dark` is the
-     Figma-accurate dark (navy surfaces, light ink). `:root` is the LIGHT mode — a soft inversion
+     Figma-accurate dark (navy surfaces, light ink). `:root` is the LIGHT mode - a soft inversion
      of dark, NOT cream and NOT stark white: the page sits on a light lavender-blue, cards lift to
      near-white, ink is navy, and the blue/pink/green accents are deepened for contrast on a light
      ground. Both keep the pixel signature: pure-black borders + sharp corners (--radius: 0). */
   :root {
-    /* LIGHT — a crisp "retro desktop": a clean, cool light-blue ground with pure-white
+    /* LIGHT - a crisp "retro desktop": a clean, cool light-blue ground with pure-white
        window-panels (cards) that pop against it, navy ink, and the blue/pink/green accents
        deepened for contrast. This de-purples the old dull lavender and opens up the
        ground↔card value gap so panels actually lift (the black pixel border no longer has
@@ -39,23 +39,23 @@
        mode gets its own cleaner blue. Accents stay tokenised. */
     --background: #d6e3f4; /* clean light retro-blue desktop (was #e1e1f7 lavender) */
     --foreground: var(--color-base-900); /* #101222 navy ink */
-    --card: #ffffff; /* crisp white window panel — pops against the blue ground */
+    --card: #ffffff; /* crisp white window panel - pops against the blue ground */
     --card-foreground: var(--color-base-900);
     --primary: var(
       --color-primary-700
-    ); /* #1f6cc0 action blue, deepened for the light ground */
+    ); /* #004d99 action blue, deepened for the light ground */
     --primary-foreground: #ffffff;
-    --secondary: var(--color-secondary-200); /* #ffb2ba pink */
-    --secondary-foreground: var(--color-secondary-800); /* #670120 */
-    --muted: #c3d5ef; /* light-blue muted surface (tags, chips, code) — was flat grey */
+    --secondary: var(--color-secondary-200); /* #7fe3f2 BMS cyan */
+    --secondary-foreground: var(--color-secondary-800); /* #00596a */
+    --muted: #c3d5ef; /* light-blue muted surface (tags, chips, code) - was flat grey */
     --muted-foreground: var(
       --color-base-600
-    ); /* #323445 — a touch darker for contrast on light */
+    ); /* #323445 - a touch darker for contrast on light */
     --accent: #c3d5ef;
     --accent-foreground: var(--color-base-900);
     --info: var(
       --color-primary-800
-    ); /* #114e90 deep blue — the brand wordmark on light */
+    ); /* #003a75 deep blue - the brand wordmark on light */
     --info-foreground: var(--color-primary-50);
     --success: var(
       --color-success-700
@@ -65,16 +65,16 @@
     --warning-foreground: var(
       --color-base-900
     ); /* #101222 navy ink reads on the amber ground */
-    --error: var(--color-secondary-600); /* #892037 maroon reads as danger */
-    --error-foreground: var(--color-secondary-50);
-    --border: #6a769a; /* soft slate-navy — SAME color as the pixel shadow below (dark keeps #000) */
+    --error: #892037; /* maroon reads as danger (literal: the secondary ramp is cyan now) */
+    --error-foreground: #fff1f3;
+    --border: #6a769a; /* soft slate-navy - SAME color as the pixel shadow below (dark keeps #000) */
     --input: #ffffff; /* crisp white field on the blue ground */
     --outline: var(
       --color-primary-800
-    ); /* deep-blue focus ring — reads on light */
-    --pixel-shadow: #6a769a; /* light-mode pixel shadow — matches --border exactly */
+    ); /* deep-blue focus ring - reads on light */
+    --pixel-shadow: #6a769a; /* light-mode pixel shadow - matches --border exactly */
 
-    --radius: 0; /* sharp pixel corners — no rounding anywhere */
+    --radius: 0; /* sharp pixel corners - no rounding anywhere */
   }
 
   .dark {
@@ -82,22 +82,22 @@
     --foreground: var(--color-base-100); /* #e1e1f7 heading text */
     --card: var(--color-base-800); /* #1c1e2f panel */
     --card-foreground: var(--color-base-100);
-    --primary: var(--color-primary-500); /* #41a6f6 action blue */
-    --primary-foreground: var(--color-primary-900); /* #00395e */
-    --secondary: var(--color-secondary-200); /* #ffb2ba pink */
-    --secondary-foreground: var(--color-secondary-800); /* #670120 */
+    --primary: var(--color-primary-500); /* #0072dc BMS blue */
+    --primary-foreground: #ffffff;
+    --secondary: var(--color-secondary-200); /* #7fe3f2 BMS cyan */
+    --secondary-foreground: var(--color-secondary-800); /* #00596a */
     --muted: var(--color-base-700); /* #272939 stats strip / input */
     --muted-foreground: var(--color-base-200); /* #bfc7d3 body text */
     --accent: var(--color-base-600); /* #323445 thumbnails / tags */
     --accent-foreground: var(--color-base-100);
-    --info: var(--color-primary-300); /* #99cbff airy blue */
+    --info: var(--color-primary-300); /* #5cb3ff airy blue */
     --info-foreground: var(--color-primary-950);
     --success: var(--color-success-400); /* #63de86 */
     --success-foreground: var(--color-success-900); /* #00401b */
     --warning: #ffd166;
     --warning-foreground: #2a1c00;
-    --error: var(--color-secondary-300); /* #ff9da8 */
-    --error-foreground: var(--color-secondary-950);
+    --error: #ff9da8;
+    --error-foreground: #2c000d;
     --border: #000000; /* pixel borders stay pure black on the dark navy ground */
     --input: var(--color-base-700);
     --outline: var(--color-primary-400);
@@ -151,9 +151,9 @@
     @apply text-base-700 dark:text-base-200 md:text-lg;
   }
 
-  /* Blog article body — styles the rendered MDX (<Content />) on /blog/<slug>/ (see BlogArticle.astro).
+  /* Blog article body - styles the rendered MDX (<Content />) on /blog/<slug>/ (see BlogArticle.astro).
      GLOBAL (not scoped): the markup comes from MDX, which Astro's scoped styles can't reach. Tokens
-     only, so it flips with the theme — except the fenced code block, which stays a fixed-dark Shiki
+     only, so it flips with the theme - except the fenced code block, which stays a fixed-dark Shiki
      panel in both themes (the scoreboard precedent). Headings reuse the shared .h2/.h3 face (grouped
      selectors above); here they add only colour, spacing, and the ► pointer. */
   .blog-prose {
@@ -171,7 +171,7 @@
     & h2 {
       @apply text-info mt-8 flex items-center gap-3;
     }
-    /* the retro ► selector — a green right-triangle via clip-path (no glyph, so it's font-safe). */
+    /* the retro ► selector - a green right-triangle via clip-path (no glyph, so it's font-safe). */
     & h2::before {
       content: "";
       @apply bg-success block h-3 w-2 shrink-0;
@@ -205,19 +205,19 @@
     @apply mx-auto max-w-[1100px] px-4;
   }
 
-  /* Retro 8-bit button — a dependency-free port of the CodePen "Pure CSS 8bit Button Style"
+  /* Retro 8-bit button - a dependency-free port of the CodePen "Pure CSS 8bit Button Style"
      (Maximuz/BdqXXN). A flat face with an inset darker shadow for depth and a notched black pixel
      border drawn by two pseudo-elements (the corners stay clipped, NES-style). Hover deepens the
-     shadow; :active presses it inward — instant, no transition (authentic snap; nothing for
+     shadow; :active presses it inward - instant, no transition (authentic snap; nothing for
      reduced-motion to worry about). Same in both themes (the accent tokens don't flip).
-     The colour is parameterised by four CSS vars (defaulting to the theme PINK); the `--blue`
+     The colour is parameterised by four CSS vars (defaulting to the theme CYAN); the `--blue`
      modifier repoints them to the action blue for the Figma READ BLOG / EMAIL ME CTAs. Used by the
      header toggle + MENU button and the hero/contact CTAs; size it with height / width / padding
      utilities at the call site. */
   .pixel-btn {
-    --pixel-btn-face: var(--color-secondary-200); /* #ffb2ba flat face */
-    --pixel-btn-face-hover: var(--color-secondary-300); /* #ff9da8 */
-    --pixel-btn-ink: var(--color-secondary-800); /* #670120 dark ink on pink */
+    --pixel-btn-face: var(--color-secondary-200); /* #7fe3f2 flat face */
+    --pixel-btn-face-hover: var(--color-secondary-300); /* #4fd6ec */
+    --pixel-btn-ink: var(--color-secondary-800); /* #00596a dark ink on cyan */
     --pixel-btn-depth: var(--color-secondary-400); /* inset shadow colour */
     @apply font-display relative inline-flex cursor-pointer items-center justify-center;
     background-color: var(--pixel-btn-face);
@@ -225,12 +225,12 @@
     box-shadow: inset -4px -4px 0 0 var(--pixel-btn-depth);
   }
   .pixel-btn--blue {
-    --pixel-btn-face: var(--color-primary-500); /* #41a6f6 action blue */
+    --pixel-btn-face: var(--color-primary-500); /* #0072dc BMS blue */
     --pixel-btn-face-hover: var(--color-primary-400);
-    --pixel-btn-ink: var(--color-primary-900); /* #00395e navy ink on blue */
+    --pixel-btn-ink: #ffffff; /* white ink on blue */
     --pixel-btn-depth: var(--color-primary-700);
   }
-  /* the Figma contact SEND MESSAGE green — the action-green counterpart to `--blue`. Points at the
+  /* the Figma contact SEND MESSAGE green - the action-green counterpart to `--blue`. Points at the
      fixed `--color-success-*` palette ramp (NOT the semantic `--success`, which flips per theme),
      so the button reads identically in both themes like the pink/blue faces. */
   .pixel-btn--green {

@@ -1,15 +1,18 @@
-# 8-BitQuest
+# BMS
 
-> A retro 8-bit, pixel-art developer portfolio built on Astro 7 and a CSS-first Tailwind v4 token system.
+> BMS is Brisbane's friendliest community makerspace. We provide a collaborative environment for makers, hobbyists, and innovators to learn, create, and work on their projects with others.
 
 ## Core pages
 - [Home](https://example.com/)
+- [Visit](https://example.com/visit/)
+- [Workshops](https://example.com/workshops/)
+- [Events](https://example.com/events/)
+- [Membership](https://example.com/membership/)
 - [About](https://example.com/about/)
 - [Blog](https://example.com/blog/)
 - [Projects](https://example.com/projects/)
 - [Contact](https://example.com/contact/)
+- [Donate](https://example.com/donate/)
 
-## Feeds & legal
-- [RSS feed](https://example.com/rss.xml)
-- [Terms](https://example.com/terms/)
-- [Privacy](https://example.com/privacy/)
+## Legal
+- [Privacy](https://example.com/privacy-policy/)

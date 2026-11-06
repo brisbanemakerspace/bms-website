@@ -1,5 +1,5 @@
 ---
-// src/components/UiCatalog/Tier1Catalog.astro — DEV-ONLY. The "Tier 1" section of the UI catalog
+// src/components/UiCatalog/Tier1Catalog.astro - DEV-ONLY. The "Tier 1" section of the UI catalog
 // (static primitives: Button, Badge, Input/Label, Textarea, Card, Alert, Separator, Skeleton,
 // Avatar), extracted from UiCatalog.astro so each tier owns its own demo data + markup instead of
 // enlarging the catalog monolith. Rendered by UiCatalog; 404s out of prod with it. Emits a run of
@@ -62,13 +62,13 @@ const alertVariants = ["info", "success", "warning", "error"] as const;
     <Button href="#button" variant="primary">Link (renders &lt;a&gt;)</Button>
     <Button href="#button" variant="outline">Outline link</Button>
   </div>
-  {/* With an icon — the base `gap-2` spaces a leading/trailing <Icon> from the label. */}
+  {/* With an icon - the base `gap-2` spaces a leading/trailing <Icon> from the label. */}
   <div class="flex flex-wrap items-center gap-3">
     <Button variant="primary"><Icon name="plus-01" size="sm" />New item</Button>
     <Button variant="secondary"><Icon name="download-01" size="sm" />Download</Button>
     <Button variant="outline">Continue<Icon name="arrow-right" size="sm" /></Button>
   </div>
-  {/* Icon-only (square) — `icon` drops the horizontal padding; always give it an aria-label. */}
+  {/* Icon-only (square) - `icon` drops the horizontal padding; always give it an aria-label. */}
   <div class="flex flex-wrap items-center gap-3">
     {
       sizes.map((size) => (
@@ -177,7 +177,7 @@ const alertVariants = ["info", "success", "warning", "error"] as const;
     </CardFooter>
   </Card>
 
-  {/* variant — elevation + hover treatment */}
+  {/* variant - elevation + hover treatment */}
   <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     {
       (["default", "elevated", "outline", "interactive"] as const).map((variant) => (
@@ -194,7 +194,7 @@ const alertVariants = ["info", "success", "warning", "error"] as const;
     }
   </div>
 
-  {/* size — one knob repads every part */}
+  {/* size - one knob repads every part */}
   <div class="grid items-start gap-4 sm:grid-cols-3">
     {
       (["sm", "md", "lg"] as const).map((size) => (
@@ -212,7 +212,7 @@ const alertVariants = ["info", "success", "warning", "error"] as const;
   </div>
 
   <div class="grid items-start gap-4 lg:grid-cols-2">
-    {/* Media card — CardImage clips to the card radius */}
+    {/* Media card - CardImage clips to the card radius */}
     <Card class="max-w-sm">
       <CardImage src="https://picsum.photos/seed/astro-boiler/640/360" alt="" />
       <CardHeader>
@@ -220,7 +220,7 @@ const alertVariants = ["info", "success", "warning", "error"] as const;
         <CardDescription>overflow-hidden on the root rounds the image corners.</CardDescription>
       </CardHeader>
       <CardContent>
-        <p class="text-sm">Top, bottom, or full-bleed — all just work.</p>
+        <p class="text-sm">Top, bottom, or full-bleed - all just work.</p>
       </CardContent>
     </Card>
 
@@ -243,7 +243,7 @@ const alertVariants = ["info", "success", "warning", "error"] as const;
     </Card>
   </div>
 
-  {/* Horizontal — just sm:flex-row on the root */}
+  {/* Horizontal - just sm:flex-row on the root */}
   <Card class="max-w-lg sm:flex-row">
     <CardImage
       src="https://picsum.photos/seed/horizontal/480/480"
@@ -261,7 +261,7 @@ const alertVariants = ["info", "success", "warning", "error"] as const;
     </div>
   </Card>
 
-  {/* Top-bordered status accent — a one-off class, not a new variant */}
+  {/* Top-bordered status accent - a one-off class, not a new variant */}
   <Card class="border-t-primary max-w-sm border-t-4">
     <CardHeader>
       <CardTitle>Top-bordered accent</CardTitle>

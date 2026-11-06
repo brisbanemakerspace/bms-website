@@ -1,0 +1,16 @@
+---
+// Donate (/donate/). Thin route shell: owns BaseLayout + SEO and composes Sections/Donate in the same
+// shell as the other pages (one .site-container + gap rhythm). Static (prerendered).
+import Donate from "@components/Sections/Donate/Donate.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Donate - ${siteData.tabTitle}`}
+  description="Support Brisbane Makerspace with a tools and consumables donation or a tax-deductible once-off or recurring cash donation."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <Donate />
+  </div>
+</BaseLayout>

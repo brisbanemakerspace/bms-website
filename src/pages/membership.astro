@@ -1,0 +1,17 @@
+---
+// Membership (/membership/). Thin route shell: owns BaseLayout + SEO and composes Sections/Membership
+// in the same shell as the other pages (one .site-container + gap rhythm). Static (prerendered).
+// Content carried over from the old brisbanemaker.space/membership/.
+import Membership from "@components/Sections/Membership/Membership.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Membership - ${siteData.tabTitle}`}
+  description="Brisbane Makerspace membership plans: maker plans for hobbyists from $42/month and coworking desks for professionals, with 24/7 access to our tools and facilities."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <Membership />
+  </div>
+</BaseLayout>

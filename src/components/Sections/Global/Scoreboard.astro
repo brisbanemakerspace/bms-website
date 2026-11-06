@@ -2,7 +2,7 @@
 // src/components/Sections/Global/Scoreboard.astro
 //
 // The retro scoreboard strip (Figma "Stats Strip"): Press Start stats split by short pixel-bar
-// separators. Shared by the home Stats section and the About Hero panel — it owns the seam logic
+// separators. Shared by the home Stats section and the About Hero panel - it owns the seam logic
 // (the `{i > 0}` separator between items) in ONE place so the two can't drift. The strip stacks to a
 // centred column on narrow screens and spreads to a justified row at `stackAt` (the home's three
 // stats release at `sm`; the About Hero's four longer ones need more room, so they stay stacked
@@ -24,7 +24,7 @@ interface Props {
 }
 const { stats, stackAt = "sm", class: className } = Astro.props as Props;
 
-// Whole static classes per breakpoint (a `${bp}:` prefix can't be interpolated — see tailwind.md).
+// Whole static classes per breakpoint (a `${bp}:` prefix can't be interpolated - see tailwind.md).
 const rowLayout = {
   sm: "sm:flex-row sm:justify-between",
   lg: "lg:flex-row lg:justify-between",

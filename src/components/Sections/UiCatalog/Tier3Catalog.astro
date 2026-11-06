@@ -1,5 +1,5 @@
 ---
-// src/components/UiCatalog/Tier3Catalog.astro — DEV-ONLY. The "Tier 3" section of the UI catalog
+// src/components/UiCatalog/Tier3Catalog.astro - DEV-ONLY. The "Tier 3" section of the UI catalog
 // (heavier, native-first interaction: Select, Checkbox/Radio/Switch, Dropdown, Dialog, Sheet,
 // Table), extracted from UiCatalog.astro so each tier owns its own demo markup instead of enlarging
 // the catalog monolith. Rendered by UiCatalog; 404s out of prod with it. Emits a run of top-level
@@ -41,7 +41,7 @@ const states = ["default", "error", "success"] as const;
 <header class="flex flex-col gap-1">
   <h2 class="h2">Tier 3</h2>
   <p class="description">
-    Heavier interaction, native-first — &lt;dialog&gt;, &lt;details&gt;, native inputs.
+    Heavier interaction, native-first - &lt;dialog&gt;, &lt;details&gt;, native inputs.
   </p>
 </header>
 
@@ -74,7 +74,7 @@ const states = ["default", "error", "success"] as const;
 <Separator />
 
 {
-  /* Checkbox / Radio — `id` + `<Label for>` association (clicking the label toggles the input).
+  /* Checkbox / Radio - `id` + `<Label for>` association (clicking the label toggles the input).
     Switch carries its own <label> root, so it just takes an aria-label. */
 }
 <section class="flex flex-col gap-6">
@@ -186,7 +186,7 @@ const states = ["default", "error", "success"] as const;
         <DialogHeader>
           <DialogTitle>Sheet ({side})</DialogTitle>
           <DialogDescription>
-            A native &lt;dialog&gt; pinned to the {side} edge — same open/close controller as
+            A native &lt;dialog&gt; pinned to the {side} edge - same open/close controller as
             Dialog.
           </DialogDescription>
         </DialogHeader>

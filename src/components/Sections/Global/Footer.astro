@@ -1,54 +1,109 @@
 ---
-// src/components/Sections/Global/Footer.astro — the global site footer (8-BitQuest, Figma node 5:93).
+// src/components/Sections/Global/Footer.astro - the global site footer (8-BitQuest, Figma node 5:93).
 //
 // Cross-page chrome, rendered once in BaseLayout below <main>. Reproduces the dark Figma frame: a
-// full-bleed pixel bar (black top border, no shadow) with three groups — copyright (left), a
-// social/utility icon row (centre), legal links (right). One desktop frame, so it stacks to a
+// full-bleed pixel bar (black top border, no shadow) with two groups - a safe-space message with flags (left, fills the row), a
+// social/utility icon row (right). One desktop frame, so it stacks to a
 // centred column below `md` (measured: the three Press Start groups stop fitting comfortably under
 // ~768px). Tokens only, so the light theme (lavender ground / navy ink) flips for free.
 //
-// Reuses what's here — the pixel-icon registry (`svg/pixel-icons`) for the four social glyphs, and
+// Reuses what's here - the pixel-icon registry (`svg/pixel-icons`) for the four social glyphs, and
 // `.site-container` / `.primary-focus` from global.css. No new primitives beyond that registry, no JS.
 // Icons rest **blue in light** (`text-info`) / **pink in dark** (`dark:text-secondary`) and go green
-// (`hover:text-success`) on hover — the same active/hover colour as the nav.
+// (`hover:text-success`) on hover - the same active/hover colour as the nav.
 //
 // Wiring (decisions the single mock didn't specify):
-//   - copyright year is build-time; "GAME OVER" is kept retro flavour, not the site name.
-//   - Privacy/Terms are the real legal routes.
+//   - the left group is the "safe space" message plus three tiny pixel flags (Aboriginal, Torres Strait
+//     Islander, Progress Pride - drawn in `svg/pixel-icons`), in place of the old copyright line.
+//   - Privacy is the real legal route (it sits last in the member links row).
 //   - the two external social destinations resolve through `@config/socialData` (label + glyph + the
-//     sameAs derivation, defined once); RSS and email are site-local, so they stay literal here.
+//     sameAs derivation, defined once); email is site-local, so they stay literal here.
+import NewsletterSignup from "@components/Sections/Global/NewsletterSignup.astro";
 import { PixelIcon, type PixelIconName } from "@components/svg/pixel-icons";
+import { policyLinkList } from "@config/policyData.json";
 import siteData from "@config/siteData.json";
 import { socialLink } from "@config/socialData.json";
 
-const year = new Date().getFullYear();
-const copyright = `© ${year} — Game Over`;
+const safeSpaceMessage = "BMS is a safe space for everyone. We acknowledge the Traditional Custodians of the unceded land that we operate on and pay respect to Elders past & present.";
+
+// Pixel flags shown on their own line below the message.
+const flags = [
+  { name: "flag-aboriginal", title: "Aboriginal flag" },
+  { name: "flag-torres-strait", title: "Torres Strait Islander flag" },
+  { name: "flag-progress-pride", title: "Progress Pride flag" },
+] as const satisfies readonly { name: PixelIconName; title: string }[];
 
 // Social row (Figma 5:96, glyphs swapped to the pixel set). `name` is validated against the
 // pixel-icon registry. Which platforms appear is this section's call; how one resolves is not.
+// GitHub, email and Discord are intentionally not here (Discord lives in the header).
 type SocialLink = { name: PixelIconName; label: string; href: string; external?: boolean };
-const socialLinks: readonly SocialLink[] = [
-  { ...socialLink("linkedin"), external: true },
-  { name: "rss", label: "RSS feed", href: "/rss.xml" },
-  { ...socialLink("youtube"), external: true },
-  { name: "email", label: "Email", href: `mailto:${siteData.author.email}` },
+// Platforms commented out of `socialPlatforms` resolve to `undefined` and are left out of the row.
+const external = (platform: Parameters<typeof socialLink>[0]): SocialLink | undefined => {
+  const link = socialLink(platform);
+  return link && { ...link, external: true };
+};
+const candidates: readonly (SocialLink | undefined)[] = [
+  external("linkedin"),
+  external("youtube"),
+];
+const socialLinks = candidates.filter((link) => link !== undefined);
+
+// Member / community links. The services are hosted outside this site, so they are absolute URLs
+// that open in a new tab; Privacy is a local route (trailing slash per astro.config
+// `trailingSlash: "always"`) and opens in place.
+const { links } = siteData;
+type MemberLink = { label: string; href: string; external?: boolean };
+const memberLinks: readonly MemberLink[] = [
+  { label: "Member Login", href: links.portal, external: true },
+  { label: "Wiki", href: links.wiki, external: true },
+  { label: "Service Status", href: links.status, external: true },
+  { label: "Donate", href: links.routes.donate },
+  // Safe Space Policy + Code of Conduct (wiki pages) - defined once in @config/policyData.
+  ...policyLinkList.map((policy) => ({ ...policy, external: true })),
+  { label: "Privacy", href: links.routes.privacy },
 ];
 
-// Legal row (Figma 5:103). Trailing slashes match astro.config `trailingSlash: "always"`.
-const legalLinks = [
-  { label: "Privacy", href: "/privacy/" },
-  { label: "Terms", href: "/terms/" },
-] as const;
 ---
 
 <footer class="bg-background border-border border-t-4" data-slot="site-footer">
+  <nav aria-label="Member links" class="site-container pt-8">
+    <ul class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+      {
+        memberLinks.map((link) => (
+          <li class="font-display text-muted-foreground flex items-center gap-3 text-[8px] not-first:before:content-['|']">
+            <a
+              href={link.href}
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              class="primary-focus text-info hover:text-success font-display text-[8px] tracking-[2px] uppercase transition-colors"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <NewsletterSignup />
   <div
-    class="site-container flex flex-col items-center gap-4 py-4 text-center md:flex-row md:justify-between md:gap-6 md:text-left"
+    class="site-container flex flex-col items-center gap-4 pt-8 pb-8 text-center md:flex-row md:justify-between md:gap-6"
   >
-    <!-- Copyright (Figma 5:94): airy-blue Press Start 2P, uppercased. -->
-    <p class="font-display text-info text-xs uppercase">{copyright}</p>
+    <!-- Safe-space message + tiny 8-bit flags (replaces the Figma copyright line, 5:94). -->
+    <div class="flex flex-1 flex-col items-center gap-3 text-center">
+      <p class="font-display text-info text-xs uppercase">{safeSpaceMessage}</p>
+      <ul class="flex items-center gap-1.5">
+        {
+          flags.map((flag) => (
+            <li class="flex">
+              <PixelIcon name={flag.name} title={flag.title} class="h-4" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
 
     <!-- Social icons (Figma 5:96): pixel glyphs, blue in light / pink in dark → green on hover. -->
+    {
+      socialLinks.length > 0 && (
     <ul class="flex items-center gap-4">
       {
         socialLinks.map((link) => (
@@ -65,23 +120,8 @@ const legalLinks = [
         ))
       }
     </ul>
+      )
+    }
 
-    <!-- Legal links (Figma 5:103): tiny grey Press Start 2P → green on hover. -->
-    <nav aria-label="Legal">
-      <ul class="flex items-center gap-4">
-        {
-          legalLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                class="primary-focus text-muted-foreground hover:text-success font-display text-[8px] tracking-[2px] uppercase transition-colors"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
   </div>
 </footer>

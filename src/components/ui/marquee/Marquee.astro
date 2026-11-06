@@ -1,8 +1,8 @@
 ---
-// src/components/ui/marquee/Marquee.astro — astro-boiler primitive (see ../README.md).
+// src/components/ui/marquee/Marquee.astro - astro-boiler primitive (see ../README.md).
 // Seamless pure-CSS infinite scroll (Preline / magic-ui pattern). The slotted content is rendered
 // `repeat` times as identical side-by-side tracks; every track runs the same keyframe and shifts one
-// full copy width + one gap, so as one track scrolls out the next is already in its place — the loop
+// full copy width + one gap, so as one track scrolls out the next is already in its place - the loop
 // has no seam. Copies after the first are aria-hidden (visual duplicates). `motion-reduce:animate-none`
 // respects reduced-motion (non-negotiable a11y). Keyframes + --animate-marquee* tokens live in
 // src/styles/tailwind-theme.css; --marquee-gap there must match the gap utilities below. Tokens only.

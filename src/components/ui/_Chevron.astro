@@ -1,8 +1,8 @@
 ---
-// src/components/ui/_Chevron.astro — shared internal partial, not a primitive (see README.md).
+// src/components/ui/_Chevron.astro - shared internal partial, not a primitive (see README.md).
 // The one disclosure/select chevron glyph, deduped from its six call sites (Accordion, Select,
 // ComboBox, AdvancedSelect, Dropdown, MegaMenu). Owns the glyph, size, and rotation-transition
-// classes; color, positioning, and the open-state rotation selector stay at each call site — the
+// classes; color, positioning, and the open-state rotation selector stay at each call site - the
 // selector genuinely differs per host (`[&[aria-expanded=true]_svg]`, `[&[open]_summary_svg]`,
 // `[button[aria-expanded=true]_&]`, or none for the static native Select). Decorative
 // (aria-hidden); inherits currentColor.

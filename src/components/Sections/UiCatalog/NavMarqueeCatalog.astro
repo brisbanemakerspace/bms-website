@@ -1,7 +1,7 @@
 ---
-// src/components/Sections/UiCatalog/NavMarqueeCatalog.astro — DEV-ONLY. The Nav + Marquee section of
+// src/components/Sections/UiCatalog/NavMarqueeCatalog.astro - DEV-ONLY. The Nav + Marquee section of
 // the UI catalog (zero-JS Nav variants + a pure-CSS Marquee), extracted from UiCatalog.astro so the
-// group owns its own markup — and the demo-only nav-click script — instead of enlarging the catalog
+// group owns its own markup - and the demo-only nav-click script - instead of enlarging the catalog
 // monolith. Rendered by UiCatalog; emits no HTML in a production build. Emits a run of top-level
 // nodes (leading group header included) so it slots into the catalog's flex-col-gap-14 flow unchanged.
 import { Icon } from "@components/svg/icons";
@@ -11,7 +11,7 @@ import { Nav, NavItem, NavLink } from "@components/ui/nav";
 import Separator from "@components/ui/separator";
 ---
 
-{/* ── Nav + Marquee — Tier 1 static ────────────────────────────────────── */}
+{/* ── Nav + Marquee - Tier 1 static ────────────────────────────────────── */}
 <header class="flex flex-col gap-1">
   <h2 class="h2">Nav &amp; Marquee</h2>
   <p class="description">Zero-JS nav variants and a pure-CSS marquee.</p>
@@ -118,7 +118,7 @@ import Separator from "@components/ui/separator";
 
 <script>
   // Dev-catalog only: the placeholder navs are href="#" links, so wire clicks here to preview the
-  // active state moving. The Nav primitive stays a plain list of links — this belongs on the demo
+  // active state moving. The Nav primitive stays a plain list of links - this belongs on the demo
   // page, not in ui/. Capture phase so preventDefault beats <ClientRouter />'s link handling.
   document.addEventListener(
     "click",

@@ -1,10 +1,10 @@
 ---
-// src/components/ui/avatar/Avatar.astro — astro-boiler primitive (see ../README.md).
+// src/components/ui/avatar/Avatar.astro - astro-boiler primitive (see ../README.md).
 // <img> when `src` is set, else the slot (fallback initials). Sized via `size`. Tokens only.
 //
 // `src` takes a bundled `ImageMetadata` (from astro:assets / `image()`) or a plain URL string. A
 // bundled image carries intrinsic width/height, which we emit to kill layout shift; a string has none.
-// `alt` is REQUIRED whenever `src` is set — explicit intent, no silent "" default (pass alt="" only to
+// `alt` is REQUIRED whenever `src` is set - explicit intent, no silent "" default (pass alt="" only to
 // mark it decorative on purpose). `loading` / `decoding` are forwarded so a below-the-fold avatar can
 // lazy-load. Note: this is a plain <img> (no Sharp), so a bundled ImageMetadata is used at its own size.
 import type { HTMLAttributes } from "astro/types";
@@ -48,7 +48,7 @@ if (src !== undefined && alt === undefined) {
   );
 }
 
-// Normalize to { src, width?, height? } — a bundled ImageMetadata already has the dims; a URL string doesn't.
+// Normalize to { src, width?, height? } - a bundled ImageMetadata already has the dims; a URL string doesn't.
 const image: { src: string; width?: number; height?: number } | undefined =
   src === undefined ? undefined : typeof src === "string" ? { src } : src;
 ---

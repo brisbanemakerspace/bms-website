@@ -2,7 +2,7 @@
 // Blog post detail (/blog/<slug>/). Thin route shell: owns BaseLayout + SEO and composes the Figma
 // "Pixel Quests - Blog Post" frame (node 5:128) via <BlogArticle> + <RelatedPosts>, one instance per
 // collection entry. `getStaticPaths` keys each route on the entry id, and `toPostCard` builds the
-// listing links off the SAME id — so the grid links and the generated routes can never drift. The
+// listing links off the SAME id - so the grid links and the generated routes can never drift. The
 // glob loader gives single-segment ids (`<slug>` for `<slug>/index.mdx`), so a plain `[slug]` fits.
 import BlogArticle from "@components/Sections/Blog/BlogArticle.astro";
 import RelatedPosts from "@components/Sections/Blog/RelatedPosts.astro";
@@ -72,7 +72,7 @@ const breadcrumbSchema = getBreadcrumbSchema([
 ---
 
 <BaseLayout
-  title={`${data.title} — ${siteData.name}`}
+  title={`${data.title} - ${siteData.tabTitle}`}
   description={data.description}
   image={data.heroImage}
   schema={[articleSchema, breadcrumbSchema]}

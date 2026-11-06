@@ -39,7 +39,7 @@ export default defineConfig([
   {
     // UI primitives (and the svg/icons primitive) intentionally export their `tv()` config
     // from the .astro frontmatter so consumers can compose/extend it (the astro-boiler
-    // primitive contract — see src/components/ui/README.md). The export is a static config,
+    // primitive contract - see src/components/ui/README.md). The export is a static config,
     // importable at build time.
     files: ["src/components/ui/**/*.astro", "src/components/svg/**/*.astro"],
     rules: {

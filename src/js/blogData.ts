@@ -1,5 +1,5 @@
-// Data access for the `blog` collection — the one query behind the /blog/ listing, the home Latest
-// Posts grid, the detail route's getStaticPaths, and the RSS feed, so their draft filter + sort can't
+// Data access for the `blog` collection - the one query behind the /blog/ listing, the home Latest
+// Posts grid, the detail route's getStaticPaths, so their draft filter + sort can't
 // drift. Kept separate from postCards.ts (pure mapping, no astro deps) because this imports
 // `getCollection` as a value, which the type-stripped `pnpm test` can't resolve.
 import { type CollectionEntry, getCollection } from "astro:content";

@@ -1,0 +1,140 @@
+---
+// src/components/Sections/Donate/Donate.astro - the donate page body: tools & consumables donations,
+// and cash donations (a Stripe once-off buy button + four recurring Stripe payment links), plus the
+// charity details. Copy and payment links are carried over from the old brisbanemaker.space/donate/.
+// One-off section copy lives here as typed literals (see AGENTS.md "content tiers"); edit this file to
+// change amounts, links or wording.
+//
+// The once-off button is Stripe's `<stripe-buy-button>` web component, which needs Stripe's script
+// (loaded only on this page). The publishable key is public by design. Recurring options are plain
+// links to Stripe-hosted checkout pages, so they work without JavaScript.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+import { socialHref } from "@config/socialData.json";
+
+const dgrInfo = siteData.links.wikiPages.dgrDonation;
+const donationPolicy = siteData.links.wikiPages.donationPolicy;
+const discord = socialHref("discord");
+const email = siteData.author.email;
+
+const notAccepted = [
+  "obsolete electronics / equipment (unless it is museum/display worthy)",
+  "tools / equipment that can't be repaired",
+  "dangerous or illegal goods",
+  "very bulky or large items",
+  "old 3D printers or laser cutters"
+];
+
+const stripe = {
+  onceOffButtonId: "buy_btn_1ThXRxBW58on1al9z86XXHfb",
+  publishableKey:
+    "pk_live_51JfGhUBW58on1al9lOeFx1myc3nkrhUlJu6wrNuiCwiR4wSKBVkqb4EY4OJFY8wskyK8qwsAyBAAVvYTvUP2f9hO00wFlYDyoG",
+};
+
+const recurring = [
+  { label: "Donate $5/mth", href: "https://buy.stripe.com/eVq3cubtOdEnbIV8aY38402" },
+  { label: "Donate $19/mth", href: "https://buy.stripe.com/aFa9ASapK57R7sFdvi38401" },
+  { label: "Donate $29/mth", href: "https://donate.stripe.com/14A3cu55qdEn9ANbna38400" },
+  { label: "Donate $49/mth", href: "https://buy.stripe.com/9B6eVc41mgQz9ANaj638403" },
+];
+
+const link = "text-info hover:text-success underline transition-colors";
+---
+
+<HeroPanel
+  headingId="donate-hero-heading"
+  tagline="Support Us"
+  heading="Donate"
+  intro="We rely on funding from our members and the generosity of donors to keep our doors open. Every contribution helps keep the space running."
+/>
+
+<section aria-labelledby="tools-heading">
+  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
+    <h2 id="tools-heading" class="h3 text-foreground">Donate Tools or Consumables</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      Our general donation policy can be found on our <a
+        href={donationPolicy}
+        class={link}
+        target="_blank"
+        rel="noopener noreferrer">wiki</a
+      >. We suggest having a quick read of that before deciding to donate something.
+    </p>
+    <p class="text-foreground/90 leading-relaxed">
+      Once you’re ready to organise your donation, it’s best to ask in our <a
+        href={discord}
+        class={link}
+        target="_blank"
+        rel="noopener noreferrer">Discord</a
+      > or send an email to: <a href={`mailto:${email}`} class={link}>{email}</a>
+    </p>
+    <p class="text-foreground/90">Some quick guidelines of donations we unfortunately cannot accept:</p>
+    <ul class="text-foreground/90 list-disc space-y-1 pl-6">
+      {notAccepted.map((item) => <li>{item}</li>)}
+    </ul>
+  </PixelPanel>
+</section>
+
+<section aria-labelledby="cash-heading">
+  <PixelPanel class="flex flex-col gap-6 p-6 md:p-8">
+    <div class="flex flex-col gap-3">
+      <h2 id="cash-heading" class="h3 text-foreground">Donate Money</h2>
+      <p class="text-foreground/90 leading-relaxed">
+        We rely on funding from our generous donors to pay rent and keep the lights on. You can make a once off or
+        recurring donation below using our secure payment processor (Stripe). All donations of $2 or more are tax deductible (see <a href={dgrInfo} class={link} target="_blank" rel="noopener noreferrer">here</a> for more info).
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-2">
+      <div class="flex flex-col gap-4">
+        <h3 class="font-display text-info text-sm uppercase">Once-Off</h3>
+        <stripe-buy-button
+          buy-button-id={stripe.onceOffButtonId}
+          publishable-key={stripe.publishableKey}></stripe-buy-button>
+        <noscript>
+          <p class="text-muted-foreground text-xs">
+            The once-off donation button needs JavaScript. Please use a recurring option or contact
+            us at {email}.
+          </p>
+        </noscript>
+      </div>
+
+      <div class="flex flex-col items-start gap-4">
+        <h3 class="font-display text-info text-sm uppercase">Recurring</h3>
+        <ul class="flex flex-col gap-3">
+          {
+            recurring.map((option) => (
+              <li>
+                <a
+                  href={option.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="pixel-btn pixel-btn--blue flex px-5 py-3 text-xs uppercase"
+                >
+                  {option.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </PixelPanel>
+</section>
+
+<section aria-labelledby="charity-heading">
+  <PixelPanel class="flex flex-col gap-3 p-6 md:p-8">
+    <h2 id="charity-heading" class="h3 text-foreground">About us</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      We are a registered charity (<a
+        href="https://www.acnc.gov.au/charity/charities/5abc2190-bc73-ee11-8179-00224893b304/profile"
+        class={link}
+        target="_blank"
+        rel="noopener noreferrer">details</a
+      >) with DGR endorsement. Brisbane Makerspace is a trading name for Meanjin Makerspace Inc.
+    </p>
+    <p class="text-muted-foreground text-sm">ABN: 22 562 885 464 · QLD Org #: IA4722548</p>
+  </PixelPanel>
+</section>
+
+<script is:inline async src="https://js.stripe.com/v3/buy-button.js"></script>

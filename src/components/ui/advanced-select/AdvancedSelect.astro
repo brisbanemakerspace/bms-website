@@ -1,15 +1,15 @@
 ---
-// src/components/ui/advanced-select/AdvancedSelect.astro — astro-boiler primitive (see ../README.md).
+// src/components/ui/advanced-select/AdvancedSelect.astro - astro-boiler primitive (see ../README.md).
 // A searchable custom select (single or multiple) backed by a real, visually-hidden native <select>
 // so it still submits with a form. The trigger reuses the shared `_field` look (rung 2); the panel is
 // a role="listbox" of options with an optional sticky search box, checkmarks, and full keyboard
 // support (↑/↓/Home/End/Enter/Esc). Pass `options` (value/label/disabled/selected); the native select
 // stays the single source of truth for the value.
 //
-// ponytail: this one needs JS — without it you get an inert trigger over an sr-only <select>. That's
+// ponytail: this one needs JS - without it you get an inert trigger over an sr-only <select>. That's
 // the deliberate trade for a styled/searchable control (Preline's is JS-only too). Zero-JS callers
 // should use the native `<Select>` primitive instead. Options are static and client-filtered (substring
-// match); remote/async loading is out of scope — fetch + render server-side per project if needed.
+// match); remote/async loading is out of scope - fetch + render server-side per project if needed.
 import type { HTMLAttributes } from "astro/types";
 import { tv, type VariantProps } from "tailwind-variants";
 
@@ -89,7 +89,7 @@ const initialLabel =
     data-slot="advanced-select-native"
   >
     {
-      /* `|| undefined` guarantees Astro OMITS the boolean attr when false — passing `false` emits
+      /* `|| undefined` guarantees Astro OMITS the boolean attr when false - passing `false` emits
         `multiple="false"` / `selected="false"`, which browsers read as present. */
     }
     {!multiple && <option value="" selected={chosen.length === 0 || undefined} />}

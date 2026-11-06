@@ -1,10 +1,10 @@
 ---
-// src/components/Sections/Blog/BlogArticle.astro — the per-post article body (Figma "Pixel Quests -
+// src/components/Sections/Blog/BlogArticle.astro - the per-post article body (Figma "Pixel Quests -
 // Blog Post", node 5:128). Data-driven: the page passes one post's frontmatter as `post`, the
 // resolved byline, formatted date, read time, and prev/next neighbours; the rendered MDX article
 // prose goes in the default slot. Layout, top → bottom (within the mock's centred reading column):
 //   • breadcrumb: Home › Blog › <title>          (node 5:130)
-//   • article panel — category tag, H1, meta row (avatar · date · read · byline), hero banner,
+//   • article panel - category tag, H1, meta row (avatar · date · read · byline), hero banner,
 //     the MDX body (.blog-prose), footer tags + ◄PREV NEXT► nav   (node 5:139)
 //
 // Reuses ui/pixel-panel (the surface), ui/badge (pixel variant), ui/breadcrumb, the svg/pixel-icons
@@ -85,7 +85,7 @@ const {
     </header>
 
     <!-- Hero banner (node 5:150): a framed figure. Reuses the post's hero image (card + banner share
-         one asset — the placeholder precedent). Eager: it's the article's LCP candidate. -->
+         one asset - the placeholder precedent). Eager: it's the article's LCP candidate. -->
     <figure class="border-border bg-accent overflow-clip border-4">
       <img
         src={heroImage.src}

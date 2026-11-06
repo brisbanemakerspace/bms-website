@@ -1,15 +1,15 @@
 ---
-// src/components/Sections/Contact/Form.astro — Figma "ContactFormCard" (node 9:31).
+// src/components/Sections/Contact/Form.astro - Figma "ContactFormCard" (node 9:31).
 //
 // The one server-driven piece of 8-BitQuest: a native <form method="POST"> bound to the `contact`
 // Astro action (accept: "form"), so it works with JavaScript disabled. The server validates
-// (contactSchema), runs the spam gates, sends via Resend, and /contact/ re-renders with the result —
+// (contactSchema), runs the spam gates, sends via Resend, and /contact/ re-renders with the result -
 // success replaces the card; validation errors show per-field; everything else shows in one alert.
 // See src/actions/index.ts + src/js/contact.ts.
 //
 // Reuse: the shared pixel surface (PixelPanel) + the Input / Textarea / Label primitives, re-skinned
 // to the pixel field look (bg-accent + a 4px black frame) via a shared class. The override carries
-// SHAPE only, never a border COLOUR that would beat a validation state —
+// SHAPE only, never a border COLOUR that would beat a validation state -
 // here the black frame is the theme's invariant (borders are always black), so the error affordance
 // is the red message + aria-invalid ring, not a recoloured border.
 import { Badge } from "@components/ui/badge";
@@ -27,14 +27,14 @@ const fieldErrors: Record<string, string[] | undefined> =
   error && isInputError(error) ? error.fields : {};
 const formError = error && !isInputError(error) ? error.message : undefined;
 
-// Repopulate on a rejected submit — see `repopulate` for why the action result can't supply this.
+// Repopulate on a rejected submit - see `repopulate` for why the action result can't supply this.
 // Reading the body here is safe: the action middleware parses a *clone* of the request, so the
 // original stream is still unconsumed. `.catch` covers a body that isn't form-encoded at all.
 const submitted =
   Astro.request.method === "POST" ? await Astro.request.formData().catch(() => null) : null;
 const values = repopulate(submitted);
 
-// Render timestamp for the time gate. Request-time because /contact/ is prerender:false — and it must
+// Render timestamp for the time gate. Request-time because /contact/ is prerender:false - and it must
 // be *this* render's clock, so a retry of a slowly-filled form isn't rejected as too quick.
 const renderedAt = Date.now();
 
@@ -99,7 +99,7 @@ const fieldClass = [
       </Badge>
       <h2 class="h3 text-foreground">Message sent.</h2>
       <p class="text-muted-foreground text-sm">
-        Thanks — your transmission reached the array. I'll beam a reply back to your inbox.
+        Thanks - your transmission reached the array. I'll beam a reply back to your inbox.
       </p>
     </PixelPanel>
   ) : (
@@ -176,7 +176,7 @@ const fieldClass = [
 }
 
 <script>
-  // Move focus to the success/error region after a submit — on the view-transition swap AND on a
+  // Move focus to the success/error region after a submit - on the view-transition swap AND on a
   // full no-JS re-render (the immediate call). No preventDefault: the router owns the submit.
   function focusContactStatus() {
     const el = document.querySelector("[data-contact-status]");
