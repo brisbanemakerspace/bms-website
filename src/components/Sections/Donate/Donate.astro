@@ -8,6 +8,7 @@
 // The once-off button is Stripe's `<stripe-buy-button>` web component, which needs Stripe's script
 // (loaded only on this page). The publishable key is public by design. Recurring options are plain
 // links to Stripe-hosted checkout pages, so they work without JavaScript.
+import CharityInfo from "@components/Sections/Global/CharityInfo.astro";
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import siteData from "@config/siteData.json";
@@ -49,39 +50,13 @@ const link = "text-info hover:text-success underline transition-colors";
   intro="We rely on funding from our members and the generosity of donors to keep our doors open. Every contribution helps keep the space running."
 />
 
-<section aria-labelledby="tools-heading">
-  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
-    <h2 id="tools-heading" class="h3 text-foreground">Donate Tools or Consumables</h2>
-    <p class="text-foreground/90 leading-relaxed">
-      Our general donation policy can be found on our <a
-        href={donationPolicy}
-        class={link}
-        target="_blank"
-        rel="noopener noreferrer">wiki</a
-      >. We suggest having a quick read of that before deciding to donate something.
-    </p>
-    <p class="text-foreground/90 leading-relaxed">
-      Once you’re ready to organise your donation, it’s best to ask in our <a
-        href={discord}
-        class={link}
-        target="_blank"
-        rel="noopener noreferrer">Discord</a
-      > or send an email to: <a href={`mailto:${email}`} class={link}>{email}</a>
-    </p>
-    <p class="text-foreground/90">Some quick guidelines of donations we unfortunately cannot accept:</p>
-    <ul class="text-foreground/90 list-disc space-y-1 pl-6">
-      {notAccepted.map((item) => <li>{item}</li>)}
-    </ul>
-  </PixelPanel>
-</section>
-
 <section aria-labelledby="cash-heading">
   <PixelPanel class="flex flex-col gap-6 p-6 md:p-8">
     <div class="flex flex-col gap-3">
       <h2 id="cash-heading" class="h3 text-foreground">Donate Money</h2>
       <p class="text-foreground/90 leading-relaxed">
         We rely on funding from our generous donors to pay rent and keep the lights on. You can make a once off or
-        recurring donation below using our secure payment processor (Stripe). All donations of $2 or more are tax deductible (see <a href={dgrInfo} class={link} target="_blank" rel="noopener noreferrer">here</a> for more info).
+        recurring donation using our secure payment processor (Stripe) below. All donations of $2 or more are tax deductible (see <a href={dgrInfo} class={link} target="_blank" rel="noopener noreferrer">here</a> for more info).
       </p>
     </div>
 
@@ -122,19 +97,32 @@ const link = "text-info hover:text-success underline transition-colors";
   </PixelPanel>
 </section>
 
-<section aria-labelledby="charity-heading">
-  <PixelPanel class="flex flex-col gap-3 p-6 md:p-8">
-    <h2 id="charity-heading" class="h3 text-foreground">About us</h2>
+<section aria-labelledby="tools-heading">
+  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
+    <h2 id="tools-heading" class="h3 text-foreground">Donate Tools or Consumables</h2>
     <p class="text-foreground/90 leading-relaxed">
-      We are a registered charity (<a
-        href="https://www.acnc.gov.au/charity/charities/5abc2190-bc73-ee11-8179-00224893b304/profile"
+      Our general donation policy can be found on our <a
+        href={donationPolicy}
         class={link}
         target="_blank"
-        rel="noopener noreferrer">details</a
-      >) with DGR endorsement. Brisbane Makerspace is a trading name for Meanjin Makerspace Inc.
+        rel="noopener noreferrer">wiki</a
+      >. We suggest having a quick read of that before deciding to donate something.
     </p>
-    <p class="text-muted-foreground text-sm">ABN: 22 562 885 464 · QLD Org #: IA4722548</p>
+    <p class="text-foreground/90 leading-relaxed">
+      Once you're ready to organise your donation, it's best to ask in our <a
+        href={discord}
+        class={link}
+        target="_blank"
+        rel="noopener noreferrer">Discord</a
+      > or send an email to: <a href={`mailto:${email}`} class={link}>{email}</a>
+    </p>
+    <p class="text-foreground/90">Some quick guidelines of donations we unfortunately cannot accept:</p>
+    <ul class="text-foreground/90 list-disc space-y-1 pl-6">
+      {notAccepted.map((item) => <li>{item}</li>)}
+    </ul>
   </PixelPanel>
 </section>
+
+<CharityInfo />
 
 <script is:inline async src="https://js.stripe.com/v3/buy-button.js"></script>

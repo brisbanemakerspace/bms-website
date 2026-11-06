@@ -3,6 +3,7 @@
 // do, who we are, how we operate. Copy and links are carried over from the old
 // brisbanemaker.space/about-us/. One-off section copy lives here as typed literals (see AGENTS.md
 // "content tiers"); edit this file to change the wording.
+import CharityInfo from "@components/Sections/Global/CharityInfo.astro";
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { policyLinks } from "@config/policyData.json";
@@ -22,7 +23,7 @@ const interests = [
   "Electronics projects like making PCBs, circuits, LEDs, ESP32/Arduinos, IoT sensors, robots, etc.",
   "Arts and crafts including cosplay, sewing, cross stitching, paper crafts, drawing, etc.",
   "Computers and coding like building/repairing computers, writing code and software, etc.",
-  "Sooo much more that we can’t fit on this list!",
+  "Sooo much more that we can't fit on this list!",
 ];
 
 const link = "text-info hover:text-success underline transition-colors";
@@ -51,9 +52,9 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
     />
     <div class="[&>*+*]:mt-4">
     <p class="text-foreground/90 leading-relaxed">
-      We’re run entirely by volunteers with an aim to bring people together around
-      our common love of making. Whether it’s 3D printing, electronics, arts & craft, or wood/metal work projects, everyone is welcome. Our hope is that by bringing people together, we can help combat loneliness and social
-      isolation that is so prevalent in today’s world.
+      We're run entirely by volunteers with an aim to bring people together around
+      our common love of making. Whether it's 3D printing, electronics, arts & craft, or wood/metal work projects, everyone is welcome. Our hope is that by bringing people together, we can help combat loneliness and social
+      isolation that is so prevalent in today's world.
     </p>
     <p class="text-foreground/90 leading-relaxed">
       We are primarily a <strong>social community group</strong>. That means our focus is on helping people create and maintain
@@ -61,7 +62,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       each other throughout the week. Creating a safe space for everyone is a core part of our culture and is codified in our Safe Space Policy and Code of Conduct.
     </p>
     <p class="text-foreground/90">
-      You also don’t need membership to be part of our community! You can:
+      You also don't need membership to be part of our community! You can:
     </p>
     <ul class="text-foreground/90 list-disc space-y-1 pl-6 leading-relaxed">
       <li>
@@ -94,7 +95,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       <p class="text-foreground/90 leading-relaxed">
         We are a collective of friendly, like-minded makers. We help each other out, and we love
         talking about nerdy stuff! We have people interested in pretty much anything you can think of and a diverse range of
-        members from all sorts of backgrounds. It doesn’t matter who you are, you’ll be welcomed
+        members from all sorts of backgrounds. It doesn't matter who you are, you'll be welcomed
         into our community.
       </p>
       <p class="text-foreground/90 leading-relaxed">
@@ -156,3 +157,5 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
     </div>
   </PixelPanel>
 </section>
+
+<CharityInfo />

@@ -1,0 +1,24 @@
+---
+// Mailing list (/mailing-list/). Thin route shell: a hero + intro, then the shared Mailchimp signup
+// form (Global/NewsletterSignup, the same one as the footer). Static (prerendered). Replaces the old
+// brisbanemaker.space/mailing-list-signup/ page, which was just the form.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import NewsletterSignup from "@components/Sections/Global/NewsletterSignup.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Mailing List — ${siteData.tabTitle}`}
+  description="Subscribe to the Brisbane Makerspace mailing list for our latest events, workshops and projects — about one email a month."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <HeroPanel
+      headingId="mailing-list-hero-heading"
+      tagline="Stay in the loop"
+      heading="Mailing List"
+      intro="Subscribe to our mailing list so you don't miss out on our latest events, workshops and projects. You'll hear from us about once per month."
+    />
+  </div>
+  <NewsletterSignup />
+</BaseLayout>

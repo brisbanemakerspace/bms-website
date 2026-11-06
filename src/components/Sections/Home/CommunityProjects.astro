@@ -1,20 +1,41 @@
 ---
 // src/components/Sections/Home/CommunityProjects.astro — "Some of the projects our community have
-// worked on": a small photo grid. Photos come from the old brisbanemaker.space homepage (location
-// metadata stripped). Plain <img> on the Vite-fingerprinted imports (no Sharp needed).
+// worked on": a simple sideways slider (CSS scroll-snap, plus prev/next buttons) of every project photo
+// from the old brisbanemaker.space homepage. Photos live in src/assets/images/projects/ (resized, EXIF
+// stripped) and go through astro:assets <Picture>. Add a photo by dropping it in that folder and giving it
+// an `alt` below - the slider order is the filename order (hence the numeric prefixes).
 import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
 import { Reveal } from "@components/ui/reveal";
-import print3d from "@images/community-3d-print.jpg";
-import dinoSign from "@images/community-dino-sign.jpeg";
-import esp32Board from "@images/community-esp32-board.jpg";
-import laserCoasters from "@images/community-laser-coasters.jpeg";
+import { Picture } from "astro:assets";
 
-const projects = [
-  { image: laserCoasters, alt: "Four laser-engraved acrylic coasters with mountain and night-sky designs." },
-  { image: dinoSign, alt: "A layered acrylic sign reading “Neo’s Park” in a Jurassic Park style." },
-  { image: esp32Board, alt: "A custom ESP32 controller board with wiring, a relay and a buzzer." },
-  { image: print3d, alt: "A blue 3D-printed rock with a white spiral shell and stars on a window ledge." },
-] as const;
+const images = import.meta.glob<{ default: ImageMetadata }>("../../../assets/images/projects/*.jpg", {
+  eager: true,
+});
+
+// Alt text by filename (without the numeric prefix and extension).
+const alts: Record<string, string> = {
+  "engraved-clock": "A round wooden wall clock laser-engraved with a photo of a dachshund puppy.",
+  "3d-printed-rock": "A blue 3D-printed rock with a white spiral shell and stars on a window ledge.",
+  meetup: "Members seated around a large table in the workshop at a community meetup.",
+  "esp32-board": "A custom ESP32 controller board with wiring, a relay and a buzzer.",
+  "thermal-camera": "A thermal camera image of a circuit board with glowing red components.",
+  "dino-sign": "A layered acrylic sign reading “Neo's Park” in a Jurassic Park style.",
+  "3d-printed-octopus": "A lilac 3D-printed head and tentacle sculpture among purple flowers on a window ledge.",
+  "cassette-box": "A laser-cut wooden cassette tape box with a Spotify code, labelled “A mixtape just for you”.",
+  "heart-box": "A layered, laser-cut wooden heart box with chocolates inside.",
+  "laser-coasters": "Four laser-engraved acrylic coasters with mountain and night-sky designs.",
+  "spotify-keyring": "A 3D-printed black keyring with a white Spotify code, on a timber table.",
+  "led-skateboard": "A small skateboard lit with glowing purple and green LEDs.",
+  "led-ring-circuit": "A soldering iron beside circuit boards with a ring of blue LEDs on a desk.",
+  "3d-printed-mount": "A hand holding a small white 3D-printed custom mount.",
+};
+
+const projects = Object.entries(images)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([path, mod]) => {
+    const key = path.split("/").pop()!.replace(/^\d+-/, "").replace(/\.jpg$/, "");
+    return { image: mod.default, alt: alts[key] ?? "" };
+  });
 ---
 
 <Reveal as="section" aria-labelledby="community-projects-heading" class="flex flex-col gap-6">
@@ -22,21 +43,51 @@ const projects = [
   <p class="text-muted-foreground max-w-3xl text-base">
     Some of the projects our community have worked on.
   </p>
-  <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
-    {
-      projects.map((project) => (
-        <li>
-          <img
-            src={project.image.src}
-            width={project.image.width}
-            height={project.image.height}
-            alt={project.alt}
-            loading="lazy"
-            decoding="async"
-            class="border-border shadow-pixel aspect-[4/3] w-full border-4 object-cover"
-          />
-        </li>
-      ))
-    }
-  </ul>
+
+  <div data-slider>
+    <ul
+      class="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pr-6 pb-4 [scrollbar-width:none] sm:-mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden"
+      aria-label="Community project photos, scroll sideways to see more"
+      data-track
+    >
+      {
+        projects.map((project) => (
+          <li class="w-64 shrink-0 snap-start sm:w-72 md:w-80">
+            <Picture
+              src={project.image}
+              widths={[320, 480, 640]}
+              sizes="(min-width: 768px) 20rem, 16rem"
+              formats={["avif", "webp"]}
+              alt={project.alt}
+              loading="lazy"
+              class="border-border shadow-pixel aspect-[4/3] w-full border-4 object-cover"
+            />
+          </li>
+        ))
+      }
+    </ul>
+    <div class="flex gap-3">
+      <button type="button" data-prev class="pixel-btn px-4 py-2 text-xs uppercase" aria-label="Previous photos">
+        ← Prev
+      </button>
+      <button type="button" data-next class="pixel-btn px-4 py-2 text-xs uppercase" aria-label="Next photos">
+        Next →
+      </button>
+    </div>
+  </div>
 </Reveal>
+
+<script>
+  // Prev/next scroll the track by (nearly) one screenful. Swiping and trackpad scrolling work without JS.
+  const init = () => {
+    document.querySelectorAll<HTMLElement>("[data-slider]").forEach((root) => {
+      const track = root.querySelector<HTMLElement>("[data-track]");
+      if (!track) return;
+      const by = (dir: number) =>
+        track.scrollBy({ left: dir * track.clientWidth * 0.8, behavior: "smooth" });
+      root.querySelector("[data-prev]")?.addEventListener("click", () => by(-1));
+      root.querySelector("[data-next]")?.addEventListener("click", () => by(1));
+    });
+  };
+  document.addEventListener("astro:page-load", init);
+</script>

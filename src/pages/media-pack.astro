@@ -1,0 +1,16 @@
+---
+// Media pack (/media-pack/). Thin route shell: owns BaseLayout + SEO and composes Sections/MediaPack.
+// Static (prerendered). Replaces the old brisbanemaker.space/bms-media-pack-design-guidelines/ download.
+import MediaPack from "@components/Sections/MediaPack/MediaPack.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Media Pack / Logos — ${siteData.tabTitle}`}
+  description="Download the Brisbane Makerspace logos and brand guidelines: colours, fonts and the BMS blue gradient."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <MediaPack />
+  </div>
+</BaseLayout>

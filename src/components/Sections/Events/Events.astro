@@ -7,6 +7,7 @@
 // lazy-loaded, and the "Open in Google Calendar" link below it works without the embed.
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
 import { PixelPanel } from "@components/ui/pixel-panel";
+import { events } from "@config/eventData.json";
 import siteData from "@config/siteData.json";
 
 const calendarId =
@@ -25,7 +26,7 @@ const embedParams = new URLSearchParams({
   showCalendars: "0",
   showTz: "0",
   mode: "AGENDA",
-  color: "#009688",
+  color: "#0072dc",
 });
 // `src` appended raw: it is already URL-safe, and URLSearchParams would re-encode it.
 const embedUrl = `https://calendar.google.com/calendar/embed?${embedParams}&src=${src}`;
@@ -72,3 +73,21 @@ const link = "text-info hover:text-success underline transition-colors";
     </p>
   </PixelPanel>
 </section>
+
+<!-- <section aria-labelledby="regular-events-heading">
+  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
+    <h2 id="regular-events-heading" class="h3 text-foreground">Regular meetups</h2>
+    <ul class="flex flex-col gap-4">
+      {
+        events.map((event) => (
+          <li class="flex flex-col gap-1">
+            <a href={`${routes.events}${event.slug}/`} class={link}>
+              {event.title}
+            </a>
+            <span class="text-muted-foreground text-sm">{event.summary}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </PixelPanel>
+</section> -->

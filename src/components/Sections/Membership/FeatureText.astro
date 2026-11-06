@@ -1,0 +1,24 @@
+---
+// src/components/Sections/Membership/FeatureText.astro - one plan feature: plain text, or text followed
+// by a wiki/policy link (opens in a new tab). Shared by the comparison table and the mobile carousel.
+export type Feature = string | { text: string; label: string; href: string };
+
+interface Props {
+  feature: Feature;
+}
+const { feature } = Astro.props;
+const link = "text-info hover:text-success underline transition-colors";
+---
+
+{
+  typeof feature === "string" ? (
+    feature
+  ) : (
+    <>
+      {feature.text}{" "}
+      <a href={feature.href} class={link} target="_blank" rel="noopener noreferrer">
+        {feature.label}
+      </a>
+    </>
+  )
+}

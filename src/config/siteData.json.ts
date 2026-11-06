@@ -13,6 +13,8 @@ const siteData = {
   tabTitle: "Brisbane Makerspace",
   // Page title for the home page: what search results and link previews (og:title, twitter:title) show.
   title: "Brisbane Makerspace - Brisbane's Friendliest Community Makerspace",
+  // Where the makerspace is (Visit page, event pages).
+  address: "35 Balaclava St, Woolloongabba, Brisbane, QLD",
   description:
     "BMS is Brisbane's friendliest community makerspace. We provide a collaborative environment for makers, hobbyists, and innovators to learn, create, and work on their projects with others.",
   location: "35 Balaclava St, Woolloongabba",
@@ -20,6 +22,8 @@ const siteData = {
   author: {
     name: "Brisbane Makerspace",
     email: "hello@brisbanemaker.space",
+    // Volunteer-staffed: emergencies and existing workshop bookings only (see the Contact page).
+    phone: "07 2111 8684",
     // Ships EMPTY on purpose: BaseHead only emits `twitter:creator` when this is set, so an unfilled
     // template omits the tag rather than attributing every page to a handle that doesn't exist.
     twitter: "",
@@ -37,9 +41,11 @@ const siteData = {
   links: {
     portal,
     portalSignup: `${portal}/register`,
+    webcams: `${portal}/webcams`,
     status: "https://status.brisbanemaker.space",
     wiki,
     wikiPages: {
+      tools: `${wiki}/tools`,
       policies: `${wiki}/policies`,
       orgStructure: `${wiki}/howto/org-structure`,
       findSomeone: `${wiki}/howto/find-someone`,
@@ -54,6 +60,11 @@ const siteData = {
       visit: "/visit/",
       events: "/events/",
       workshops: "/workshops/",
+      facilities: "/facilities/",
+      signup: "/signup/",
+      giftCards: "/gift-cards/",
+      mailingList: "/mailing-list/",
+      mediaPack: "/media-pack/",
       membership: "/membership/",
       contact: "/contact/",
       donate: "/donate/",

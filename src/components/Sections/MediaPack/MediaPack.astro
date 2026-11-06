@@ -1,0 +1,168 @@
+---
+// src/components/Sections/MediaPack/MediaPack.astro — the media pack / logos page body: downloadable
+// BMS logos, the brand colours and fonts, and the Brand Guidelines PDF. Files are in /public/media-pack/
+// (from the 8 Nov 2026 media pack). Colours and fonts are from the Brand Guidelines.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+
+const base = "/media-pack/";
+interface Logo {
+  name: string;
+  alt: string;
+  /** file stem under logos/svg and logos/png, e.g. `bms-plain-white-logo`. */
+  stem: string;
+  /** show the logo on the brand gradient (for the plain white logos). */
+  onGradient?: boolean;
+}
+// Order follows the brand guide: primary (white on gradient), then the secondary variations
+// (gradient on light, plain black), then the full-name versions.
+const logos: readonly Logo[] = [
+  { name: "Primary: white on gradient", alt: "The BMS logo in white on the blue gradient.", stem: "bms-plain-white-on-gradient-logo" },
+  { name: "Primary: white on gradient (square)", alt: "The square BMS logo in white on the blue gradient.", stem: "bms-plain-white-on-gradient-logo-square" },
+  { name: "Primary: white on gradient (full name)", alt: "The BMS Brisbane Makerspace logo in white on the blue gradient.", stem: "bms-plain-white-on-gradient-horizontal-logo" },
+  { name: "Gradient (on light backgrounds)", alt: "The BMS logo in the blue gradient.", stem: "bms-gradient-logo" },
+  { name: "Gradient (square)", alt: "The square BMS logo in the blue gradient.", stem: "bms-gradient-logo-square" },
+  { name: "Gradient (full name)", alt: "The BMS Brisbane Makerspace logo in the blue gradient.", stem: "bms-gradient-horizontal-logo" },
+  { name: "Plain black (no colour)", alt: "The BMS logo in plain black.", stem: "bms-plain-black-logo" },
+  { name: "Plain black (square)", alt: "The square BMS logo in plain black.", stem: "bms-plain-black-logo-square" },
+  { name: "Plain black (full name)", alt: "The BMS Brisbane Makerspace logo in plain black.", stem: "bms-plain-black-horizontal-logo" },
+  { name: "Plain white", alt: "The BMS logo in plain white.", stem: "bms-plain-white-logo", onGradient: true },
+  { name: "Plain white (square)", alt: "The square BMS logo in plain white.", stem: "bms-plain-white-logo-square", onGradient: true },
+  { name: "Plain white (full name)", alt: "The BMS Brisbane Makerspace logo in plain white.", stem: "bms-plain-white-horizontal-logo", onGradient: true },
+];
+
+const colours = [
+  { name: "BMS Blue (primary accent)", hex: "#0072DC" },
+  { name: "BMS Blue Alt (secondary accent)", hex: "#00BFDC" },
+] as const;
+
+---
+
+<HeroPanel
+  headingId="media-pack-hero-heading"
+  tagline="Brand"
+  heading="Media Pack / Logos"
+  intro="Logos, colours and fonts for Brisbane Makerspace. Our preference is the white logo on the BMS blue gradient, but please prioritise visual appeal over being consistent with the guidelines."
+/>
+
+<section aria-labelledby="logos-heading" class="flex flex-col gap-6">
+  <h2 id="logos-heading" class="h2 text-info">Logos</h2>
+  <ul class="grid gap-6 md:grid-cols-3">
+    {
+      logos.map((logo) => (
+        <li class="flex">
+          <PixelPanel class="flex w-full flex-col gap-4 p-6">
+            <div
+              class:list={[
+                "border-border flex h-40 items-center justify-center border-4 p-4",
+                logo.onGradient ? "bg-[image:linear-gradient(to_right,#00bfdc,#0072dc)]" : "bg-white",
+              ]}
+            >
+              <img
+                src={`${base}logos/svg/${logo.stem}.svg`}
+                alt={logo.alt}
+                loading="lazy"
+                class="max-h-full max-w-full object-contain"
+              />
+            </div>
+            <h3 class="font-display text-info text-xs uppercase">{logo.name}</h3>
+          </PixelPanel>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<section aria-labelledby="brand-heading">
+  <PixelPanel class="grid gap-8 p-6 md:grid-cols-2 md:p-8">
+    <div class="flex flex-col gap-3">
+      <h2 id="brand-heading" class="h3 text-foreground">BMS Blue Gradient</h2>
+      <div
+        class="border-border h-24 w-full border-4 bg-[image:linear-gradient(to_right,#00bfdc,#0072dc)]"
+        role="img"
+        aria-label="Gradient from cyan on the left to blue on the right"
+      >
+      </div>
+      <ul class="flex flex-col gap-2">
+        {
+          colours.map((c) => (
+            <li class="flex items-center gap-3">
+              <span
+                class="border-border size-6 shrink-0 rounded-full border-2"
+                style={`background-color:${c.hex}`}
+                aria-hidden="true"
+              />
+              <span class="text-foreground/90 text-sm">{c.name}:</span>
+              <strong class="text-sm">{c.hex}</strong>
+              <button
+                type="button"
+                data-copy={c.hex}
+                aria-label={`Copy ${c.hex}`}
+                title="Copy"
+                class="text-info hover:text-success primary-focus inline-flex cursor-pointer items-center gap-1 text-xs"
+              >
+                <svg viewBox="0 0 16 16" class="size-4" fill="currentColor" aria-hidden="true" shape-rendering="crispEdges">
+                  <path d="M5 1h9v11h-2V3H5zM2 4h9v11H2zm2 2v7h5V6z" fill-rule="evenodd" />
+                </svg>
+                <span data-copy-label class="sr-only">Copy</span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-foreground/90 text-sm leading-relaxed">
+        The gradient starts on the left with BMS Blue Alt and transitions into BMS Blue on the right.
+      </p>
+    </div>
+    <div class="flex flex-col gap-3">
+      <h2 class="h3 text-foreground">Fonts</h2>
+      <ul class="text-foreground/90 space-y-1 text-sm leading-relaxed">
+        <li><strong>Headings:</strong> Press Start 2P</li>
+        <li><strong>Body:</strong> Space Mono</li>
+        <li><strong>Body (alternate):</strong> Helvetica</li>
+      </ul>
+      <p class="text-foreground/90 text-sm leading-relaxed">
+        Both preferred fonts are monospaced, which can cause problems. If readability or compatibility is an
+        issue, switch to Roboto for headings or Helvetica for body text.
+      </p>
+    </div>
+  </PixelPanel>
+</section>
+
+<section aria-labelledby="downloads-heading">
+  <PixelPanel class="flex flex-col items-start gap-4 p-6 md:p-8">
+    <h2 id="downloads-heading" class="h3 text-foreground">Download everything</h2>
+    <p class="text-foreground/90 max-w-prose text-sm leading-relaxed">
+      One zip with the Brand Guidelines PDF, every logo (SVG and PNG), the icon set, favicons, cover images and
+      pegboard backgrounds.
+    </p>
+    <a
+      href={`${base}bms-brand-guidelines.zip`}
+      download
+      class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase"
+    >
+      Brand Guidelines package (ZIP)
+    </a>
+  </PixelPanel>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const label = btn.querySelector<HTMLElement>("[data-copy-label]");
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy ?? "");
+        if (label) {
+          label.textContent = "Copied!";
+          label.classList.remove("sr-only");
+          setTimeout(() => {
+            label.textContent = "Copy";
+            label.classList.add("sr-only");
+          }, 1500);
+        }
+      } catch {
+        /* clipboard unavailable - leave the hex visible to copy by hand */
+      }
+    });
+  });
+</script>

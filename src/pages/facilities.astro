@@ -1,0 +1,16 @@
+---
+// Facilities (/facilities/). Thin route shell: owns BaseLayout + SEO and composes Sections/Facilities.
+// Static (prerendered). Content carried over from the old brisbanemaker.space/facilities/.
+import Facilities from "@components/Sections/Facilities/Facilities.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Facilities — ${siteData.tabTitle}`}
+  description="Tools and facilities at Brisbane Makerspace: 3D printers, a laser cutter, electronics, arts and crafts, a Cricut and a CNC router — plus regular community events."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <Facilities />
+  </div>
+</BaseLayout>

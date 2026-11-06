@@ -6,6 +6,7 @@
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
 import siteData from "@config/siteData.json";
 import members from "@images/members.jpeg";
+import { Picture } from "astro:assets";
 
 const { routes } = siteData.links;
 ---
@@ -27,13 +28,14 @@ const { routes } = siteData.links;
   </div>
 </HeroPanel>
 
-  <img
-    src={members.src}
-    width={members.width}
-    height={members.height}
+  <Picture
+    src={members}
+    widths={[400, 600, 800]}
+    sizes="(min-width: 768px) 28rem, 100vw"
+    formats={["avif", "webp"]}
     alt="Four members playing a board game around a table, with a Progress Pride flag on the wall behind them."
     loading="eager"
-    decoding="async"
+    fetchpriority="high"
     class="border-border shadow-pixel-lg h-auto w-full border-4 object-cover md:h-full"
   />
 </div>

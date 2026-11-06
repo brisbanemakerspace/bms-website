@@ -16,6 +16,7 @@ import { Nav } from "@components/ui/nav";
 import { Sheet } from "@components/ui/sheet";
 import siteData from "@config/siteData.json";
 import { socialLink } from "@config/socialData.json";
+import logo from "@images/bms-logo.svg";
 
 const pathname = Astro.url.pathname;
 // `undefined` when Discord is commented out of `socialPlatforms` - the button then simply isn't rendered.
@@ -30,18 +31,20 @@ const discord = socialLink("discord");
     /* h-16 on the header (border-box) so the bar is 64px total incl. the 4px border - the Figma frame. */
   }
   <div class="site-container flex h-full max-w-[1160px] items-center justify-between">
-    <!-- Brand: wordmark (the pixel avatar was removed), links home. The link's accessible name is the wordmark. On a
-         narrow phone the brand (min-w-0) shrinks and the wordmark truncates before the row overflows. -->
+    <!-- Brand: the BMS gradient logo (cropped from the brand pack), links home. The link's accessible name is the
+         aria-label; the image is decorative. -->
     <a
       href="/"
       class="primary-focus flex min-w-0 items-center"
       aria-label={`${siteData.name} - home`}
     >
-      <span
-        class="font-display text-info xs:text-lg truncate text-base tracking-[-0.06em] uppercase sm:text-2xl"
-      >
-        {siteData.name}
-      </span>
+      <img
+        src={logo.src}
+        width={logo.width}
+        height={logo.height}
+        alt=""
+        class="h-8 w-auto sm:h-10"
+      />
     </a>
 
     <!-- Right cluster: desktop nav + Discord, or (below lg) Discord + hamburger. `shrink-0` so
@@ -64,7 +67,7 @@ const discord = socialLink("discord");
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${discord.label} (opens in a new tab)`}
-            class="pixel-btn size-9 shrink-0 [--pixel-btn-depth:#3c45a5] [--pixel-btn-face-hover:#4752c4] [--pixel-btn-face:#5865f2] [--pixel-btn-ink:#ffffff] [&_path]:fill-white"
+            class="pixel-btn size-9 shrink-0 [--pixel-btn-depth:#3c45a5] [--pixel-btn-face-hover:#4752c4] [--pixel-btn-face:#5865f2] [--pixel-btn-ink:#ffffff] before:hidden after:hidden [&_path]:fill-white"
           >
             <PixelIcon name={discord.name} size="md" />
           </a>

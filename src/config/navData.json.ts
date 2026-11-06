@@ -1,22 +1,29 @@
 import { type NavItemProps } from "./types/configDataTypes";
 
 /**
- * * Primary navigation - the header's link set (Figma node 5:110).
+ * * Primary navigation - the header's link set, laid out like the old brisbanemaker.space menu:
+ * VISIT · MEMBERSHIP · WORKSHOPS · ABOUT (a dropdown: Facilities, Contact, About, Events, Media Pack) · DONATE.
  *
  * Labels are Title-case and uppercased in the UI (Press Start 2P). Hrefs carry the trailing slash
- * to match `astro.config.mjs` `trailingSlash: "always"`. `as const satisfies` keeps the literal
- * types while checking the shape.
- *
- * Order: VISIT · EVENTS · MEMBERSHIP · ABOUT · PROJECTS · (BLOG) · CONTACT. Home is intentionally not a nav item - the brand wordmark
- * (Header.astro `<a href="/">`) is the home link, the common logo-as-home pattern. All four routes are
- * live (`/contact/` is the one SSR page). Four Press Start labels fit the desktop bar at `lg` (measured).
+ * to match `astro.config.mjs` `trailingSlash: "always"`. An entry with `children` is a dropdown group
+ * on desktop (its label isn't a link); the mobile drawer lists the children inline. Home is
+ * intentionally not a nav item - the brand wordmark (Header.astro `<a href="/">`) is the home link.
+ * Pages without a nav entry (Projects, Blog, Signup, Gift cards, Mailing list) are linked
+ * from elsewhere on the site.
  */
 export const navItems = [
   { label: "Visit", href: "/visit/" },
   { label: "Membership", href: "/membership/" },
-  { label: "Events", href: "/events/" },
-  { label: "About", href: "/about/" },
-  // { label: "Projects", href: "/projects/" },
-  // { label: "Blog", href: "/blog/" },
-  { label: "Contact", href: "/contact/" },
+  { label: "Workshops", href: "/workshops/" },
+  { label: "Donate", href: "/donate/" },
+  {
+    label: "About",
+    children: [
+      { label: "Facilities", href: "/facilities/" },
+      { label: "Contact", href: "/contact/" },
+      { label: "About", href: "/about/" },
+      { label: "Events", href: "/events/" },
+      { label: "Media Pack", href: "/media-pack/" },
+    ],
+  },
 ] as const satisfies readonly NavItemProps[];

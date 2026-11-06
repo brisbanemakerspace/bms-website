@@ -12,10 +12,12 @@ export interface SiteDataProps {
   title: string; // home page title for search results + link previews (og:title / twitter:title)
   description: string;
   location: string; // shortened physical address for the site
+  address: string; // fuller street address (Visit page, event pages)
   // used for blog post / article metadata
   author: {
     name: string;
     email: string;
+    phone?: string; // volunteer-staffed line, shown on the Contact page
     twitter: string; // for twitter card attribution, e.g. "@handle" minus the @
   };
   // fallback social/OG image when a page has none
@@ -27,9 +29,11 @@ export interface SiteDataProps {
   links: {
     portal: string;
     portalSignup: string;
+    webcams: string;
     status: string;
     wiki: string;
     wikiPages: Record<
+      | "tools"
       | "policies"
       | "orgStructure"
       | "findSomeone"
@@ -45,6 +49,11 @@ export interface SiteDataProps {
       | "visit"
       | "events"
       | "workshops"
+      | "facilities"
+      | "signup"
+      | "giftCards"
+      | "mailingList"
+      | "mediaPack"
       | "membership"
       | "contact"
       | "donate"
@@ -58,10 +67,14 @@ export interface SiteDataProps {
 
 // --------------------------------------------------------
 // primary navigation (the header link set). See src/config/navData.json.ts.
-export interface NavItemProps {
+export interface NavLinkProps {
   label: string; // Title-case; uppercased in the UI (Press Start 2P)
   href: string; // trailing-slash route (astro.config `trailingSlash: "always"`)
 }
+
+// A nav entry is either a link, or a group: a label (not a link itself) that opens a dropdown of links.
+export type NavItemProps =
+  NavLinkProps | { label: string; children: readonly NavLinkProps[] };
 
 // --------------------------------------------------------
 // social platforms (label + glyph + how the URL resolves). See src/config/socialData.json.ts.
@@ -130,4 +143,35 @@ export interface SiteSettingsProps {
   // master switch for the decorative motion layer (scroll-reveal via <Reveal>, etc.).
   // Independent of `prefers-reduced-motion`, which is always honored by the global guard in motion/index.css.
   useAnimations?: boolean;
+}
+
+// --------------------------------------------------------
+// workshops. See src/config/workshopData.json.ts.
+export interface WorkshopProps {
+  slug: string; // /workshops/<slug>/
+  title: string;
+  listing: boolean; // show on the /workshops/ index (seasonal ones are detail-page only)
+  listPrice?: string; // price line on the index card
+  listDescription?: readonly string[]; // index card copy
+  price: string; // detail page price line
+  description: readonly string[]; // detail page intro paragraphs
+  coverHeading: string; // "What we'll cover…" / "What is included…"
+  covers: readonly string[];
+  closing: readonly string[]; // paragraphs after the list
+  accessibility: string;
+  bookingId: string; // ClassBento booking-widget id
+}
+
+// events (regular meetups). See src/config/eventData.json.ts.
+export interface EventProps {
+  slug: string; // /events/<slug>/
+  title: string;
+  summary: string; // one line for the index
+  description: readonly string[];
+  agendaIntro?: string;
+  agenda?: readonly string[];
+  closing: readonly string[];
+  when: { date: string; time: string };
+  eventbriteUrl?: string;
+  facebookUrl?: string;
 }

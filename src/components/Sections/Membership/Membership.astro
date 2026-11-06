@@ -8,6 +8,7 @@
 // needs no JavaScript. Hobbyist plans sign up through the member portal; coworking plans go through
 // the contact page.
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import FeatureText, { type Feature } from "@components/Sections/Membership/FeatureText.astro";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import siteData from "@config/siteData.json";
 
@@ -18,8 +19,6 @@ const feesUrl = wikiPages.fees;
 const fairUseUrl = wikiPages.fairUse;
 const toolsUrl = wikiPages.lasercutterTools;
 
-/** A feature line: plain text, or text followed by a link. */
-type Feature = string | { text: string; label: string; href: string };
 interface Plan {
   name: string;
   price: number;
@@ -107,6 +106,26 @@ const coworkingPlans: readonly Plan[] = [
   },
 ];
 
+// Comparison-table rows: every distinct feature across a group's plans. A feature is "the same row" when
+// its text (and link label) match, so shared lines line up and a plan-specific one (e.g. "Must present
+// concession or healthcare card") only ticks its own column. A feature a plan has that no earlier plan
+// had is slotted in just before that plan's next already-listed feature, so it sits beside its
+// counterpart (the Dedicated Desk line lands directly under the Hot Desk line) instead of at the bottom.
+const featureKey = (f: Feature) => (typeof f === "string" ? f : `${f.text} ${f.label}`);
+const rowsFor = (plans: readonly Plan[]) => {
+  const rows: { key: string; feature: Feature }[] = [];
+  for (const plan of plans) {
+    plan.features.forEach((feature, i) => {
+      const key = featureKey(feature);
+      if (rows.some((r) => r.key === key)) return;
+      const next = plan.features.slice(i + 1).map(featureKey);
+      const at = rows.findIndex((r) => next.includes(r.key));
+      rows.splice(at === -1 ? rows.length : at, 0, { key, feature });
+    });
+  }
+  return rows;
+};
+
 const link = "text-info hover:text-success underline transition-colors";
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 ---
@@ -115,7 +134,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
   headingId="membership-hero-heading"
   tagline="Join Us"
   heading="Membership"
-  intro="Find the membership that’s right for you."
+  intro="Find the membership that's right for you."
 />
 
 <section aria-labelledby="membership-intro-heading">
@@ -153,7 +172,6 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       intro:
         "Join our community and connect with other makers. For individuals who want access to our space for personal use and social reasons. You can also select a discounted yearly plan when signing up through the portal.",
       plans: makerPlans,
-      cols: "lg:grid-cols-3",
       footnote: (
         <>
           * Our <a href={toolsUrl} class={link} {...ext}>fair use policy</a> applies. Tools require safety
@@ -168,7 +186,6 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       intro:
         "Whilst we provide membership options that permit commercial use, we do so to help us fund our primary charitable objectives. Our facilities are volunteer run and may not have the same level of service you'd expect with a typical commercial lease and are priced with this in mind.",
       plans: coworkingPlans,
-      cols: "md:grid-cols-2",
       footnote: (
         <>
           * Our <a href={toolsUrl} class={link} {...ext}>fair use policy</a> applies. Tools require safety
@@ -187,45 +204,144 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
           <p class="text-foreground/90 leading-relaxed">{group.intro}</p>
         </div>
 
-        <ul class={`grid gap-6 ${group.cols}`}>
-          {group.plans.map((plan) => (
-            <li class="flex">
-              <PixelPanel class="flex w-full flex-col gap-4 p-6">
-                <h3 class="font-display text-info text-sm uppercase">{plan.name}</h3>
-                <p class="text-foreground flex items-baseline gap-2">
-                  <span class="font-display text-3xl">${plan.price}</span>
-                  <span class="text-muted-foreground text-sm">/ month</span>
-                </p>
-                <a
-                  href={plan.href}
-                  class="pixel-btn pixel-btn--green flex px-5 py-3 text-xs uppercase"
-                  {...(plan.href.startsWith("http") ? ext : {})}
-                >
-                  Sign Up
-                </a>
-                <ul class="text-foreground/90 list-disc space-y-2 pl-5 text-sm leading-relaxed">
-                  {plan.features.map((feature) => (
-                    <li>
-                      {typeof feature === "string" ? (
-                        feature
-                      ) : (
+        {/* md+: one comparison table - plans as columns, features as rows. */}
+        <PixelPanel class="hidden overflow-x-auto p-6 md:block md:p-8">
+          <table class="w-full border-collapse text-left">
+            <caption class="sr-only">{group.title}: what each plan includes</caption>
+            <thead>
+              <tr>
+                <td class="w-2/5"></td>
+                {group.plans.map((plan) => (
+                  <th scope="col" class="px-3 pb-4 align-bottom font-normal">
+                    <span class="font-display text-info block text-xs uppercase">{plan.name}</span>
+                    <span class="text-foreground mt-2 flex items-baseline gap-2">
+                      <span class="font-display text-3xl">${plan.price}</span>
+                      <span class="text-muted-foreground text-sm">/ month</span>
+                    </span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rowsFor(group.plans).map((row) => (
+                <tr class="border-border/40 border-t">
+                  <th scope="row" class="text-foreground/90 py-4 pr-4 text-sm leading-relaxed font-normal">
+                    <FeatureText feature={row.feature} />
+                  </th>
+                  {group.plans.map((plan) => (
+                    <td class="px-3 py-4">
+                      {plan.features.some((f) => featureKey(f) === row.key) ? (
                         <>
-                          {feature.text}{" "}
-                          <a href={feature.href} class={link} {...ext}>
-                            {feature.label}
-                          </a>
+                          <span class="bg-primary block size-3" aria-hidden="true" />
+                          <span class="sr-only">Included</span>
                         </>
+                      ) : (
+                        <span class="sr-only">Not included</span>
                       )}
-                    </li>
+                    </td>
                   ))}
-                </ul>
-              </PixelPanel>
-            </li>
-          ))}
-        </ul>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr class="border-border/40 border-t">
+                <td class="pt-6"></td>
+                {group.plans.map((plan) => (
+                  <td class="px-3 pt-6">
+                    <a
+                      href={plan.href}
+                      class="pixel-btn pixel-btn--green flex px-5 py-3 text-xs uppercase"
+                      {...(plan.href.startsWith("http") ? ext : {})}
+                    >
+                      Sign Up<span class="sr-only">&nbsp;for {plan.name}</span>
+                    </a>
+                  </td>
+                ))}
+              </tr>
+            </tfoot>
+          </table>
+        </PixelPanel>
+
+        {/* Below md: a swipeable carousel, one plan per slide (CSS scroll-snap; the dots are an extra). */}
+        <div class="md:hidden" data-carousel>
+          <ul
+            class="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pr-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            aria-label={`${group.title}: swipe to compare plans`}
+          >
+            {group.plans.map((plan) => (
+              <li class="flex shrink-0 basis-[85%] snap-center" data-slide>
+                <PixelPanel class="flex w-full flex-col gap-4 p-6">
+                  <h3 class="font-display text-info text-sm uppercase">{plan.name}</h3>
+                  <p class="text-foreground flex items-baseline gap-2">
+                    <span class="font-display text-3xl">${plan.price}</span>
+                    <span class="text-muted-foreground text-sm">/ month</span>
+                  </p>
+                  <ul class="text-foreground/90 flex flex-col text-sm leading-relaxed">
+                    {plan.features.map((feature) => (
+                      <li class="border-border/40 flex items-start gap-3 border-t py-3">
+                        <span class="bg-primary mt-1.5 block size-3 shrink-0" aria-hidden="true" />
+                        <span>
+                          <FeatureText {feature} />
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={plan.href}
+                    class="pixel-btn pixel-btn--green mt-auto flex px-5 py-3 text-xs uppercase"
+                    {...(plan.href.startsWith("http") ? ext : {})}
+                  >
+                    Sign Up<span class="sr-only">&nbsp;for {plan.name}</span>
+                  </a>
+                </PixelPanel>
+              </li>
+            ))}
+          </ul>
+          <div class="flex items-center justify-center gap-3" role="group" aria-label="Choose a plan">
+            {group.plans.map((plan, i) => (
+              <button
+                type="button"
+                data-dot
+                aria-label={`Show ${plan.name}`}
+                aria-current={i === 0 ? "true" : undefined}
+                class="bg-border/50 aria-[current=true]:bg-primary size-3 cursor-pointer"
+              />
+            ))}
+          </div>
+        </div>
 
         <p class="text-muted-foreground text-xs leading-relaxed">{group.footnote}</p>
       </div>
     </section>
   ))
 }
+
+<script>
+  // Carousel dots: mark the slide that is mostly in view, and jump to a slide when its dot is pressed.
+  // Without JS the carousel still swipes (CSS scroll-snap); only the dot highlighting is lost.
+  const init = () => {
+    document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((root) => {
+      const slides = [...root.querySelectorAll<HTMLElement>("[data-slide]")];
+      const dots = [...root.querySelectorAll<HTMLElement>("[data-dot]")];
+      const track = slides[0]?.parentElement;
+      if (!track || slides.length !== dots.length) return;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            const i = slides.indexOf(entry.target as HTMLElement);
+            dots.forEach((dot, n) => dot.setAttribute("aria-current", String(n === i)));
+          }
+        },
+        { root: track, threshold: 0.6 },
+      );
+      slides.forEach((slide) => observer.observe(slide));
+      dots.forEach((dot, i) =>
+        dot.addEventListener("click", () =>
+          slides[i]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }),
+        ),
+      );
+    });
+  };
+  document.addEventListener("astro:page-load", init);
+</script>

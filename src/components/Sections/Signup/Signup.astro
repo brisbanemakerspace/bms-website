@@ -1,0 +1,50 @@
+---
+// src/components/Sections/Signup/Signup.astro — the membership sign-up steps page body: four numbered
+// steps and a button to the member-portal signup form. Copy carried over from the old
+// brisbanemaker.space/signup-form/. Edit the `steps` array to change it.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+
+const { routes, portalSignup } = siteData.links;
+const steps = [
+  "Fill out the signup form below.",
+  "Select a plan and make your first payment.",
+  "Complete the online membership induction.",
+  "Pick up an access card and start making!",
+] as const;
+---
+
+<HeroPanel
+  headingId="signup-hero-heading"
+  tagline="Join Us"
+  heading="Signup"
+  intro="Get started in 4 simple steps!"
+/>
+
+<section aria-labelledby="signup-steps-heading">
+  <PixelPanel class="flex flex-col gap-6 p-6 md:p-8">
+    <h2 id="signup-steps-heading" class="h3 text-foreground">How to join</h2>
+    <ol class="flex flex-col gap-4">
+      {
+        steps.map((step, i) => (
+          <li class="flex items-start gap-4">
+            <span class="font-display text-secondary text-sm">{String(i + 1).padStart(2, "0")}.</span>
+            <p class="text-foreground/90 leading-relaxed">{step}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="flex flex-wrap gap-3">
+      <a
+        href={portalSignup}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="pixel-btn pixel-btn--green px-5 py-3 text-xs uppercase"
+      >
+        Membership Signup Form
+      </a>
+      <a href={routes.membership} class="pixel-btn px-5 py-3 text-xs uppercase">See Plans &amp; Pricing</a>
+    </div>
+  </PixelPanel>
+</section>

@@ -38,7 +38,7 @@ export default defineConfig({
 
   // Static except the unlisted `/contact-backup/` route (`prerender = false`: it receives the Resend
   // form POST). Everything else prerenders; the adapter serves the build on Cloudflare Workers.
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: "compile" }),
 
   // Mail keys for the contact-backup action, via `astro:env` so they resolve at REQUEST time (on
   // Workers, secrets exist only in the runtime env). All optional; see src/actions/index.ts.
@@ -85,6 +85,9 @@ export default defineConfig({
         !page.includes("/contact-backup/"),
     }),
   ],
+
+  // Inline the (small) stylesheet so it no longer blocks first render.
+  build: { inlineStylesheets: "always" },
 
   vite: {
     plugins: [tailwindcss()],

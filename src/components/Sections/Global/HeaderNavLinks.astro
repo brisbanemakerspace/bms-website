@@ -1,11 +1,16 @@
 ---
 // src/components/Sections/Global/HeaderNavLinks.astro - the header's nav-item list, rendered in BOTH
 // the desktop <Nav> and the mobile Sheet <Nav> (a sibling sub-part of Header.astro) so the two can't
-// drift. Each item is a retro NavLink with the leading ► pointer that fades in on hover/active.
-// `fullWidth` stretches each item to the drawer's width for the mobile variant. Content is wired from
-// config (navData) with the shared active-route check.
-import { NavItem, NavLink } from "@components/ui/nav";
+// drift. Each link is a retro NavLink with the leading ► pointer that fades in on hover/active.
+// A navData entry with `children` is a dropdown group on desktop (the ui/dropdown primitive: native
+// Popover API, zero extra JS beyond its shared controller); in the mobile drawer (`fullWidth`) the
+// children are listed inline instead. Content is wired from config (navData) with the shared
+// active-route check.
+import Chevron from "@components/ui/_Chevron.astro";
+import { Dropdown, DropdownItem, DropdownMenu } from "@components/ui/dropdown";
+import { NavItem, NavLink, navLink } from "@components/ui/nav";
 import { navItems } from "@config/navData.json";
+import type { NavLinkProps } from "@config/types/configDataTypes";
 import { isActive } from "@js/nav";
 
 interface Props {
@@ -15,26 +20,87 @@ interface Props {
   fullWidth?: boolean;
 }
 const { pathname, fullWidth = false } = Astro.props as Props;
+
+/** Flatten groups into plain links for the drawer. */
+const flatLinks: readonly NavLinkProps[] = navItems.flatMap(
+  (item): readonly NavLinkProps[] => ("children" in item ? item.children : [item]),
+);
 ---
 
 {
-  navItems.map((item) => (
-    <NavItem class={fullWidth ? "w-full" : undefined}>
-      <NavLink
-        variant="retro"
-        href={item.href}
-        class={fullWidth ? "w-full" : undefined}
-        aria-current={isActive(pathname, item.href) ? "page" : undefined}
-      >
-        <svg
-          class="fill-success pointer-events-none absolute top-1/2 left-1.5 h-3.5 w-2.5 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
-          viewBox="0 0 10.41 13.02"
-          aria-hidden="true"
-        >
-          <path d="M10.41 6.64 0 13.02V0Z" />
-        </svg>
-        {item.label}
-      </NavLink>
-    </NavItem>
-  ))
+  fullWidth
+    ? flatLinks.map((item) => (
+        <NavItem class="w-full">
+          <NavLink
+            variant="retro"
+            href={item.href}
+            class="w-full"
+            aria-current={isActive(pathname, item.href) ? "page" : undefined}
+          >
+            <svg
+              class="fill-success pointer-events-none absolute top-1/2 left-1.5 h-3.5 w-2.5 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
+              viewBox="0 0 10.41 13.02"
+              aria-hidden="true"
+            >
+              <path d="M10.41 6.64 0 13.02V0Z" />
+            </svg>
+            {item.label}
+          </NavLink>
+        </NavItem>
+      ))
+    : navItems.map((item) =>
+        "children" in item ? (
+          <NavItem>
+            <Dropdown>
+              <button
+                type="button"
+                popovertarget={`nav-menu-${item.label.toLowerCase()}`}
+                aria-haspopup="menu"
+                aria-expanded="false"
+                class={navLink({
+                  variant: "retro",
+                  class: [
+                    "cursor-pointer [&[aria-expanded=true]_svg]:rotate-180",
+                    item.children.some((child) => isActive(pathname, child.href)) && "text-success",
+                  ],
+                })}
+              >
+                {item.label}
+                <Chevron class="size-4" />
+              </button>
+              <DropdownMenu
+                id={`nav-menu-${item.label.toLowerCase()}`}
+                class="border-border shadow-pixel min-w-52 rounded-none border-4 p-1"
+              >
+                {item.children.map((child) => (
+                  <DropdownItem
+                    href={child.href}
+                    aria-current={isActive(pathname, child.href) ? "page" : undefined}
+                    class="font-display hover:text-success aria-[current=page]:text-success rounded-none px-3 py-3 text-xs uppercase"
+                  >
+                    {child.label}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+          </NavItem>
+        ) : (
+          <NavItem>
+            <NavLink
+              variant="retro"
+              href={item.href}
+              aria-current={isActive(pathname, item.href) ? "page" : undefined}
+            >
+              <svg
+                class="fill-success pointer-events-none absolute top-1/2 left-1.5 h-3.5 w-2.5 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
+                viewBox="0 0 10.41 13.02"
+                aria-hidden="true"
+              >
+                <path d="M10.41 6.64 0 13.02V0Z" />
+              </svg>
+              {item.label}
+            </NavLink>
+          </NavItem>
+        ),
+      )
 }

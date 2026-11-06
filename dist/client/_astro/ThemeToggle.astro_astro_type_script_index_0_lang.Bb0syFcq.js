@@ -1,1 +1,0 @@
-import{t as e}from"./_client.DTGDOzF9.js";function t(e){let t=()=>e.setAttribute(`aria-pressed`,String(document.documentElement.classList.contains(`dark`)));t(),e.addEventListener(`click`,()=>{let e=document.documentElement.classList.toggle(`dark`);try{localStorage.setItem(`colorTheme`,e?`dark`:`light`)}catch{}t()})}e(`[data-slot="theme-toggle"]`,t);

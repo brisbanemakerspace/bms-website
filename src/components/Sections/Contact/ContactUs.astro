@@ -1,0 +1,109 @@
+---
+// src/components/Sections/Contact/ContactUs.astro — the Contact page body for Brisbane Makerspace: how
+// to organise a visit, how to contact the volunteers, and location / email / phone cards. Copy carried
+// over from the old brisbanemaker.space/contact/ (the old embedded map becomes plain map links, and the
+// location is the site address from siteData). One-off section copy lives here as typed literals (see
+// AGENTS.md "content tiers"); edit this file to change the wording.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import MapEmbed from "@components/Sections/Global/MapEmbed.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+import { socialHref } from "@config/socialData.json";
+
+const { routes } = siteData.links;
+const discord = socialHref("discord");
+const email = siteData.author.email;
+const phone = siteData.author.phone;
+const address = siteData.address;
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${siteData.tabTitle} ${address}`)}`;
+const appleMapsUrl = `https://maps.apple.com/?q=${encodeURIComponent(`${siteData.tabTitle} ${address}`)}`;
+
+const link = "text-info hover:text-success underline transition-colors";
+const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+---
+
+<HeroPanel
+  headingId="contact-hero-heading"
+  tagline="Say Hello"
+  heading="Contact"
+  intro="We're a volunteer-run charity, so it might take a while to get back to you."
+/>
+
+<div class="grid gap-8 md:grid-cols-2">
+  <section aria-labelledby="visit-tour-heading">
+    <PixelPanel class="flex h-full flex-col items-start gap-4 p-6 md:p-8">
+      <h2 id="visit-tour-heading" class="h3 text-foreground">Visit or book a tour</h2>
+      <p class="text-foreground/90 leading-relaxed">To organise a visit or book a tour:</p>
+      <a href={routes.visit} class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase">Visit Us</a>
+      <p class="text-muted-foreground text-sm leading-relaxed">
+        You can also come along to one of our <a href={routes.events} class={link}>public events</a>.
+      </p>
+    </PixelPanel>
+  </section>
+
+  <section aria-labelledby="contact-us-heading">
+    <PixelPanel class="flex h-full flex-col gap-4 p-6 md:p-8">
+      <h2 id="contact-us-heading" class="h3 text-foreground">To contact us</h2>
+      <p class="text-foreground/90 leading-relaxed">
+        We're a volunteer-run charity which means we don't have any paid staff. The best way to contact
+        us is by email or Discord using the links below.
+      </p>
+    </PixelPanel>
+  </section>
+</div>
+
+<section aria-label="Location, email and phone">
+  <ul class="grid gap-6 md:grid-cols-3">
+    <li class="flex">
+      <PixelPanel class="flex w-full flex-col items-start gap-3 p-6">
+        <h2 class="font-display text-info text-sm uppercase">Our Location</h2>
+        <address class="text-foreground/90 not-italic leading-relaxed">{address}</address>
+        <p class="text-muted-foreground text-sm">Membership required outside of public events.</p>
+        <div class="mt-auto flex flex-wrap gap-3">
+          <a href={mapsUrl} class="pixel-btn pixel-btn--blue px-4 py-2 text-xs uppercase" {...ext}>
+            Google Maps
+          </a>
+          <a href={appleMapsUrl} class="pixel-btn px-4 py-2 text-xs uppercase" {...ext}>Apple Maps</a>
+        </div>
+      </PixelPanel>
+    </li>
+
+    <li class="flex">
+      <PixelPanel class="flex w-full flex-col items-start gap-3 p-6">
+        <h2 class="font-display text-info text-sm uppercase">Email Us</h2>
+        <a href={`mailto:${email}`} class={`${link} break-all`}>{email}</a>
+        <p class="text-muted-foreground text-sm">
+          <strong>Note: </strong>We do not offer 3D printing services or short term memberships.
+        </p>
+        {
+          discord && (
+            <>
+              <h3 class="font-display text-info mt-2 text-sm uppercase">Message Us on Discord</h3>
+              <a href={discord} class={`${link} break-all`} {...ext}>
+                {discord.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+              </a>
+            </>
+          )
+        }
+      </PixelPanel>
+    </li>
+
+    {
+      phone && (
+        <li class="flex">
+          <PixelPanel class="flex w-full flex-col items-start gap-3 p-6">
+            <h2 class="font-display text-info text-sm uppercase">Phone Us</h2>
+            <a href={`tel:${phone.replace(/\s+/g, "")}`} class={link}>
+              {phone}
+            </a>
+            <p class="text-muted-foreground text-sm">
+              <strong>Emergencies</strong> and <strong>existing workshop bookings only</strong>. We cannot provide general information or answer questions by phone. Our phone line is staffed by a volunteer and may not be available at all times.
+            </p>
+          </PixelPanel>
+        </li>
+      )
+    }
+  </ul>
+</section>
+
+<MapEmbed />

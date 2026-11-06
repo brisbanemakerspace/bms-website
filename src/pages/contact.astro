@@ -1,24 +1,18 @@
 ---
-// Contact (/contact/). Figma "contact-page" frame (node 9:4). Thin route shell: owns BaseLayout +
-// SEO and composes the Sections/Contact blocks in the same shell as index/about (one .site-container
-// + gap rhythm). Fully static (prerendered).
-
-import Faq from "@components/Sections/Contact/Faq.astro";
-import Hero from "@components/Sections/Contact/Hero.astro";
-import InfoCards from "@components/Sections/Contact/InfoCards.astro";
+// Contact (/contact/). Thin route shell: owns BaseLayout + SEO and composes Sections/Contact/ContactUs.
+// Static (prerendered). Content carried over from the old brisbanemaker.space/contact/. (The earlier
+// template Hero / InfoCards / Faq sections are no longer used here; InfoCards still backs the unlisted
+// /contact-backup/ page.)
+import ContactUs from "@components/Sections/Contact/ContactUs.astro";
 import siteData from "@config/siteData.json";
 import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title={`Contact - ${siteData.tabTitle}`}
-  description="Drop me a transmission - questions on vintage hardware, a retro-quest collab, or a guest devlog pitch - plus e-mail, Discord and GitHub links and a system FAQ."
+  title={`Contact — ${siteData.tabTitle}`}
+  description="Contact Brisbane Makerspace, a volunteer-run charity in Brisbane: how to organise a visit or tour, our email and Discord, our location and an emergency phone line."
 >
   <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
-    <Hero />
-
-    <InfoCards />
-
-    <Faq />
+    <ContactUs />
   </div>
 </BaseLayout>

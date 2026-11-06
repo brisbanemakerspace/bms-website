@@ -1,0 +1,22 @@
+---
+// Workshop detail (/workshops/<slug>/). Static: one page per entry in @config/workshopData.
+import WorkshopDetail from "@components/Sections/Workshops/WorkshopDetail.astro";
+import siteData from "@config/siteData.json";
+import { workshops } from "@config/workshopData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return workshops.map((workshop) => ({ params: { slug: workshop.slug }, props: { workshop } }));
+}
+
+const { workshop } = Astro.props;
+---
+
+<BaseLayout
+  title={`${workshop.title} — ${siteData.tabTitle}`}
+  description={`${workshop.title} at Brisbane Makerspace. ${workshop.description[0]}`}
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <WorkshopDetail workshop={workshop} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+// Event detail (/events/<slug>/). Static: one page per entry in @config/eventData.
+import EventDetail from "@components/Sections/Events/EventDetail.astro";
+import { events } from "@config/eventData.json";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return events.map((event) => ({ params: { slug: event.slug }, props: { event } }));
+}
+
+const { event } = Astro.props;
+---
+
+<BaseLayout title={`${event.title} — ${siteData.tabTitle}`} description={event.summary}>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <EventDetail event={event} />
+  </div>
+</BaseLayout>

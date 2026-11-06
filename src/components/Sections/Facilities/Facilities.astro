@@ -1,0 +1,317 @@
+---
+// src/components/Sections/Facilities/Facilities.astro — the Facilities page body: community events and
+// each tool area (3D printing, laser cutting, CNC, arts & crafts, electronics, Cricut). Copy carried
+// over from the old brisbanemaker.space/facilities/. Edit the `facilities` array to change it.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+import printer3d from "@images/icons/3d-printer.svg";
+import audioRecording from "@images/icons/audio-recording.svg";
+import cncRouter from "@images/icons/cnc-router.svg";
+import colourPrinter from "@images/icons/colour-printer.svg";
+import computer from "@images/icons/computer.svg";
+import drillDriver from "@images/icons/drill-driver.svg";
+import heatPress from "@images/icons/heat-press.svg";
+import laserCutter from "@images/icons/laser-cutter.svg";
+import multimeter from "@images/icons/multimeter.svg";
+import sewingMachine from "@images/icons/sewing-machine.svg";
+import tableSaw from "@images/icons/table-saw.svg";
+import vinylCutter from "@images/icons/vinyl-cutter.svg";
+
+const { routes, wiki, wikiPages, webcams } = siteData.links;
+const link = "text-info hover:text-success underline transition-colors";
+
+// Icons are the BMS 8-bit set (Brand Guidelines pack), purely decorative next to each heading.
+/** A paragraph is plain text, or a list of text runs where `{ text, href }` renders as a link. */
+type Paragraph = string | readonly (string | { text: string; href: string })[];
+/** A wiki page for one tool, as a path under the wiki root (https://wiki.brisbanemaker.space/tools). */
+interface WikiLink {
+  label: string;
+  path: string;
+}
+interface Facility {
+  title: string;
+  icon: ImageMetadata;
+  /** per-tool wiki pages, listed at the bottom of the card. */
+  wikiLinks: readonly WikiLink[];
+  paragraphs: readonly Paragraph[];
+}
+const facilities: readonly Facility[] = [
+  {
+    title: "3D Printing",
+    icon: printer3d,
+    wikiLinks: [
+      { label: "3D Printers 1 & 2 (Bambu Lab A1 mini)", path: "/tools/digifab/a1-mini" },
+      { label: "3D Printer 3 (Bambu Lab P1S)", path: "/tools/digifab/p1s" },
+      { label: "Resin 3D Printer (Elegoo Mars 2 Pro)", path: "/tools/digifab/elegoomars2pro" },
+    ],
+    paragraphs: [
+      "Our Bambu Labs 3D printers print super fast and are easy to use. We have several different sizes that can print everything from small prototypes to large models. Our Mars 2 Pro prints resin with incredible resolution.",
+      "We also have many different filament and resins for you to pick from.",
+    ],
+  },
+  {
+    title: "Laser Cutting",
+    icon: laserCutter,
+    wikiLinks: [
+      { label: "Laser Cutter", path: "/tools/digifab/lasercutter" },
+    ],
+    paragraphs: [
+      "Our laser cutter allows you to create amazing custom signage, project enclosures, works of art and more. It can engrave and cut up to 8-10mm thick sheet materials like acrylic, plywood, cardboard, and more!",
+      "Our camera assisted software means you can drag and drop your drawing straight onto your workpiece. The workflow is optimised for ease of use with a camera and has auto focus built right in.",
+    ],
+  },
+  {
+    title: "Woodworking",
+    icon: tableSaw,
+    wikiLinks: [
+      { label: "Mitre Saw", path: "/tools/woodworking/makita-mitre-saw" },
+      { label: "Table Saw", path: "/tools/woodworking/tablesaw" },
+      { label: "Band Saw", path: "/tools/woodworking/bandsaw" },
+      { label: "Drill Press", path: "/tools/woodworking/drillpress" },
+      { label: "Router Table", path: "/tools/woodworking/routertable" },
+      { label: "Belt & Disc Sander", path: "/tools/woodworking/beltsander" },
+      { label: "Bench Grinder", path: "/tools/woodworking/benchgrinder" },
+    ],
+    paragraphs: [
+      "Our woodworking area has the saws and sanders you need for bigger builds: a mitre saw, table saw, band saw, drill press, router table, belt and disc sander and a bench grinder. These tools need an induction before you can use them, so check the wiki or ask a member to show you the ropes.",
+      "Note: our woodworking area is currently being setup - please get involved to help us get it ready for use!",
+    ],
+  },
+  {
+    title: "Arts and Crafts",
+    icon: sewingMachine,
+    wikiLinks: [
+      { label: "Craft Supplies", path: "/craft-supply-boxes" },
+      { label: "Sewing Machine", path: "/tools/other/brother-ns50" },
+    ],
+    paragraphs: [
+      "We have a huge range of arts and crafts consumables and tools. We have boxes full of paint, pens, pencils, stationary, sewing, different glues, knitting and crocheting materials just to name a few! We also have a sewing machine and overlocker for serious sewing.",
+      "We also have lots of “bits and bobs” to finish off your paper and other crafts like sequins, pipe cleaners, construction paper, card, calligraphy pens and more!",
+    ],
+  },
+  {
+    title: "Electronics",
+    icon: multimeter,
+    wikiLinks: [
+      { label: "Soldering Iron / Hot Air", path: "/tools/electronics/soldering" },
+      { label: "Lab Power Supply", path: "/tools/electronics/lab-supply" },
+      { label: "Digital Multimeters", path: "/tools/electronics/multimeters" },
+      { label: "kWeld Battery Spot Welder", path: "/tools/electronics/kweld" },
+    ],
+    paragraphs: [
+      "Our range of electronics tools and consumables is perfect for adding a little extra “pizzaz” to your projects. Our tools are suitable for creating Arduino or ESP32 projects and for adding motors, LEDs, and sound to your projects!",
+      "You can solder, test and experiment with our soldering and hot air stations, multimeters, laboratory power supply, and soldering “third hand”. We also have a kWeld battery spot welding system for 18650 batteries.",
+    ],
+  },
+  {
+    title: "Cricut",
+    icon: vinylCutter,
+    wikiLinks: [
+      { label: "Cricut", path: "/tools/digifab/cricut" },
+    ],
+    paragraphs: [
+      "Our Cricut can handle vinyl, fabric, leather, paper, balsa wood and more. Cut and emboss amazing designs to perfect your projects.",
+      "Use our circuit for sewing and paper crafts, artwork, vinyl stickers, cards, party invitations and decor, iron-ons, centrepieces, leather pieces and more!",
+    ],
+  },
+  {
+    title: "CNC Router",
+    icon: cncRouter,
+    wikiLinks: [
+      { label: "CNC Router", path: "/tools/digifab/cncrouter" },
+    ],
+    paragraphs: [
+      [
+        "We've acquired a medium-sized CNC router and are in the process of setting it up. We expect it will be available for members to use shortly. Sign up to our ",
+        { text: "mailing list", href: routes.mailingList },
+        " for updates, or ",
+        { text: "contact us", href: routes.contact },
+        " for more information.",
+      ],
+      "The CNC router has a huge 1250x750mm work area and is capable of fine detail carving from a range of materials like timber and softer metals like Aluminium. It has a powerful 1.5kW spindle.",
+    ],
+  },
+  {
+    title: "Hand and Power Tools",
+    icon: drillDriver,
+    wikiLinks: [
+      { label: "Ryobi ONE+ Cordless Tools", path: "/tools/ryobi" },
+      { label: "Hand Tools", path: "/tools/other/hand-tools" },
+      { label: "Air Compressor", path: "/tools/other/compressor" },
+      { label: "Nailer and Stapler", path: "/tools/other/nailer" },
+      { label: "Cutoff Tool", path: "/tools/other/cutoff" },
+    ],
+    paragraphs: [
+      "Grab a cordless Ryobi ONE+ drill driver, impact driver, random orbital sander, heat gun, glue gun or hand vacuum and get going. We've also got a range of other tools available that are too many to list here.",
+      "We also have hand tools, an air compressor with a Ryobi Airwave nailer and stapler, and a cutoff tool.",
+    ],
+  },
+  {
+    title: "Printing and Scanning",
+    icon: colourPrinter,
+    wikiLinks: [
+      { label: "A4 Colour Printing", path: "/tools/other/printing" },
+      { label: "Shipping Label Printer", path: "/tools/other/label-printer" },
+      { label: "3D Scanner", path: "/tools/digifab/revopointpop2" },
+    ],
+    paragraphs: [
+      "Need something printed? We have an A4 colour printer (laser and inkjet), a shipping label printer for your online shop, and a 3D scanner for capturing objects to model and print.",
+    ],
+  },
+  {
+    title: "Badges, Stamps and Heat Press",
+    icon: heatPress,
+    wikiLinks: [
+      { label: "Badge Maker", path: "/tools/other/badge-maker" },
+      { label: "Small Heat Press", path: "/tools/other/smallheatpress" },
+      { label: "Stamp Maker", path: "/tools/other/shachihata-origami-factory" },
+    ],
+    paragraphs: [
+      "Make something to wear or give away. We have a badge maker, a small heat press for iron-on transfers (goes great with the cricut!), and a stamp maker for custom stamps.",
+    ],
+  },
+  {
+    title: "Audio and Imaging",
+    icon: audioRecording,
+    wikiLinks: [
+      { label: "Audio Recording Equipment", path: "/tools/audio-recording" },
+      { label: "Photo Lightbox", path: "/tools/other/lightbox" },
+      { label: "Thermal Camera (Flir One Pro)", path: "/tools/other/flir-one-pro" },
+    ],
+    paragraphs: [
+      "Record a podcast or show off your latest project. We have audio recording equipment, a photo lightbox for product shots, and a Flir One Pro thermal camera for spotting hot spots in your electronics.",
+    ],
+  },
+  {
+    title: "And Even More",
+    icon: computer,
+    wikiLinks: [
+      { label: "iMac Computers", path: "/tools/digifab/imacs" },
+      { label: "Shop Vacs", path: "/tools/other/shopvac" },
+      { label: "Multipurpose Sharpener", path: "/tools/other/sharpener" },
+      { label: "Vending Machine (Dixie Narco 440)", path: "/tools/other/dn-440" },
+      { label: "Vending Machine (Poly Vend 6000)", path: "/tools/other/pv-6000" },
+    ],
+    paragraphs: [
+      "There are Mac computers for your design work, shop vacs to keep things tidy, a multipurpose sharpener, and vending machines for snacks and drinks. We even have a resident pet - Bubbles the fish!",
+    ],
+  },
+];
+---
+
+<HeroPanel
+  headingId="facilities-hero-heading"
+  tagline="Tools & Space"
+  heading="Facilities"
+  intro="We are primarily a social group where people can make new connections, and socialise around our common love of making things. We run regular social events and volunteer working bees, and rely on the generous support of our volunteers to operate."
+>
+  <p class="text-foreground/90 max-w-3xl text-sm">
+    You can also see the full list of tools and their documentation {" "}
+    <a href={wikiPages.tools} target="_blank" rel="noopener noreferrer" class={link}>
+      on our public wiki
+    </a>.
+  </p>
+</HeroPanel>
+
+<section aria-labelledby="webcams-heading">
+  <PixelPanel class="flex flex-col items-start gap-3 p-6 md:p-8">
+    <h2 id="webcams-heading" class="h3 text-foreground">Peek inside the space</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      Curious what's happening at the makerspace right now? Our public webcams let you see snapshots from inside the space, 
+      no visit required! You can also see what our 3D printers are up to.{" "}<img
+        src={printer3d.src}
+        width={printer3d.width}
+        height={printer3d.height}
+        alt=""
+        aria-hidden="true"
+        class="inline-block size-6 align-text-bottom [image-rendering:pixelated]"
+      />
+    </p>
+    <a
+      href={webcams}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase"
+    >
+      View our webcams
+    </a>
+  </PixelPanel>
+</section>
+
+<section aria-label="Tools and facilities">
+  <ul class="grid gap-6 md:grid-cols-2">
+    {
+      facilities.map((facility) => (
+        <li class="flex">
+          <PixelPanel class="flex w-full flex-col gap-3 p-6">
+            <div class="flex items-center gap-4">
+              <img
+                src={facility.icon.src}
+                width={facility.icon.width}
+                height={facility.icon.height}
+                alt=""
+                aria-hidden="true"
+                class="size-14 shrink-0 [image-rendering:pixelated]"
+              />
+              <h2 class="h3 text-foreground">{facility.title}</h2>
+            </div>
+            {facility.paragraphs.map((paragraph) => (
+              <p class="text-foreground/90 text-sm leading-relaxed">
+                {typeof paragraph === "string"
+                  ? paragraph
+                  : paragraph.map((run) =>
+                      typeof run === "string" ? (
+                        run
+                      ) : (
+                        <a href={run.href} class={link}>
+                          {run.text}
+                        </a>
+                      ),
+                    )}
+              </p>
+            ))}
+            <div class="mt-auto flex flex-col gap-1 pt-2">
+              <h3 class="font-display text-info text-xs uppercase">On the wiki</h3>
+              <ul class="flex flex-col gap-1 text-sm">
+                {facility.wikiLinks.map((wikiLink) => (
+                  <li>
+                    <a
+                      href={`${wiki}${wikiLink.path}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class={link}
+                    >
+                      {wikiLink.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </PixelPanel>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<section aria-labelledby="more-tools-heading">
+  <PixelPanel class="flex flex-col items-start gap-3 p-6 md:p-8">
+    <h2 id="more-tools-heading" class="h3 text-foreground">Don't see what you're looking for?</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      We have so much that we can't list everything here. For a full list of tools and
+      documentation, please check our wiki or come and visit us!
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <a
+        href={wiki}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase"
+      >
+        See more tools on our wiki
+      </a>
+      <a href={routes.visit} class="pixel-btn px-5 py-3 text-xs uppercase">Visit Us</a>
+    </div>
+  </PixelPanel>
+</section>

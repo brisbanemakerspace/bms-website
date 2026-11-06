@@ -5,20 +5,30 @@
 import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { Reveal } from "@components/ui/reveal";
-
+import community from "@images/offer-community.jpg";
+import tools from "@images/offer-tools.png";
+import smartHomeMeetup from "@images/smart-home-meetup.jpg";
+import { Picture } from "astro:assets";
 
 const offers = [
   {
-    title: "Makerspace Tools",
-    body: "We have lasercutting, 3D printing, electronics, arts & crafts and more!",
-  },
-  {
     title: "Meetups & Events",
     body: "Events for people to socialise around our common love of making.",
+    image: smartHomeMeetup,
+    alt: "About a dozen members seated around a large table in the workshop at a smart home meetup.",
+  },
+  {
+    title: "Makerspace Tools",
+    body: "We have lasercutting, 3D printing, electronics, arts & crafts and more!",
+    image: tools,
+    alt: "Pixel-art tools on a pegboard: a 3D printer, a sewing machine, a table saw and an oscilloscope.",
+    pixelArt: true,
   },
   {
     title: "Community Meetup Space",
     body: "We have space available for non profit groups to host meetups and meetings.",
+    image: community,
+    alt: "Four members talking around a table in the workshop at Maker Monday, with shelves of project storage behind them.",
   },
 ] as const;
 ---
@@ -34,6 +44,26 @@ const offers = [
       offers.map((offer, i) => (
         <li class="flex">
           <PixelPanel class="flex w-full flex-col gap-3 p-6">
+            {"pixelArt" in offer ? (
+              <img
+                src={offer.image.src}
+                width={offer.image.width}
+                height={offer.image.height}
+                alt={offer.alt}
+                loading="lazy"
+                class="border-border aspect-square w-full border-4 object-cover [image-rendering:pixelated]"
+              />
+            ) : (
+              <Picture
+                src={offer.image}
+                widths={[320, 480, 640]}
+                sizes="(min-width: 768px) 22rem, 90vw"
+                formats={["avif", "webp"]}
+                alt={offer.alt}
+                loading="lazy"
+                class="border-border aspect-square w-full border-4 object-cover"
+              />
+            )}
             <span class="font-display text-secondary text-sm">{String(i + 1).padStart(2, "0")}.</span>
             <h3 class="h3 text-foreground">{offer.title}</h3>
             <p class="text-muted-foreground text-sm leading-relaxed">{offer.body}</p>

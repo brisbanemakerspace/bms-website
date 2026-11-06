@@ -1,0 +1,16 @@
+---
+// Gift cards (/gift-cards/). Thin route shell: owns BaseLayout + SEO and composes Sections/GiftCards.
+// Static (prerendered). Content carried over from the old brisbanemaker.space/workshop-gift-card/.
+import GiftCards from "@components/Sections/GiftCards/GiftCards.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Workshop Gift Card — ${siteData.tabTitle}`}
+  description="Give the gift of making: a Brisbane Makerspace workshop gift card, from $69, for beginner through to project-specific workshops."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <GiftCards />
+  </div>
+</BaseLayout>

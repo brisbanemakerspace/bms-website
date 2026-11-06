@@ -1,0 +1,33 @@
+---
+// src/components/Sections/Global/MapEmbed.astro - the Google Maps embed of the makerspace, shown as the last
+// section on the Visit, Workshops and Contact pages. It follows `siteData.address` (change the address in
+// config and every map follows). Standard Google Maps embed; the Maps / Apple Maps links open an app.
+import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+
+const query = encodeURIComponent(`${siteData.tabTitle} ${siteData.address}`);
+const embedUrl = `https://maps.google.com/maps?q=${query}&t=m&z=15&output=embed&iwloc=near`;
+const googleUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
+const appleUrl = `https://maps.apple.com/?q=${query}`;
+const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+---
+
+<section aria-labelledby="map-heading">
+  <PixelPanel class="flex flex-col items-start gap-4 p-6 md:p-8">
+    <h2 id="map-heading" class="h3 text-foreground">Find Us On The Map</h2>
+    <address class="text-foreground/90 not-italic leading-relaxed">{siteData.address}</address>
+    <iframe
+      src={embedUrl}
+      title={`Map showing ${siteData.tabTitle} at ${siteData.address}`}
+      class="border-border h-[360px] w-full border-4 md:h-[450px]"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen></iframe>
+    <div class="flex flex-wrap gap-3">
+      <a href={googleUrl} class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase" {...ext}>
+        Open in Google Maps
+      </a>
+      <a href={appleUrl} class="pixel-btn px-5 py-3 text-xs uppercase" {...ext}>Open in Apple Maps</a>
+    </div>
+  </PixelPanel>
+</section>

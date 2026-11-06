@@ -1,1 +1,0 @@
-document.addEventListener(`click`,e=>{let t=e.target instanceof Element?e.target.closest(`[data-slot="nav-link"]`):null,n=t?.closest(`[data-slot="nav"]`);t&&n&&(e.preventDefault(),n.querySelectorAll(`[data-slot="nav-link"]`).forEach(e=>e.removeAttribute(`aria-current`)),t.setAttribute(`aria-current`,`page`))},!0);

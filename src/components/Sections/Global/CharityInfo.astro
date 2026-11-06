@@ -1,0 +1,23 @@
+---
+// src/components/Sections/Global/CharityInfo.astro - the "About us" charity panel (registered charity,
+// DGR endorsement, trading name, ABN). Shared by the Donate and About pages so the legal details live in
+// ONE place. Layout-free: the page shell supplies the surrounding spacing.
+import { PixelPanel } from "@components/ui/pixel-panel";
+
+const link = "text-info hover:text-success underline transition-colors";
+---
+
+<section aria-labelledby="charity-heading">
+  <PixelPanel class="flex flex-col gap-3 p-6 md:p-8">
+    <h2 id="charity-heading" class="h3 text-foreground">About us</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      We are a registered charity (<a
+        href="https://www.acnc.gov.au/charity/charities/5abc2190-bc73-ee11-8179-00224893b304/profile"
+        class={link}
+        target="_blank"
+        rel="noopener noreferrer">details</a
+      >) with DGR endorsement. Brisbane Makerspace is a trading name for Meanjin Makerspace Inc.
+    </p>
+    <p class="text-muted-foreground text-sm">ABN: 22 562 885 464 · QLD Org #: IA4722548</p>
+  </PixelPanel>
+</section>

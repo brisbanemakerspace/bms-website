@@ -42,11 +42,11 @@
     --card: #ffffff; /* crisp white window panel - pops against the blue ground */
     --card-foreground: var(--color-base-900);
     --primary: var(
-      --color-primary-700
-    ); /* #004d99 action blue, deepened for the light ground */
+      --color-primary-500
+    ); /* #0072dc BMS blue (brand guide); white ink on it is 4.7:1. Text uses --info (deep blue) */
     --primary-foreground: #ffffff;
-    --secondary: var(--color-secondary-200); /* #7fe3f2 BMS cyan */
-    --secondary-foreground: var(--color-secondary-800); /* #00596a */
+    --secondary: var(--color-secondary-500); /* #00bfdc BMS Blue (Alt) */
+    --secondary-foreground: var(--color-secondary-950); /* #002830 */
     --muted: #c3d5ef; /* light-blue muted surface (tags, chips, code) - was flat grey */
     --muted-foreground: var(
       --color-base-600
@@ -84,8 +84,8 @@
     --card-foreground: var(--color-base-100);
     --primary: var(--color-primary-500); /* #0072dc BMS blue */
     --primary-foreground: #ffffff;
-    --secondary: var(--color-secondary-200); /* #7fe3f2 BMS cyan */
-    --secondary-foreground: var(--color-secondary-800); /* #00596a */
+    --secondary: var(--color-secondary-500); /* #00bfdc BMS Blue (Alt) */
+    --secondary-foreground: var(--color-secondary-950); /* #002830 */
     --muted: var(--color-base-700); /* #272939 stats strip / input */
     --muted-foreground: var(--color-base-200); /* #bfc7d3 body text */
     --accent: var(--color-base-600); /* #323445 thumbnails / tags */
@@ -215,10 +215,10 @@
      header toggle + MENU button and the hero/contact CTAs; size it with height / width / padding
      utilities at the call site. */
   .pixel-btn {
-    --pixel-btn-face: var(--color-secondary-200); /* #7fe3f2 flat face */
-    --pixel-btn-face-hover: var(--color-secondary-300); /* #4fd6ec */
-    --pixel-btn-ink: var(--color-secondary-800); /* #00596a dark ink on cyan */
-    --pixel-btn-depth: var(--color-secondary-400); /* inset shadow colour */
+    --pixel-btn-face: var(--color-secondary-500); /* #00bfdc BMS Blue (Alt) flat face */
+    --pixel-btn-face-hover: var(--color-secondary-400); /* #1ccbe6 */
+    --pixel-btn-ink: var(--color-secondary-950); /* #002830 dark ink on cyan (7:1) */
+    --pixel-btn-depth: var(--color-secondary-600); /* #0099b3 inset shadow colour */
     @apply font-display relative inline-flex cursor-pointer items-center justify-center;
     background-color: var(--pixel-btn-face);
     color: var(--pixel-btn-ink);

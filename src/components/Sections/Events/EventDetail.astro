@@ -1,0 +1,78 @@
+---
+// src/components/Sections/Events/EventDetail.astro — one regular event's page body: description, what to
+// expect, when/where, and the Eventbrite / Facebook links. Content comes from @config/eventData
+// (carried over from the old brisbanemaker.space event posts).
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+import type { EventProps } from "@config/types/configDataTypes";
+
+interface Props {
+  event: EventProps;
+}
+const { event } = Astro.props as Props;
+const { routes, wikiPages } = siteData.links;
+const link = "text-info hover:text-success underline transition-colors";
+const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+---
+
+<HeroPanel headingId="event-hero-heading" tagline="Event" heading={event.title} intro={event.summary} />
+
+<section aria-labelledby="event-details-heading">
+  <PixelPanel class="grid gap-8 p-6 md:grid-cols-[minmax(0,1fr)_minmax(0,18rem)] md:p-8">
+    <div class="flex flex-col gap-4">
+      <h2 id="event-details-heading" class="h3 text-foreground">Event details</h2>
+      {event.description.map((paragraph) => <p class="text-foreground/90 leading-relaxed">{paragraph}</p>)}
+      {
+        event.agenda && (
+          <>
+            <p class="text-foreground/90 leading-relaxed">{event.agendaIntro}</p>
+            <ul class="text-foreground/90 list-disc space-y-1 pl-6 leading-relaxed">
+              {event.agenda.map((item) => <li>{item}</li>)}
+            </ul>
+          </>
+        )
+      }
+      {event.closing.map((paragraph) => <p class="text-foreground/90 leading-relaxed">{paragraph}</p>)}
+      <p class="text-muted-foreground text-sm">
+        Read our <a href={wikiPages.policies} class={link} {...ext}>policies</a> and <a
+          href={routes.visit}
+          class={link}>how to visit</a
+        >.
+      </p>
+    </div>
+
+    <dl class="flex flex-col gap-4 self-start text-sm">
+      <div>
+        <dt class="font-display text-info text-xs uppercase">When</dt>
+        <dd class="text-foreground/90 mt-1">{event.when.date}</dd>
+        <dd class="text-foreground/90">{event.when.time}</dd>
+      </div>
+      <div>
+        <dt class="font-display text-info text-xs uppercase">Where</dt>
+        <dd class="text-foreground/90 mt-1">{siteData.address}</dd>
+      </div>
+      {
+        (event.eventbriteUrl || event.facebookUrl) && (
+          <div class="flex flex-col items-start gap-3">
+            <dt class="font-display text-info text-xs uppercase">Join in</dt>
+            {event.eventbriteUrl && (
+              <dd>
+                <a href={event.eventbriteUrl} class="pixel-btn pixel-btn--blue px-4 py-2 text-xs uppercase" {...ext}>
+                  Eventbrite
+                </a>
+              </dd>
+            )}
+            {event.facebookUrl && (
+              <dd>
+                <a href={event.facebookUrl} class="pixel-btn px-4 py-2 text-xs uppercase" {...ext}>
+                  Facebook event
+                </a>
+              </dd>
+            )}
+          </div>
+        )
+      }
+    </dl>
+  </PixelPanel>
+</section>

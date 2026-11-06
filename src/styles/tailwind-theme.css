@@ -13,7 +13,7 @@
  * `bg-violet-700`/`text-zinc-300`, which bypass theming + dark mode.
  */
 @theme {
-  /* PRIMARY - BMS blue, from the brand Design Guide: the gradient's top-right #0072DC is `-500`
+  /* PRIMARY - BMS blue, from the Brand Guidelines: the gradient's right-hand end #0072DC is `-500`
      (buttons, badges, the dark-mode action colour). The ramp runs light → deep around it; `-300`
      is the airy blue for dark-mode headings/links, `-700` the light-mode action blue.
      Rebrand by repointing these hexes; the semantic `--primary` (global.css) reads them. */
@@ -29,7 +29,7 @@
   --color-primary-900: #002650;
   --color-primary-950: #001a38;
 
-  /* SECONDARY - BMS cyan, the Design Guide gradient's bottom-left #00BFDC is `-500`. Used for
+  /* SECONDARY - BMS cyan, the Brand Guidelines gradient's left-hand end #00BFDC is `-500`. Used for
      accent buttons/surfaces (`-200` face, `-800` dark ink on it, `-400` inset depth). */
   --color-secondary-50: #e6fcff;
   --color-secondary-100: #c2f6ff;
@@ -43,9 +43,9 @@
   --color-secondary-900: #003c47;
   --color-secondary-950: #002830;
 
-  /* BMS BLUE GRADIENT (Design Guide): starts bottom-left #00BFDC, runs diagonally to top-right
-     #0072DC. Use as `bg-(image:--gradient-bms)` or `background-image: var(--gradient-bms)`. */
-  --gradient-bms: linear-gradient(to top right, #00bfdc, #0072dc);
+  /* BMS BLUE GRADIENT (Brand Guidelines): starts on the left at #00BFDC and transitions to
+     #0072DC on the right (brand guide, 8 Nov 2026). Use as `bg-(image:--gradient-bms)` or `background-image: var(--gradient-bms)`. */
+  --gradient-bms: linear-gradient(to right, #00bfdc, #0072dc);
 
   /* SUCCESS - the retro green. The one STATUS colour promoted to a full ramp (warning/error stay
      semantic-only until something needs them) because the pixel SEND MESSAGE button needs fixed,

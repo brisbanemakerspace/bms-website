@@ -1,0 +1,16 @@
+---
+// Signup (/signup/). Thin route shell: owns BaseLayout + SEO and composes Sections/Signup. Static
+// (prerendered). Content carried over from the old brisbanemaker.space/signup-form/.
+import Signup from "@components/Sections/Signup/Signup.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Signup — ${siteData.tabTitle}`}
+  description="Join Brisbane Makerspace in four simple steps: fill out the signup form, pick a plan and pay, complete the online induction, then pick up your access card."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <Signup />
+  </div>
+</BaseLayout>

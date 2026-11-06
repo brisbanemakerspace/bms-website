@@ -57,7 +57,6 @@ const memberLinks: readonly MemberLink[] = [
   { label: "Member Login", href: links.portal, external: true },
   { label: "Wiki", href: links.wiki, external: true },
   { label: "Service Status", href: links.status, external: true },
-  { label: "Donate", href: links.routes.donate },
   // Safe Space Policy + Code of Conduct (wiki pages) - defined once in @config/policyData.
   ...policyLinkList.map((policy) => ({ ...policy, external: true })),
   { label: "Privacy", href: links.routes.privacy },
@@ -89,7 +88,9 @@ const memberLinks: readonly MemberLink[] = [
   >
     <!-- Safe-space message + tiny 8-bit flags (replaces the Figma copyright line, 5:94). -->
     <div class="flex flex-1 flex-col items-center gap-3 text-center">
-      <p class="font-display text-info text-xs uppercase">{safeSpaceMessage}</p>
+      <p class="font-display text-info text-xs uppercase">
+        {safeSpaceMessage.split("everyone").map((part, i) => (i === 0 ? <>{part}<u>everyone</u></> : part))}
+      </p>
       <ul class="flex items-center gap-1.5">
         {
           flags.map((flag) => (

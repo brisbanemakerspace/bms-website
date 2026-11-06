@@ -1,0 +1,50 @@
+---
+// src/components/Sections/GiftCards/GiftCards.astro — the workshop gift card page body: a short pitch
+// and the embedded ClassBento gift-card widget. Copy carried over from the old
+// brisbanemaker.space/workshop-gift-card/. The widget is ClassBento's own iframe, so loading this page
+// contacts ClassBento (lazy-loaded). Its review widget is not carried over.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+import { giftCardWidgetId } from "@config/workshopData.json";
+
+const { routes } = siteData.links;
+const link = "text-info hover:text-success underline transition-colors";
+---
+
+<HeroPanel
+  headingId="gift-cards-hero-heading"
+  tagline="Gift Cards"
+  heading="Workshop Gift Card"
+  intro="A wide range of workshops to choose from."
+/>
+
+<section aria-labelledby="gift-cards-about-heading">
+  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
+    <h2 id="gift-cards-about-heading" class="h3 text-foreground">Give the gift of making</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      If you know someone who would love to dive into the world of innovative technology, why not gift
+      them one of our amazing workshops!
+    </p>
+    <p class="text-foreground/90 leading-relaxed">
+      We have a range of beginner through to intermediate and project specific workshops. We have
+      something for everyone!
+    </p>
+    <p class="text-muted-foreground text-sm">
+      We recommend checking out the list of <a href={routes.workshops} class={link}>workshops</a> before
+      purchasing a gift card. Prices vary, but they start at $69 for most workshops.
+    </p>
+  </PixelPanel>
+</section>
+
+<section aria-labelledby="gift-cards-buy-heading">
+  <PixelPanel class="flex flex-col gap-4 p-4 md:p-6">
+    <h2 id="gift-cards-buy-heading" class="h3 text-foreground">Buy a gift card</h2>
+    <iframe
+      src={`https://classbento.com.au/${giftCardWidgetId}-gift-widget`}
+      title="Buy a Brisbane Makerspace workshop gift card"
+      loading="lazy"
+      class="border-border h-[700px] w-full border-4 bg-white"></iframe>
+    <p class="text-muted-foreground text-sm">Gift cards are sold through ClassBento.</p>
+  </PixelPanel>
+</section>

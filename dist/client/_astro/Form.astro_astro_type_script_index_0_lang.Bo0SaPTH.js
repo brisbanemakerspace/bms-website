@@ -1,1 +1,0 @@
-function e(){let e=document.querySelector(`[data-contact-status]`);e instanceof HTMLElement&&e.focus()}document.addEventListener(`astro:after-swap`,e),e();

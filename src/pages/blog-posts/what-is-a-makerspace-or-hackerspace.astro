@@ -1,0 +1,16 @@
+---
+// "What is a makerspace?" article (/blog-posts/what-is-a-makerspace-or-hackerspace/). Thin route shell;
+// content carried over from the old brisbanemaker.space post of the same URL. Static (prerendered).
+import MakerspaceExplainer from "@components/Sections/BlogPosts/MakerspaceExplainer.astro";
+import siteData from "@config/siteData.json";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`What is a makerspace? — ${siteData.tabTitle}`}
+  description="What is a makerspace or hackerspace? How they differ, why “makerspace” is the more common term, what you can do in one, and popular makerspaces across Australia."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <MakerspaceExplainer />
+  </div>
+</BaseLayout>

@@ -1,0 +1,56 @@
+---
+// src/components/Sections/Workshops/WorkshopDetail.astro — one workshop's page body: price, description,
+// what's covered, accessibility note and the embedded ClassBento booking widget. Content comes from
+// @config/workshopData (carried over from the old brisbanemaker.space booking pages).
+//
+// The booking widget is ClassBento's own iframe, so loading this page contacts ClassBento (lazy-loaded).
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+import type { WorkshopProps } from "@config/types/configDataTypes";
+import { bookingWidgetUrl } from "@config/workshopData.json";
+
+interface Props {
+  workshop: WorkshopProps;
+}
+const { workshop } = Astro.props as Props;
+const { routes } = siteData.links;
+const link = "text-info hover:text-success underline transition-colors";
+---
+
+<HeroPanel
+  headingId="workshop-hero-heading"
+  tagline="Workshop"
+  heading={workshop.title}
+  intro={workshop.price}
+>
+  <a href="#book" class="pixel-btn pixel-btn--green px-5 py-3 text-xs uppercase">Book Now</a>
+</HeroPanel>
+
+<section aria-labelledby="workshop-about-heading">
+  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
+    <h2 id="workshop-about-heading" class="h3 text-foreground">About this workshop</h2>
+    {workshop.description.map((paragraph) => <p class="text-foreground/90 leading-relaxed">{paragraph}</p>)}
+    <p class="text-foreground font-bold">{workshop.coverHeading}</p>
+    <ul class="text-foreground/90 list-disc space-y-1 pl-6 leading-relaxed">
+      {workshop.covers.map((item) => <li>{item}</li>)}
+    </ul>
+    {workshop.closing.map((paragraph) => <p class="text-foreground/90 leading-relaxed">{paragraph}</p>)}
+    <p class="text-muted-foreground text-sm leading-relaxed">{workshop.accessibility}</p>
+  </PixelPanel>
+</section>
+
+<section id="book" aria-labelledby="workshop-book-heading" class="scroll-mt-24">
+  <PixelPanel class="flex flex-col gap-4 p-4 md:p-6">
+    <h2 id="workshop-book-heading" class="h3 text-foreground">Book a session</h2>
+    <iframe
+      src={bookingWidgetUrl(workshop.bookingId)}
+      title={`Book the ${workshop.title} workshop`}
+      loading="lazy"
+      class="border-border h-[700px] w-full border-4 bg-white"></iframe>
+    <p class="text-muted-foreground text-sm">
+      Bookings are handled by ClassBento. Looking for another class? See all <a href={routes.workshops} class={link}>workshops</a>
+      or buy a <a href={routes.giftCards} class={link}>gift card</a>.
+    </p>
+  </PixelPanel>
+</section>

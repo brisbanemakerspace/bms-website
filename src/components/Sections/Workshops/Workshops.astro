@@ -2,48 +2,54 @@
 // src/components/Sections/Workshops/Workshops.astro — the Workshops page body: three beginner classes
 // with prices and Book Now buttons. Copy, prices and booking links are carried over from the old
 // brisbanemaker.space/workshops/. One-off section copy lives here as typed literals (see AGENTS.md
-// "content tiers"); edit the `workshops` array to change a class, price or booking link.
+// "content tiers"); edit @config/workshopData to change a class or price.
 //
-// The Book Now buttons go to the old site's booking pages (there is no booking system on this site
-// yet) — swap the hrefs when those move. The old page's photos and its "Recent Reviews" screenshots
-// are not carried over.
+// Each card has its photo (the `photos` map below, keyed by workshop slug) and a "Recent Reviews" strip of
+// ClassBento review graphics sits under the cards. The classes come from @config/workshopData (entries with `listing: true`); each Book Now button goes
+// to that class's /workshops/<slug>/ page, which embeds the ClassBento booking widget.
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import MapEmbed from "@components/Sections/Global/MapEmbed.astro";
 import { PixelPanel } from "@components/ui/pixel-panel";
+import siteData from "@config/siteData.json";
+import { listedWorkshops } from "@config/workshopData.json";
+import printing3d from "@images/workshops/3d-printing.jpg";
+import laserCutting from "@images/workshops/laser-cutting.jpg";
+import ledLamp from "@images/workshops/led-lamp.jpg";
+import review1 from "@images/workshops/review-1.png";
+import review2 from "@images/workshops/review-2.png";
+import review3 from "@images/workshops/review-3.png";
+import { Picture } from "astro:assets";
 
-interface Workshop {
-  title: string;
-  price: string;
-  description: readonly string[];
-  bookingUrl: string;
-}
+const { routes } = siteData.links;
 
-const workshops: readonly Workshop[] = [
+const photos: Record<string, { image: ImageMetadata; alt: string }> = {
+  "laser-cutting": {
+    image: laserCutting,
+    alt: "A laser cutter firing into acrylic to cut out Christmas ornaments.",
+  },
+  "3d-printing": {
+    image: printing3d,
+    alt: "Three people gathered around an orange 3D printer on a workshop table.",
+  },
+  "led-lamp": {
+    image: ledLamp,
+    alt: "A laser-cut acrylic LED lamp shaped like a shark, glowing blue.",
+  },
+};
+
+// ClassBento review graphics; the quote is in the alt text so it can be read without seeing the image.
+const reviews = [
   {
-    title: "Laser Cutting for Beginners",
-    price: "Sessions from $69 ($65 for 2 or more!)",
-    description: [
-      "Have you ever wanted to laser cut or engrave your own creations? Learn all the basics of laser cutting for beginners in this hands-on Brisbane workshop.",
-      "In this two-hour workshop, you will learn everything you need to know to get started with laser cutting. We’ll cover all of the basics, including how laser cutting works, the different types of machines and some tips and tricks for getting started. By the end of this workshop, you’ll know how to operate our laser cutter and have a custom engraved keychain or drink coaster!",
-    ],
-    bookingUrl: "https://brisbanemaker.space/book-a-laser-cutting-workshop-for-beginners/",
+    image: review1,
+    alt: "Five-star ClassBento review by Anthony Bostock, May 2024: “Great class to find out how to operate a co2 laser, we engraved some acrylic and made an led table light. Jaimyn has a wealth of experience and knowledge and will answer all your questions no problems. well worth attending this workshop.”",
   },
   {
-    title: "3D Printing for Beginners",
-    price: "Sessions from $69 ($65 for 2 or more!)",
-    description: [
-      "Dive into the world of innovative technology in this 3D printing workshop in Brisbane, designed for beginners.",
-      "In this two-hour workshop, you’ll learn everything you need to know to get started with 3D printing. We cover various topics, including the types of 3D printers available, what materials to use, some basic print settings and show you a typical 3D printing workflow. We’ll cover all of the basics, and by the end of this workshop, you’ll know how to operate a 3D printer!",
-    ],
-    bookingUrl: "https://brisbanemaker.space/book-a-3d-printing-workshop-for-beginners-brisbane/",
+    image: review2,
+    alt: "Five-star ClassBento review by Karyn Newton, April 2024: “Awesome information at a level anyone could understand. Will be back again once my printer arrives and I have made some thing.”",
   },
   {
-    title: "Laser Cut LED Lamp Workshop",
-    price: "Sessions from $59 ($55 for 2 or more!)",
-    description: [
-      "Have you ever wanted to laser cut a personalised LED lamp? These DIY customised lamps make for truly unique gift ideas or the perfect addition to your home decor. In this 1.5 hour workshop at Brisbane Makerspace, you will laser cut and assemble your own customised LED lamp.",
-      "We’ll spend the first half helping you customise and perfect your design, then we’ll cut out and engrave a piece of beautiful clear acrylic on our laser cutter. Each lamp base includes a multi coloured LED strip with a remote control.",
-    ],
-    bookingUrl: "https://brisbanemaker.space/book-a-laser-cut-led-lamp-workshop-brisbane/",
+    image: review3,
+    alt: "Five-star ClassBento review by Jane Foley, February 2024: “Jay was professional and took the time to explain in a way that I could understand. I came home not afraid to have a go with our machine. Thank you for providing the opportunity to explore Laser cutting/engraving in a safe and friendly atmosphere.”",
   },
 ];
 ---
@@ -69,20 +75,29 @@ const workshops: readonly Workshop[] = [
 <section aria-label="Workshops">
   <ul class="grid gap-6 lg:grid-cols-3">
     {
-      workshops.map((workshop) => (
+      listedWorkshops.map((workshop) => (
         <li class="flex">
           <PixelPanel class="flex w-full flex-col gap-4 p-6">
+            {photos[workshop.slug] && (
+              <Picture
+                src={photos[workshop.slug]!.image}
+                widths={[320, 480, 640]}
+                sizes="(min-width: 1024px) 22rem, 90vw"
+                formats={["avif", "webp"]}
+                alt={photos[workshop.slug]!.alt}
+                loading="lazy"
+                class="border-border aspect-[3/2] w-full border-4 object-cover"
+              />
+            )}
             <h3 class="h3 text-foreground">{workshop.title}</h3>
-            <p class="font-display text-info text-xs leading-relaxed uppercase">{workshop.price}</p>
+            <p class="font-display text-info text-xs leading-relaxed uppercase">{workshop.listPrice}</p>
             <div class="text-foreground/90 flex flex-col gap-3 text-sm leading-relaxed">
-              {workshop.description.map((paragraph) => (
+              {workshop.listDescription.map((paragraph) => (
                 <p>{paragraph}</p>
               ))}
             </div>
             <a
-              href={workshop.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`${routes.workshops}${workshop.slug}/`}
               class="pixel-btn pixel-btn--green mt-auto flex px-5 py-3 text-xs uppercase"
             >
               Book Now
@@ -93,3 +108,40 @@ const workshops: readonly Workshop[] = [
     }
   </ul>
 </section>
+
+<section aria-labelledby="reviews-heading">
+  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
+    <h2 id="reviews-heading" class="h3 text-foreground">Recent Reviews</h2>
+    <ul class="grid gap-6 md:grid-cols-3">
+      {
+        reviews.map((review) => (
+          <li>
+            <Picture
+              src={review.image}
+              widths={[320, 480, 640]}
+              sizes="(min-width: 768px) 22rem, 90vw"
+              formats={["webp"]}
+              alt={review.alt}
+              loading="lazy"
+              class="border-border w-full border-4"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </PixelPanel>
+</section>
+
+<section aria-labelledby="gift-card-heading">
+  <PixelPanel class="flex flex-col items-start gap-3 p-6 md:p-8">
+    <h2 id="gift-card-heading" class="h3 text-foreground">Give the gift of making</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      Know someone who would love to try something new? A workshop gift card is a great present.
+    </p>
+    <a href={routes.giftCards} class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase">
+      Gift Cards
+    </a>
+  </PixelPanel>
+</section>
+
+<MapEmbed />

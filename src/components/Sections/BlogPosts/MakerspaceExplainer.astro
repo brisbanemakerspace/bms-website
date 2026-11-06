@@ -1,0 +1,140 @@
+---
+// src/components/Sections/BlogPosts/MakerspaceExplainer.astro — the article "What is a makerspace?"
+// (carried over from the old brisbanemaker.space/blog-posts/what-is-a-makerspace-or-hackerspace/).
+// The post's photos and their captions are not carried over. Edit the `sections` array to change it.
+import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+
+type Block = string | { list: readonly string[] };
+interface Section {
+  heading?: string;
+  blocks: readonly Block[];
+}
+
+const sections: readonly Section[] = [
+  {
+    blocks: [
+      "A makerspace, also known as a hackerspace, can be different things to different people. Common themes include a collaborative and community focused workspace; high tech tools; and a collective of like minded people sharing knowledge and resources.",
+      "Makerspaces are often found in schools, universities, private businesses, and even libraries! You can find a makerspace in almost every corner of the world, and maker culture is starting to become very popular. In fact, if you live in a major city, there's probably a makerspace nearby.",
+      "A makerspace typically has a variety of different equipment. This ranges from low tech tools like scissor and laminators, up to high tech tools like 3D printers and laser cutters. The most common tools that a makerspace may have include 3D printers, laser cutters, soldering irons, CNC machines and sewing machines.",
+      "However, not all makerspaces have these tools. It's common for some makerspaces to focus on specific areas, or to bootstrap themselves by focusing on a limited range then expand over time.",
+      "In fact, you don't need any of these tools to be considered a makerspace. The most important aspect of a makerspace is fostering “maker culture”. This involves bringing together a community of collaborative makers. The second most important part of a makerspace is running regular workshops, classes and meetups to bring people together and share knowledge.",
+      "While most makerspaces focus on creating a collaborative workshop environment for local members of the community, some places are more commercial in nature. A makerspace or hackerspace may be setup as an entrepreneurship or startup hub. They can help their customers grow and provide access to tools they need to develop their products. Some (like Arc hardware incubator) even act as incubators for startups with a high growth potential.",
+    ],
+  },
+  {
+    heading: "What is the difference between a makerspace, hackerspace, tech lab, fab lab, and a tech shop?",
+    blocks: [
+      "The short answer is nothing. They are all physical spaces for making, learning and collaborating. Some of those phrases are trademarked or are specific businesses, but they all operate in a similar way. There is some variety in how they're run – some are not for profit, for profit, and some are entirely volunteer/community run. However, at their core, all of them offer a physical, collaborative workspace for making things using a variety of low tech and high tech tools.",
+    ],
+  },
+  {
+    heading: "Why is the term “makerspace” more commonly use than “hackerspace” now?",
+    blocks: [
+      "Originally a “hacker” was someone who found creative uses for technology or creative solutions to technological problems. Unfortunately, over time this phrase started getting negative connotations associated with the illegal actions of computer hackers. Nowadays, most people prefer the term “maker” and “makerspace” over “hackerspace” as its more inclusive and better indicates what the organisation does.",
+      "Within maker and hacker circles, the phrases “hack together” or “hack on this problem” are still often used. However, the negative connotations associated with calling an organise a hackerspace often cause confusion or difficulties during operation. Due to this, “makerspace” is the more commonly used term today.",
+    ],
+  },
+  {
+    heading: "Makerspace Projects / Events",
+    blocks: [
+      "A makerspace or hackerspace typically has a huge range of activities and projects that their members work on. As discussed earlier in this post, some spaces may not have the facilities to do everything here, but these are the most common things you can do at a makerspace / hackerspace.",
+      {
+        list: [
+          "3d printing",
+          "Laser cutting",
+          "Robotics",
+          "Coding",
+          "Soldering",
+          "Arduino and electronics",
+          "Sewing",
+          "Arts and crafts",
+          "CNC milling",
+          "Meetups",
+          "How to classes",
+        ],
+      },
+    ],
+  },
+  {
+    heading: "Popular Makerspaces in Australia",
+    blocks: [
+      "There are several popular makerspaces all over Australia, and in every state and territory! Here are some of the more well known ones, but there are many more not on this list! You should visit the excellent hackerspaces.org wiki if you'd like to find more in your area or learn about each one.",
+      {
+        list: [
+          "Brisbane Makerspace",
+          "Gold Coast Tech Space",
+          "HSBNE Inc",
+          "Sunshine Coast Makerspace",
+          "Make Hack Void",
+          "SparkCC",
+          "CCHS",
+          "Artifactory",
+        ],
+      },
+    ],
+  },
+  {
+    heading: "How do others describe what a makerspace is?",
+    blocks: [
+      "You've heard a lot from us about what we think a makerspace is or should be. We also thought it would be a good idea to collect some thoughts from other makerspaces and organisations for a more complete picture. Here are definitions from 2 of the most well known hackerspaces around the world, from Wikipedia, and the fantastic hackerspaces.org community.",
+      "Noisebridge is a space for sharing, creation, collaboration, research, development, mentoring, and of course, learning. Noisebridge is also more than a physical space; it's a community with roots extending around the world.",
+      "i3Detroit.com – A Makerspace is “a collision of art, technology, learning, and collaboration”",
+      "Wikipedia defines a makerspace “as a community-operated workspace where people with common interests, often in computers, machining, technology, science, digital art or electronic art, can meet, socialize and collaborate.",
+      "hackerspaces.org says that Hackerspaces are community-operated physical places, where people share their interest in tinkering with technology, meet and work on their projects, and learn from each other.",
+    ],
+  },
+];
+
+const sources = [
+  "https://www.makerspaces.com/what-is-a-makerspace/",
+  "https://wiki.hackerspaces.org",
+  "https://en.wikipedia.org/wiki/Hackerspace",
+  "https://www.noisebridge.net/wiki/Noisebridge",
+] as const;
+
+const link = "text-info hover:text-success underline transition-colors break-all";
+---
+
+<HeroPanel
+  headingId="explainer-hero-heading"
+  tagline="Blog"
+  heading="What is a makerspace?"
+  intro="What a makerspace is, how it differs from a hackerspace, and what you can do in one."
+/>
+
+<article class="flex flex-col gap-6">
+  {
+    sections.map((section) => (
+      <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
+        {section.heading && <h2 class="h3 text-foreground">{section.heading}</h2>}
+        {section.blocks.map((block) =>
+          typeof block === "string" ? (
+            <p class="text-foreground/90 leading-relaxed">{block}</p>
+          ) : (
+            <ul class="text-foreground/90 list-disc space-y-1 pl-6 leading-relaxed">
+              {block.list.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          ),
+        )}
+      </PixelPanel>
+    ))
+  }
+
+  <PixelPanel class="flex flex-col gap-3 p-6 md:p-8">
+    <h2 class="h3 text-foreground">Sources</h2>
+    <ul class="flex flex-col gap-1">
+      {
+        sources.map((source) => (
+          <li>
+            <a href={source} class={link} target="_blank" rel="noopener noreferrer">
+              {source}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </PixelPanel>
+</article>

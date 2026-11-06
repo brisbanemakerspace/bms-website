@@ -79,7 +79,7 @@ const legalData = {
           "We do not sell your personal information. We may disclose it to:",
           {
             list: [
-              "service providers that help us operate, such as website hosting, email delivery, payment processing, data analytics and our newsletter provider (Mailchimp);",
+              "service providers that help us operate, such as website hosting, email delivery, payment processing, data analytics, our newsletter provider (Mailchimp), our workshop booking and gift card provider (ClassBento) and Google (for the embedded events calendar);",
               "other members, but only information you choose to make public (for example forum posts and profile details);",
               "the public, in the case of webcam snapshots published on our website (see section 7);",
               "professional advisers, insurers and auditors;",
@@ -93,7 +93,7 @@ const legalData = {
       {
         heading: "5. Overseas disclosure",
         body: [
-          "Some of our service providers store or process data outside Australia - for example global hosting and content-delivery networks, email delivery and payment processors, which may be located in the United States or other countries. Before disclosing personal information overseas we aim to take reasonable steps to make sure the recipient handles it in a way consistent with the Australian Privacy Principles, or we rely on your consent or another exception in APP 8.",
+          "Some of our service providers store or process data outside Australia — for example global hosting and content-delivery networks, email delivery and payment processors, which may be located in the United States or other countries. Before disclosing personal information overseas we aim to take reasonable steps to make sure the recipient handles it in a way consistent with the Australian Privacy Principles, or we rely on your consent or another exception in APP 8.",
         ],
       },
       {
@@ -114,7 +114,7 @@ const legalData = {
       {
         heading: "8. Direct marketing",
         body: [
-          "We may send you information about our activities, classes and events where you have consented or would reasonably expect it - including our newsletter, if you subscribe through the form on this website (we collect your first name and email address, which are stored by Mailchimp). Every marketing message includes a way to opt out, and you can also opt out at any time by emailing hello@brisbanemaker.space. We will still send you service messages that are necessary for your membership or account.",
+          "We may send you information about our activities, classes and events where you have consented or would reasonably expect it — including our newsletter, if you subscribe through the form on this website (we collect your first name and email address, which are stored by Mailchimp). Every marketing message includes a way to opt out, and you can also opt out at any time by emailing hello@brisbanemaker.space. We will still send you service messages that are necessary for your membership or account.",
         ],
       },
       {
@@ -128,7 +128,7 @@ const legalData = {
       {
         heading: "10. Accessing and correcting your information",
         body: [
-          "You can ask us for access to the personal information we hold about you, and ask us to correct it if it is inaccurate, out of date, incomplete, irrelevant or misleading. You can also update many details yourself by logging in to your account. This includes asking about CCTV footage that shows you, although we may not be able to give access to footage that also shows other people or has already been deleted under our retention period. To make a request, email hello@brisbanemaker.space. We aim to respond within a reasonable period (usually within 30 days). We may need to verify your identity first, and in limited circumstances (such as those allowed by the Privacy Act) we may refuse access or correction - if we do, we will explain why in writing.",
+          "You can ask us for access to the personal information we hold about you, and ask us to correct it if it is inaccurate, out of date, incomplete, irrelevant or misleading. You can also update many details yourself by logging in to your account. This includes asking about CCTV footage that shows you, although we may not be able to give access to footage that also shows other people or has already been deleted under our retention period. To make a request, email hello@brisbanemaker.space. We aim to respond within a reasonable period (usually within 30 days). We may need to verify your identity first, and in limited circumstances (such as those allowed by the Privacy Act) we may refuse access or correction — if we do, we will explain why in writing.",
         ],
       },
       {
