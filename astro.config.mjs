@@ -14,7 +14,11 @@ import { defineConfig, envField } from "astro/config";
 // variable rather than assuming one. None of these is set by a local `pnpm build` or by a deploy
 // preview, so previews and local work build freely. On a host not listed here, set DEPLOY_ENV
 // yourself (see .env.example) - the gate is only as good as the signal it can see.
-const site = process.env.SITE_URL ?? "https://example.com";
+// An empty or scheme-less SITE_URL (e.g. `brisbanemaker.space`) is not a URL, and Astro's own "Invalid URL" config
+// error names neither the variable nor the fix - so treat it as unset. A production deploy then fails on the
+// placeholder gate below with a message that says exactly what to set.
+const rawSite = process.env.SITE_URL?.trim();
+const site = rawSite && URL.canParse(rawSite) ? rawSite : "https://example.com";
 const isProductionDeploy =
   process.env.CONTEXT === "production" || // Netlify
   process.env.VERCEL_ENV === "production" || // Vercel
@@ -27,7 +31,7 @@ const placeholderHosts = new Set(["example.com", "www.example.com"]);
 const hostname = URL.canParse(site) ? new URL(site).hostname : "example.com";
 if (isProductionDeploy && placeholderHosts.has(hostname)) {
   throw new Error(
-    "SITE_URL is unset or still the placeholder. Set it to your production domain in your " +
+    "SITE_URL is unset, invalid (it needs https://, e.g. https://brisbanemaker.space) or still the placeholder. Set it in your " +
       "host's environment variables before deploying.",
   );
 }
