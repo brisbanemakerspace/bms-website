@@ -25,15 +25,18 @@ const appleMapsUrl = `https://maps.apple.com/?q=${mapQuery}`;
 const travel = [
   {
     title: "By Car",
+    icon: "car",
     body: "There is street parking nearby, but much of it becomes tow-away from 4-6pm.",
     more: true,
   },
   {
     title: "Bus or Train",
+    icon: "bus",
     body: "We're a 10-15 minute walk from multiple train stations, with many more bus stops nearby.",
   },
   {
     title: "Ride or Scoot",
+    icon: "bicycle",
     body: "We're accessible to most of inner Brisbane by bike or scooter.",
   },
 ] as const;
@@ -67,7 +70,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 <div class="grid gap-8 md:grid-cols-2">
   <section aria-labelledby="location-heading">
     <PixelPanel class="flex h-full flex-col items-start gap-4 p-6 md:p-8">
-      <h2 id="location-heading" class="h3 text-foreground">Our Address</h2>
+      <h2 id="location-heading" class="h3 text-foreground">Our Address <PixelIcon name="map-pin" class="relative -top-[0.1em] h-[0.9em] align-baseline" /></h2>
       <address class="text-foreground/90 not-italic leading-relaxed">{address}</address>
       <p class="text-muted-foreground text-sm">Membership required outside of public events.</p>
       <div class="flex flex-wrap gap-3">
@@ -81,7 +84,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
   <section aria-labelledby="when-heading">
     <PixelPanel class="flex h-full flex-col items-start gap-4 p-6 md:p-8">
-      <h2 id="when-heading" class="h3 text-foreground">When To Visit</h2>
+      <h2 id="when-heading" class="h3 text-foreground">When To Visit <PixelIcon name="clock" class="relative -top-[0.1em] h-[0.9em] align-baseline" /></h2>
       <p class="text-foreground/90 leading-relaxed">
         We're open to the public every Monday 6-8pm and during public events. See
         events <a href={eventsUrl} class={link}>here</a>.
@@ -104,6 +107,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       {
         travel.map((item) => (
           <li class="flex flex-col gap-2">
+            <PixelIcon name={item.icon} class="size-12" />
             <h3 class="font-display text-info text-sm uppercase">{item.title}</h3>
             <p class="text-foreground/90 leading-relaxed">
               {item.body}

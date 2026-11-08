@@ -89,7 +89,8 @@ const memberLinks: readonly MemberLink[] = [
     <!-- Safe-space message + tiny 8-bit flags (replaces the Figma copyright line, 5:94). -->
     <div class="flex flex-1 flex-col items-center gap-3 text-center">
       <p class="font-display text-info text-xs uppercase">
-        {safeSpaceMessage.split("everyone").map((part, i) => (i === 0 ? <>{part}<u>everyone</u></> : part))}
+        {safeSpaceMessage.split("everyone").map((part, i) => (i === 0 ? <>{part}<u>everyone</u></> : part))}{" "}
+        <PixelIcon name="heart" class="relative -top-[0.1em] h-[0.9em] align-baseline" />
       </p>
       <ul class="flex items-center gap-1.5">
         {

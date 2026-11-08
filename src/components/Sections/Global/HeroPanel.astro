@@ -10,6 +10,7 @@
 // The three simple heroes (Contact/Blog/Projects) pass just tagline + heading + intro. Home and
 // About pass their CTAs / bio / Scoreboard through the default <slot>; About omits `intro` because
 // its body is a multi-paragraph bio, not a single line.
+import { PixelIcon, type PixelIconName } from "@components/svg/pixel-icons";
 import { Badge } from "@components/ui/badge";
 import { PixelPanel } from "@components/ui/pixel-panel";
 
@@ -21,8 +22,10 @@ interface Props {
   headingId: string;
   /** single intro paragraph; omit when the page supplies its own body via the slot (About's bio). */
   intro?: string;
+  /** optional pixel icon shown inline at the end of the H1 (decorative). */
+  headingIcon?: PixelIconName;
 }
-const { tagline, heading, headingId, intro } = Astro.props as Props;
+const { tagline, heading, headingId, intro, headingIcon } = Astro.props as Props;
 ---
 
 <PixelPanel
@@ -38,6 +41,12 @@ const { tagline, heading, headingId, intro } = Astro.props as Props;
     class="h1 w-fit max-w-full bg-[image:var(--gradient-bms)] bg-clip-text text-balance text-transparent"
   >
     {heading}
+    {headingIcon && (
+      <>
+        {" "}
+        <PixelIcon name={headingIcon} class="relative -top-[0.1em] h-[0.9em] align-baseline" />
+      </>
+    )}
   </h1>
 
   {intro && <p class="text-muted-foreground max-w-3xl text-base text-balance">{intro}</p>}

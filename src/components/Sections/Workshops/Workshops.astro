@@ -9,6 +9,7 @@
 // to that class's /workshops/<slug>/ page, which embeds the ClassBento booking widget.
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
 import MapEmbed from "@components/Sections/Global/MapEmbed.astro";
+import { PixelIcon, type PixelIconName } from "@components/svg/pixel-icons";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import siteData from "@config/siteData.json";
 import { listedWorkshops } from "@config/workshopData.json";
@@ -35,6 +36,12 @@ const photos: Record<string, { image: ImageMetadata; alt: string }> = {
     image: ledLamp,
     alt: "A laser-cut acrylic LED lamp shaped like a shark, glowing blue.",
   },
+};
+
+const toolIcons: Record<string, PixelIconName> = {
+  "laser-cutting": "laser-cutter",
+  "3d-printing": "3d-printer",
+  "led-lamp": "desk-lamp",
 };
 
 // ClassBento review graphics; the quote is in the alt text so it can be read without seeing the image.
@@ -97,7 +104,12 @@ const reviews = [
                 class="border-border aspect-[3/2] w-full border-4 object-cover"
               />
             )}
-            <h3 class="h3 text-foreground">{workshop.title}</h3>
+            <h3 class="h3 text-foreground">
+              {workshop.title}{" "}
+              {toolIcons[workshop.slug] && (
+                <PixelIcon name={toolIcons[workshop.slug]!} class="relative -top-[0.1em] h-[0.9em] align-baseline" />
+              )}
+            </h3>
             <p class="font-display text-info text-xs leading-relaxed uppercase">{workshop.listPrice}</p>
             <div class="text-foreground/90 flex flex-col gap-3 text-sm leading-relaxed">
               {workshop.listDescription.map((paragraph) => (
@@ -119,7 +131,7 @@ const reviews = [
 
 <section aria-labelledby="reviews-heading">
   <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
-    <h2 id="reviews-heading" class="h3 text-foreground">Recent Reviews</h2>
+    <h2 id="reviews-heading" class="h3 text-foreground">Recent Reviews <PixelIcon name="star" class="relative -top-[0.1em] h-[0.9em] align-baseline" /></h2>
     <ul class="grid gap-6 md:grid-cols-3">
       {
         reviews.map((review) => (

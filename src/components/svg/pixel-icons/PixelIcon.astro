@@ -14,7 +14,7 @@ type Props = Omit<HTMLAttributes<"svg">, "name"> &
   VariantProps<typeof pixelIcon> & { name: PixelIconName; title?: string };
 
 export const pixelIcon = tv({
-  base: "inline-block w-auto shrink-0",
+  base: "inline-block w-auto shrink-0 overflow-visible",
   variants: {
     // height-only, so non-square glyphs keep their aspect ratio via w-auto
     size: { sm: "h-4", md: "h-5", lg: "h-6", xl: "h-8" },

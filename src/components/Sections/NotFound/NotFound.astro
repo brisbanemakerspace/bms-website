@@ -11,6 +11,7 @@
 // the pixel treatment, so it costs no new asset and can never drift from the theme's palette. It is
 // aria-hidden - the <h1> carries the real message for a screen reader.
 import { Badge } from "@components/ui/badge";
+import { PixelIcon } from "@components/svg/pixel-icons";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { siteSettings } from "@config/siteSettings.json";
 
@@ -43,6 +44,8 @@ const { title, description } = Astro.props as Props;
     >
       404
     </p>
+
+    <PixelIcon name="ghost" class="size-16" />
 
     <div class="flex flex-col items-center gap-3">
       <h1 class="h2 text-info text-balance">{title}</h1>

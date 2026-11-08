@@ -6,6 +6,7 @@
 // Popover API, zero extra JS beyond its shared controller); in the mobile drawer (`fullWidth`) the
 // children are listed inline instead. Content is wired from config (navData) with the shared
 // active-route check.
+import { PixelIcon } from "@components/svg/pixel-icons";
 import Chevron from "@components/ui/_Chevron.astro";
 import { Dropdown, DropdownItem, DropdownMenu } from "@components/ui/dropdown";
 import { NavItem, NavLink, navLink } from "@components/ui/nav";
@@ -37,13 +38,10 @@ const flatLinks: readonly NavLinkProps[] = navItems.flatMap(
             class="w-full"
             aria-current={isActive(pathname, item.href) ? "page" : undefined}
           >
-            <svg
-              class="fill-highlight pointer-events-none absolute top-1/2 left-1.5 h-3.5 w-2.5 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
-              viewBox="0 0 10.41 13.02"
-              aria-hidden="true"
-            >
-              <path d="M10.41 6.64 0 13.02V0Z" />
-            </svg>
+            <PixelIcon
+              name="triangle-right-plain"
+              class="text-highlight pointer-events-none absolute top-1/2 left-1 size-4 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
+            />
             {item.label}
           </NavLink>
         </NavItem>
@@ -91,13 +89,10 @@ const flatLinks: readonly NavLinkProps[] = navItems.flatMap(
               href={item.href}
               aria-current={isActive(pathname, item.href) ? "page" : undefined}
             >
-              <svg
-                class="fill-highlight pointer-events-none absolute top-1/2 left-1.5 h-3.5 w-2.5 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
-                viewBox="0 0 10.41 13.02"
-                aria-hidden="true"
-              >
-                <path d="M10.41 6.64 0 13.02V0Z" />
-              </svg>
+              <PixelIcon
+                name="triangle-right-plain"
+                class="text-highlight pointer-events-none absolute top-1/2 left-1 size-4 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
+              />
               {item.label}
             </NavLink>
           </NavItem>

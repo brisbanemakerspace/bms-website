@@ -4,6 +4,7 @@
 // over from the old brisbanemaker.space/contact/ (the old embedded map becomes plain map links, and the
 // location is the site address from siteData). One-off section copy lives here as typed literals (see
 // AGENTS.md "content tiers"); edit this file to change the wording.
+import { PixelIcon } from "@components/svg/pixel-icons";
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
 import MapEmbed from "@components/Sections/Global/MapEmbed.astro";
 import { PixelPanel } from "@components/ui/pixel-panel";
@@ -32,7 +33,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 <div class="grid gap-8 md:grid-cols-2">
   <section aria-labelledby="visit-tour-heading">
     <PixelPanel class="flex h-full flex-col items-start gap-4 p-6 md:p-8">
-      <h2 id="visit-tour-heading" class="h3 text-foreground">Visit or book a tour</h2>
+      <h2 id="visit-tour-heading" class="h3 text-foreground">Visit or book a tour <PixelIcon name="door" class="relative -top-[0.1em] h-[0.9em] align-baseline" /></h2>
       <p class="text-foreground/90 leading-relaxed">To organise a visit or book a tour:</p>
       <a href={routes.visit} class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase">Visit Us</a>
       <p class="text-muted-foreground text-sm leading-relaxed">
@@ -56,7 +57,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
   <ul class="grid gap-6 md:grid-cols-3">
     <li class="flex">
       <PixelPanel class="flex w-full flex-col items-start gap-3 p-6">
-        <h2 class="font-display text-info text-sm uppercase">Our Location</h2>
+        <h2 class="font-display text-info text-sm uppercase">Our Location <PixelIcon name="map-pin" class="relative -top-[0.1em] h-[0.9em] align-baseline" /></h2>
         <address class="text-foreground/90 not-italic leading-relaxed">{address}</address>
         <p class="text-muted-foreground text-sm">Membership required outside of public events.</p>
         <div class="mt-auto flex flex-wrap gap-3">
@@ -70,7 +71,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
     <li class="flex">
       <PixelPanel class="flex w-full flex-col items-start gap-3 p-6">
-        <h2 class="font-display text-info text-sm uppercase">Email Us</h2>
+        <h2 class="font-display text-info text-sm uppercase">Email Us <PixelIcon name="envelope" class="relative -top-[0.1em] h-[0.9em] align-baseline" /></h2>
         <a href={`mailto:${email}`} class={`${link} break-all`}>{email}</a>
         <p class="text-muted-foreground text-sm">
           <strong>Note: </strong>We do not offer 3D printing services or short term memberships.

@@ -3,25 +3,14 @@
 // each tool area (3D printing, laser cutting, CNC, arts & crafts, electronics, Cricut). Copy carried
 // over from the old brisbanemaker.space/facilities/. Edit the `facilities` array to change it.
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelIcon, type PixelIconName } from "@components/svg/pixel-icons";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import siteData from "@config/siteData.json";
-import printer3d from "@images/icons/3d-printer.svg";
-import audioRecording from "@images/icons/audio-recording.svg";
-import cncRouter from "@images/icons/cnc-router.svg";
-import colourPrinter from "@images/icons/colour-printer.svg";
-import computer from "@images/icons/computer.svg";
-import drillDriver from "@images/icons/drill-driver.svg";
-import heatPress from "@images/icons/heat-press.svg";
-import laserCutter from "@images/icons/laser-cutter.svg";
-import multimeter from "@images/icons/multimeter.svg";
-import sewingMachine from "@images/icons/sewing-machine.svg";
-import tableSaw from "@images/icons/table-saw.svg";
-import vinylCutter from "@images/icons/vinyl-cutter.svg";
 
 const { routes, wiki, wikiPages, webcams } = siteData.links;
 const link = "text-info hover:text-highlight underline transition-colors";
 
-// Icons are the BMS 8-bit set (Brand Guidelines pack), purely decorative next to each heading.
+// Icons are the BMS 8-bit set (pixel-icons registry), purely decorative next to each heading.
 /** A paragraph is plain text, or a list of text runs where `{ text, href }` renders as a link. */
 type Paragraph = string | readonly (string | { text: string; href: string })[];
 /** A wiki page for one tool, as a path under the wiki root (https://wiki.brisbanemaker.space/tools). */
@@ -31,7 +20,7 @@ interface WikiLink {
 }
 interface Facility {
   title: string;
-  icon: ImageMetadata;
+  icon: PixelIconName;
   /** per-tool wiki pages, listed at the bottom of the card. */
   wikiLinks: readonly WikiLink[];
   paragraphs: readonly Paragraph[];
@@ -39,7 +28,7 @@ interface Facility {
 const facilities: readonly Facility[] = [
   {
     title: "3D Printing",
-    icon: printer3d,
+    icon: "3d-printer",
     wikiLinks: [
       { label: "3D Printers 1 & 2 (Bambu Lab A1 mini)", path: "/tools/digifab/a1-mini" },
       { label: "3D Printer 3 (Bambu Lab P1S)", path: "/tools/digifab/p1s" },
@@ -52,7 +41,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "Laser Cutting",
-    icon: laserCutter,
+    icon: "laser-cutter",
     wikiLinks: [
       { label: "Laser Cutter", path: "/tools/digifab/lasercutter" },
     ],
@@ -63,7 +52,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "Woodworking",
-    icon: tableSaw,
+    icon: "table-saw",
     wikiLinks: [
       { label: "Mitre Saw", path: "/tools/woodworking/makita-mitre-saw" },
       { label: "Table Saw", path: "/tools/woodworking/tablesaw" },
@@ -80,7 +69,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "Arts and Crafts",
-    icon: sewingMachine,
+    icon: "sewing-machine",
     wikiLinks: [
       { label: "Craft Supplies", path: "/craft-supply-boxes" },
       { label: "Sewing Machine", path: "/tools/other/brother-ns50" },
@@ -92,7 +81,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "Electronics",
-    icon: multimeter,
+    icon: "multimeter",
     wikiLinks: [
       { label: "Soldering Iron / Hot Air", path: "/tools/electronics/soldering" },
       { label: "Lab Power Supply", path: "/tools/electronics/lab-supply" },
@@ -106,7 +95,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "Cricut",
-    icon: vinylCutter,
+    icon: "vinyl-cutter",
     wikiLinks: [
       { label: "Cricut", path: "/tools/digifab/cricut" },
     ],
@@ -117,7 +106,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "CNC Router",
-    icon: cncRouter,
+    icon: "cnc-router",
     wikiLinks: [
       { label: "CNC Router", path: "/tools/digifab/cncrouter" },
     ],
@@ -134,7 +123,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "Hand and Power Tools",
-    icon: drillDriver,
+    icon: "drill-driver",
     wikiLinks: [
       { label: "Ryobi ONE+ Cordless Tools", path: "/tools/ryobi" },
       { label: "Hand Tools", path: "/tools/other/hand-tools" },
@@ -149,7 +138,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "Printing and Scanning",
-    icon: colourPrinter,
+    icon: "colour-printer",
     wikiLinks: [
       { label: "A4 Colour Printing", path: "/tools/other/printing" },
       { label: "Shipping Label Printer", path: "/tools/other/label-printer" },
@@ -161,7 +150,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "Badges, Stamps and Heat Press",
-    icon: heatPress,
+    icon: "heat-press",
     wikiLinks: [
       { label: "Badge Maker", path: "/tools/other/badge-maker" },
       { label: "Small Heat Press", path: "/tools/other/smallheatpress" },
@@ -173,7 +162,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "Audio and Imaging",
-    icon: audioRecording,
+    icon: "audio-recording",
     wikiLinks: [
       { label: "Audio Recording Equipment", path: "/tools/audio-recording" },
       { label: "Photo Lightbox", path: "/tools/other/lightbox" },
@@ -185,7 +174,7 @@ const facilities: readonly Facility[] = [
   },
   {
     title: "And Even More",
-    icon: computer,
+    icon: "computer",
     wikiLinks: [
       { label: "iMac Computers", path: "/tools/digifab/imacs" },
       { label: "Shop Vacs", path: "/tools/other/shopvac" },
@@ -216,17 +205,12 @@ const facilities: readonly Facility[] = [
 
 <section aria-labelledby="webcams-heading">
   <PixelPanel class="flex flex-col items-start gap-3 p-6 md:p-8">
-    <h2 id="webcams-heading" class="h3 text-foreground">Peek inside the space 👀</h2>
+    <h2 id="webcams-heading" class="h3 text-foreground inline-flex items-center gap-3">
+      Peek inside the space <PixelIcon name="eyes" size="lg" />
+    </h2>
     <p class="text-foreground/90 leading-relaxed">
-      Curious what's happening at the makerspace right now? Our public webcams let you see snapshots from inside the space, 
-      no visit required! You can also see what our 3D printers are up to or check out our internal wiki.{" "}<img
-        src={printer3d.src}
-        width={printer3d.width}
-        height={printer3d.height}
-        alt=""
-        aria-hidden="true"
-        class="inline-block size-6 align-text-bottom [image-rendering:pixelated]"
-      />
+      Curious what's happening at the makerspace right now? Our public webcams let you see snapshots from inside the space (and our 3D printers!), 
+      no visit required! You can also check out our internal wiki for more about our tools and policies.
     </p>
     <div class="flex flex-wrap gap-3">
       <a
@@ -256,14 +240,7 @@ const facilities: readonly Facility[] = [
         <li class="flex">
           <PixelPanel class="flex w-full flex-col gap-3 p-6">
             <div class="flex items-center gap-4">
-              <img
-                src={facility.icon.src}
-                width={facility.icon.width}
-                height={facility.icon.height}
-                alt=""
-                aria-hidden="true"
-                class="size-14 shrink-0 [image-rendering:pixelated]"
-              />
+              <PixelIcon name={facility.icon} class="size-14 shrink-0" />
               <h2 class="h3 text-foreground">{facility.title}</h2>
             </div>
             {facility.paragraphs.map((paragraph) => (

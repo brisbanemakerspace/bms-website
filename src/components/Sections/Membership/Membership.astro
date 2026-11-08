@@ -9,6 +9,7 @@
 // the contact page.
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
 import FeatureText, { type Feature } from "@components/Sections/Membership/FeatureText.astro";
+import { PixelIcon, type PixelIconName } from "@components/svg/pixel-icons";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import siteData from "@config/siteData.json";
 
@@ -37,12 +38,12 @@ const warmFuzzy = "A warm fuzzy feeling for supporting our community space";
 const access = "24/7 access to the space and tools#";
 
 // Signup steps, in order. The numbers are CSS counters on the <ol>, so they stay in sync with the list.
-const signupSteps: readonly { text: string; link?: { label: string; href: string } }[] = [
-  { text: "See what the space is like.", link: { label: "Visit Us", href: routes.visit } },
-  { text: "Sign up online using the links below." },
-  { text: "Complete the online video induction." },
-  { text: "Collect your swipe card during an open night." },
-  { text: "Organise your tool inductions." },
+const signupSteps: readonly { text: string; icon: PixelIconName; link?: { label: string; href: string } }[] = [
+  { text: "See what the space is like.", icon: "door", link: { label: "Visit Us", href: routes.visit } },
+  { text: "Sign up online using the links below.", icon: "laptop-form" },
+  { text: "Complete the online video induction.", icon: "play-button" },
+  { text: "Collect your swipe card during an open night.", icon: "swipe-card" },
+  { text: "Organise your tool inductions.", icon: "wrench" },
 ];
 
 const makerPlans: readonly Plan[] = [
@@ -155,9 +156,12 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       {
         signupSteps.map((step, i) => (
           <li class="border-border bg-muted flex items-start gap-3 border-4 p-4 md:flex-col">
-            <span class="bg-primary text-primary-foreground font-display flex size-8 shrink-0 items-center justify-center text-xs">
-              {i + 1}
-            </span>
+            <div class="flex shrink-0 items-center gap-3">
+              <span class="bg-primary text-primary-foreground font-display flex size-8 shrink-0 items-center justify-center text-xs">
+                {i + 1}
+              </span>
+              <PixelIcon name={step.icon} class="size-8" />
+            </div>
             <div class="flex flex-col items-start gap-3">
               <span class="text-foreground/90 text-sm leading-relaxed">{step.text}</span>
               {step.link && (
@@ -244,14 +248,12 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
                     <td class="px-3 py-4">
                       {plan.features.some((f) => featureKey(f) === row.key) ? (
                         <>
-                          <span class="bg-primary block size-3" aria-hidden="true" />
+                          <PixelIcon name="tick" class="size-6" />
                           <span class="sr-only">Included</span>
                         </>
                       ) : (
                         <>
-                          <span class="text-muted-foreground font-display block text-sm leading-none" aria-hidden="true">
-                            X
-                          </span>
+                          <PixelIcon name="cross" class="size-6" />
                           <span class="sr-only">Not included</span>
                         </>
                       )}

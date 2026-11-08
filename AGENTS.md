@@ -97,6 +97,17 @@ check`). Server secrets (the Resend keys) go through the `astro:env` schema in `
   `rm -rf .astro`, so removing a collection entry and rebuilding fails with
   `UnknownContentCollectionError` naming the file you just deleted. Clear both:
   `rm -rf node_modules/.astro .astro dist`. See `src/data/README.md`.
+- **Some files in `public/` are deliberate - don't "dedupe" them into `src/`.** Files in `public/` are
+  served at a fixed URL with no content hash, and these URLs are shared outside the site (email
+  signatures, partner sites, social profiles, old links), so they must not change:
+  - `public/media-pack/` - the Brand and Logo Guidelines downloads (`bms-brand-guidelines.zip` and
+    `logos/svg/*`). The page at `/brand-guidelines/` links them; the old `/media-pack/` URL redirects to it.
+    The folder name is kept so the file URLs stay stable.
+  - `public/bms-logo-{gradient,white,black}.{svg,png}` - stable-URL copies of the logo. The header logo
+    (`src/assets/images/bms-logo.svg`) is bundled by Vite and gets a hashed `/_astro/` URL that changes
+    whenever the file does, so it can't be used for external links. These are separate copies and do not
+    follow edits to the header logo - update both if the logo changes.
+  - `public/bms-containers-for-change-return.pdf` - the bag-return sticker linked from `/donate/`.
 - **`/contact/` being on-demand duplicates the stylesheet.** The build emits `BaseLayout.<hash>.css`
   and a byte-identical `contact.<hash>.css`. It is an adapter artifact of mixing prerendered and
   on-demand routes (prerendering the route collapses them - verified), not something to fix in config.

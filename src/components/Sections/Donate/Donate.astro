@@ -10,6 +10,7 @@
 // links to Stripe-hosted checkout pages, so they work without JavaScript.
 import CharityInfo from "@components/Sections/Global/CharityInfo.astro";
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
+import { PixelIcon } from "@components/svg/pixel-icons";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import siteData from "@config/siteData.json";
 import { socialHref } from "@config/socialData.json";
@@ -57,13 +58,14 @@ const link = "text-info hover:text-highlight underline transition-colors";
   headingId="donate-hero-heading"
   tagline="Support Us"
   heading="Donate"
+  headingIcon="heart"
   intro="We rely on funding from our members and the generosity of donors to keep our doors open. Every contribution helps keep the space running."
 />
 
 <section aria-labelledby="cash-heading">
   <PixelPanel class="flex flex-col gap-6 p-6 md:p-8">
     <div class="flex flex-col gap-3">
-      <h2 id="cash-heading" class="h3 text-foreground">Donate Money</h2>
+      <h2 id="cash-heading" class="h3 text-foreground">Donate Money <PixelIcon name="coin" class="relative -top-[0.1em] h-[0.9em] align-baseline" /></h2>
       <p class="text-foreground/90 leading-relaxed">
         We rely on funding from our generous donors to pay rent and keep the lights on. You can make a once off or
         recurring donation using our secure payment processor (Stripe) below. All donations of $2 or more are tax deductible (see <a href={dgrInfo} class={link} target="_blank" rel="noopener noreferrer">here</a> for more info).
@@ -129,7 +131,7 @@ const link = "text-info hover:text-highlight underline transition-colors";
 
 <section aria-labelledby="tools-heading">
   <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
-    <h2 id="tools-heading" class="h3 text-foreground">Donate Tools or Consumables</h2>
+    <h2 id="tools-heading" class="h3 text-foreground">Donate Tools or Consumables <PixelIcon name="toolbox" class="relative -top-[0.1em] h-[0.9em] align-baseline" /></h2>
     <p class="text-foreground/90 leading-relaxed">
       Our general donation policy can be found on our <a
         href={donationPolicy}
