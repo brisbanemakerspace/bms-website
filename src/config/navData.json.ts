@@ -23,7 +23,7 @@ export const navItems = [
       { label: "Contact", href: "/contact/" },
       { label: "About", href: "/about/" },
       { label: "Events", href: "/events/" },
-      { label: "Brand and Logo Guidelines", href: "/brand-guidelines/" },
+      { label: "Logos", href: "/brand-guidelines/" },
     ],
   },
 ] as const satisfies readonly NavItemProps[];
