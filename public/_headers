@@ -1,0 +1,12 @@
+# Security headers for every response served from static assets. (The build appends the immutable
+# Cache-Control rule for /_astro/* below this - see the Cloudflare adapter.)
+# Deliberately NO script-src CSP: the theme script, Stripe, ClassBento, Google Calendar/Maps and YouTube all
+# need allowing, and a half-working CSP would break pages. Add one only with a nonce/hash plan.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: frame-ancestors 'self'; base-uri 'self'; object-src 'none'
+  Cross-Origin-Opener-Policy: same-origin
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

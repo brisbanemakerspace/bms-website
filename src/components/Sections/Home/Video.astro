@@ -1,23 +1,72 @@
 ---
-// src/components/Sections/Home/Video.astro - the homepage walkthrough video (a standard YouTube embed),
-// carried over from the old brisbanemaker.space homepage. Change `videoId` to swap the video.
+// src/components/Sections/Home/Video.astro - the homepage walkthrough video, carried over from the old
+// brisbanemaker.space homepage. A "facade": the page loads only the video's thumbnail and a play button, and
+// swaps in the real YouTube embed (youtube.com/embed, autoplaying) when it is clicked. A live YouTube iframe
+// pulls in ~850 KB of YouTube JavaScript plus its CSS, fonts and cookies, which dropped the mobile Lighthouse
+// performance score from 99 to 58; the facade keeps the page fast and the video one click away.
+// Without JavaScript the button is a normal link that opens the video on YouTube. Change `videoId` to swap it.
 import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { Reveal } from "@components/ui/reveal";
 
 const videoId = "ag2dKPIn9Kg";
+const title = "Brisbane Makerspace walkthrough video";
 ---
 
 <Reveal as="section" aria-labelledby="video-heading" class="flex flex-col gap-6">
   <SectionHeading id="video-heading" title="Take a look inside" />
   <PixelPanel class="p-3 md:p-4">
-    <iframe
-      src={`https://www.youtube.com/embed/${videoId}`}
-      title="Brisbane Makerspace walkthrough video"
-      class="aspect-video w-full"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen></iframe>
+    <div class="aspect-video w-full" data-video={videoId} data-title={title}>
+      <a
+        href={`https://www.youtube.com/watch?v=${videoId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="primary-focus group relative block size-full overflow-hidden bg-black"
+        aria-label={`Play video: ${title}`}
+        data-video-play
+      >
+        <img
+          src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+          alt=""
+          width="480"
+          height="360"
+          loading="lazy"
+          decoding="async"
+          class="size-full object-cover opacity-90 transition-opacity group-hover:opacity-100"
+        />
+        <span
+          class="pixel-btn pixel-btn--blue absolute top-1/2 left-1/2 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center md:size-20"
+          aria-hidden="true"
+        >
+          <svg viewBox="0 0 16 16" class="size-8 md:size-10" fill="currentColor" shape-rendering="crispEdges">
+            <path d="M4 2h2v12H4zM6 3h2v10H6zM8 4h2v8H8zM10 5h2v6h-2zM12 6h2v4h-2z" />
+          </svg>
+        </span>
+      </a>
+    </div>
   </PixelPanel>
 </Reveal>
+
+<script>
+  // Swap the thumbnail for the real embed on click (or Enter/Space on the focused link).
+  const init = () => {
+    document.querySelectorAll<HTMLElement>("[data-video]").forEach((box) => {
+      const play = box.querySelector<HTMLElement>("[data-video-play]");
+      if (!play) return;
+      play.addEventListener("click", (event) => {
+        event.preventDefault();
+        const iframe = document.createElement("iframe");
+        iframe.src = `https://www.youtube.com/embed/${box.dataset.video}?autoplay=1`;
+        iframe.title = box.dataset.title ?? "Video";
+        iframe.className = "size-full";
+        iframe.allow =
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.allowFullscreen = true;
+        box.replaceChildren(iframe);
+        iframe.focus();
+      });
+    });
+  };
+  document.addEventListener("astro:page-load", init);
+</script>
