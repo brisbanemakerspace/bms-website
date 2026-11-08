@@ -37,13 +37,13 @@ const warmFuzzy = "A warm fuzzy feeling for supporting our community space";
 const access = "24/7 access to the space and tools#";
 
 // Signup steps, in order. The numbers are CSS counters on the <ol>, so they stay in sync with the list.
-const signupSteps = [
-  "Visit the space",
-  "Sign up online",
-  "Complete the onboarding induction",
-  "Collect your swipe card during Monday open night",
-  "Organise your tool inductions",
-] as const;
+const signupSteps: readonly { text: string; link?: { label: string; href: string } }[] = [
+  { text: "See what the space is like.", link: { label: "Visit Us", href: routes.visit } },
+  { text: "Sign up online using the links below." },
+  { text: "Complete the online video induction." },
+  { text: "Collect your swipe card during an open night." },
+  { text: "Organise your tool inductions." },
+];
 
 const makerPlans: readonly Plan[] = [
   {
@@ -135,7 +135,7 @@ const rowsFor = (plans: readonly Plan[]) => {
   return rows;
 };
 
-const link = "text-info hover:text-success underline transition-colors";
+const link = "text-info hover:text-highlight underline transition-colors";
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 ---
 
@@ -143,56 +143,37 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
   headingId="membership-hero-heading"
   tagline="Join Us"
   heading="Membership"
-  intro="Find the membership that's right for you."
+  intro="How do I sign up and what does it cost?"
 />
-
-<section aria-labelledby="membership-intro-heading">
-  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
-    <h2 id="membership-intro-heading" class="h2 text-foreground text-base leading-7 md:text-xl md:leading-8">Do I need a membership?</h2>
-    <p class="text-foreground/90 leading-relaxed">
-      You don't need a membership to attend our public <a href={eventsUrl} class={link}
-        >meetups and events</a
-      > or chat online. If you're a non-profit group looking for a meetup space, <a
-        href={contactUrl}
-        class={link}>get in touch</a
-      >. Unfortunately, to use any of our tools, you must become a member due to training and insurance requirements.
-    </p>
-
-    <p class="text-foreground/90 leading-relaxed">
-      It's also good to know that we're 100% volunteer run so things can take a bit longer than expected. We do our best to keep the space clean and tidy, but we rely on members to help out with cleaning and maintenance. If you're after a professional workshop space, membership may not be right for you.
-    </p>
-
-    <nav aria-label="Membership types" class="flex flex-wrap gap-3">
-      <a href="#maker-plans" class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase">
-        Hobbyists &amp; Makers
-      </a>
-      <a href="#coworking-plans" class="pixel-btn px-5 py-3 text-xs uppercase">
-        Full-time Professionals
-      </a>
-    </nav>
-  </PixelPanel>
-</section>
 
 <section aria-labelledby="signup-steps-heading">
   <PixelPanel class="flex flex-col gap-6 p-6 md:p-8">
     <h2 id="signup-steps-heading" class="h2 text-foreground text-base leading-7 md:text-xl md:leading-8">
       How to become a member
     </h2>
-    <ol class="grid gap-4 md:grid-cols-5">
+    <ol class="grid w-full gap-4 md:grid-cols-5">
       {
         signupSteps.map((step, i) => (
           <li class="border-border bg-muted flex items-start gap-3 border-4 p-4 md:flex-col">
             <span class="bg-primary text-primary-foreground font-display flex size-8 shrink-0 items-center justify-center text-xs">
               {i + 1}
             </span>
-            <span class="text-foreground/90 text-sm leading-relaxed">{step}</span>
+            <div class="flex flex-col items-start gap-3">
+              <span class="text-foreground/90 text-sm leading-relaxed">{step.text}</span>
+              {step.link && (
+                <a href={step.link.href} class="pixel-btn pixel-btn--blue px-3 py-2 text-[10px] uppercase">
+                  {step.link.label}
+                </a>
+              )}
+            </div>
           </li>
         ))
       }
     </ol>
-    <p class="text-muted-foreground text-sm">The total process typically takes 1-2 weeks.</p>
+    <p class="text-muted-foreground text-sm">The entire process typically takes 1-2 weeks including the time needed for your tool inductions. Please note that we do not offer short term or daily membership options.</p>
   </PixelPanel>
 </section>
+
 
 {
   [
@@ -200,7 +181,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       id: "maker-plans",
       title: "Maker plans for hobbyists & independent makers",
       intro:
-        "Join our community and connect with other makers. For individuals who want access to our space for personal use and social reasons. You can also select a discounted yearly plan when signing up through the portal.",
+        "Join our community and connect with other makers. For individuals who want access to our space for personal use and social reasons. You can also select a discounted yearly plan when signing up.",
       plans: makerPlans,
       footnote: (
         <>
@@ -351,6 +332,24 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
     </section>
   ))
 }
+
+<section aria-labelledby="membership-intro-heading">
+  <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
+    <h2 id="membership-intro-heading" class="h2 text-foreground text-base leading-7 md:text-xl md:leading-8">Do I need a membership?</h2>
+    <p class="text-foreground/90 leading-relaxed">
+      You don't need a membership to attend our public <a href={eventsUrl} class={link}
+        >meetups and events</a
+      > or chat online. If you're a non-profit group looking for a meetup space, <a
+        href={contactUrl}
+        class={link}>get in touch</a
+      >. Unfortunately, to use any of our tools, you must become a member due to training and insurance requirements.
+    </p>
+
+    <p class="text-foreground/90 leading-relaxed">
+      It's also good to know that we're 100% volunteer run so things can take a bit longer than expected. We do our best to keep the space clean and tidy, but we rely on members to help out with cleaning and maintenance. If you're after a professional workshop space, membership may not be right for you.
+    </p>
+  </PixelPanel>
+</section>
 
 <script>
   // Carousel dots: mark the slide that is mostly in view, and jump to a slide when its dot is pressed.

@@ -10,7 +10,7 @@
 // Reuses what's here - the pixel-icon registry (`svg/pixel-icons`) for the four social glyphs, and
 // `.site-container` / `.primary-focus` from global.css. No new primitives beyond that registry, no JS.
 // Icons rest **blue in light** (`text-info`) / **pink in dark** (`dark:text-secondary`) and go green
-// (`hover:text-success`) on hover - the same active/hover colour as the nav.
+// (`hover:text-highlight`) on hover - the same active/hover colour as the nav.
 //
 // Wiring (decisions the single mock didn't specify):
 //   - the left group is the "safe space" message plus three tiny pixel flags (Aboriginal, Torres Strait
@@ -73,7 +73,7 @@ const memberLinks: readonly MemberLink[] = [
             <a
               href={link.href}
               {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              class="primary-focus text-info hover:text-success font-display inline-block py-2 text-[8px] tracking-[2px] uppercase transition-colors"
+              class="primary-focus text-info hover:text-highlight font-display inline-block py-2 text-[8px] tracking-[2px] uppercase transition-colors"
             >
               {link.label}
             </a>
@@ -112,7 +112,7 @@ const memberLinks: readonly MemberLink[] = [
             <a
               href={link.href}
               aria-label={link.label}
-              class="primary-focus text-info dark:text-secondary hover:text-success block transition-colors"
+              class="primary-focus text-info dark:text-secondary hover:text-highlight block transition-colors"
               {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
               <PixelIcon name={link.name} class="h-5" />

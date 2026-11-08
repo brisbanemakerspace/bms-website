@@ -12,7 +12,7 @@ const marked = (text: string) => {
   const m = /^(.*?)([*^#])$/.exec(text);
   return m ? ([m[1], m[2]] as const) : ([text, ""] as const);
 };
-const link = "text-info hover:text-success underline transition-colors";
+const link = "text-info hover:text-highlight underline transition-colors";
 ---
 
 {

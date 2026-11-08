@@ -34,7 +34,7 @@ const attrs: HTMLAttributes<"a"> = href
 // The pixel surface (frame + offset shadow, both themes) comes from ui/pixel-panel; the chip adds
 // only its inline layout and, on links, the green house hover colour.
 const interactive = href
-  ? "primary-focus hover:text-success motion-reduce:transition-none transition-colors"
+  ? "primary-focus hover:text-highlight motion-reduce:transition-none transition-colors"
   : "";
 const chipClass = ["inline-flex items-center gap-2 px-3 py-2", interactive]
   .filter(Boolean)

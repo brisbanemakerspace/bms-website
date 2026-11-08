@@ -38,7 +38,7 @@ const flatLinks: readonly NavLinkProps[] = navItems.flatMap(
             aria-current={isActive(pathname, item.href) ? "page" : undefined}
           >
             <svg
-              class="fill-success pointer-events-none absolute top-1/2 left-1.5 h-3.5 w-2.5 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
+              class="fill-highlight pointer-events-none absolute top-1/2 left-1.5 h-3.5 w-2.5 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
               viewBox="0 0 10.41 13.02"
               aria-hidden="true"
             >
@@ -61,7 +61,7 @@ const flatLinks: readonly NavLinkProps[] = navItems.flatMap(
                   variant: "retro",
                   class: [
                     "cursor-pointer [&[aria-expanded=true]_svg]:rotate-180",
-                    item.children.some((child) => isActive(pathname, child.href)) && "text-success",
+                    item.children.some((child) => isActive(pathname, child.href)) && "text-highlight",
                   ],
                 })}
               >
@@ -76,7 +76,7 @@ const flatLinks: readonly NavLinkProps[] = navItems.flatMap(
                   <DropdownItem
                     href={child.href}
                     aria-current={isActive(pathname, child.href) ? "page" : undefined}
-                    class="font-display hover:text-success aria-[current=page]:text-success rounded-none px-3 py-3 text-xs uppercase"
+                    class="font-display hover:text-highlight aria-[current=page]:text-highlight rounded-none px-3 py-3 text-xs uppercase"
                   >
                     {child.label}
                   </DropdownItem>
@@ -92,7 +92,7 @@ const flatLinks: readonly NavLinkProps[] = navItems.flatMap(
               aria-current={isActive(pathname, item.href) ? "page" : undefined}
             >
               <svg
-                class="fill-success pointer-events-none absolute top-1/2 left-1.5 h-3.5 w-2.5 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
+                class="fill-highlight pointer-events-none absolute top-1/2 left-1.5 h-3.5 w-2.5 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"
                 viewBox="0 0 10.41 13.02"
                 aria-hidden="true"
               >

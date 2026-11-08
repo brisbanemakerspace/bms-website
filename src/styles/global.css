@@ -57,6 +57,8 @@
       --color-primary-800
     ); /* #003a75 deep blue - the brand wordmark on light */
     --info-foreground: var(--color-primary-50);
+    /* hover / active accent for links + nav: light BMS blue, deepened on the light ground for contrast */
+    --highlight: var(--color-secondary-700); /* #007a8f */
     --success: var(
       --color-success-700
     ); /* #237c44 green tuned to read on the light ground */
@@ -92,6 +94,7 @@
     --accent-foreground: var(--color-base-100);
     --info: var(--color-primary-300); /* #5cb3ff airy blue */
     --info-foreground: var(--color-primary-950);
+    --highlight: var(--color-secondary-400); /* #1ccbe6 light BMS blue */
     --success: var(--color-success-400); /* #63de86 */
     --success-foreground: var(--color-success-900); /* #00401b */
     --warning: #ffd166;
@@ -163,7 +166,7 @@
       @apply mt-6;
     }
     & a {
-      @apply text-info hover:text-success underline underline-offset-2 transition-colors;
+      @apply text-info hover:text-highlight underline underline-offset-2 transition-colors;
     }
     & strong {
       @apply text-info font-bold;
@@ -171,10 +174,10 @@
     & h2 {
       @apply text-info mt-8 flex items-center gap-3;
     }
-    /* the retro ► selector - a green right-triangle via clip-path (no glyph, so it's font-safe). */
+    /* the retro ► selector - a highlight-coloured right-triangle via clip-path (no glyph, so it's font-safe). */
     & h2::before {
       content: "";
-      @apply bg-success block h-3 w-2 shrink-0;
+      @apply bg-highlight block h-3 w-2 shrink-0;
       clip-path: polygon(0 0, 100% 50%, 0 100%);
     }
     & h3 {
@@ -243,18 +246,14 @@
     --pixel-btn-ink: #ffffff;
     --pixel-btn-depth: #3c45a5;
   }
-  /* the Figma contact SEND MESSAGE green - the action-green counterpart to `--blue`. Points at the
-     fixed `--color-success-*` palette ramp (NOT the semantic `--success`, which flips per theme),
-     so the button reads identically in both themes like the pink/blue faces. */
+  /* the former action-green buttons (Book Now, Sign Up, Send Message...) now use the light BMS blue
+     (BMS Blue Alt, #00bfdc) - the same face as the default `.pixel-btn`. The class name is kept so call
+     sites don't change. Fixed `--color-secondary-*` ramp, so it reads identically in both themes. */
   .pixel-btn--green {
-    --pixel-btn-face: var(
-      --color-success-400
-    ); /* #63de86 the mock's SEND MESSAGE face */
-    --pixel-btn-face-hover: var(--color-success-300);
-    --pixel-btn-ink: var(
-      --color-success-900
-    ); /* #00401b dark green ink on green */
-    --pixel-btn-depth: var(--color-success-600);
+    --pixel-btn-face: var(--color-secondary-500); /* #00bfdc */
+    --pixel-btn-face-hover: var(--color-secondary-400); /* #1ccbe6 */
+    --pixel-btn-ink: var(--color-secondary-950); /* #002830 dark ink on cyan (7:1) */
+    --pixel-btn-depth: var(--color-secondary-600); /* #0099b3 */
   }
   .pixel-btn:hover,
   .pixel-btn:focus-visible {
