@@ -36,6 +36,15 @@ const minTerm = "3 month minimum term (cancel anytime after)";
 const warmFuzzy = "A warm fuzzy feeling for supporting our community space";
 const access = "24/7 access to the space and tools#";
 
+// Signup steps, in order. The numbers are CSS counters on the <ol>, so they stay in sync with the list.
+const signupSteps = [
+  "Visit the space",
+  "Sign up online",
+  "Complete the onboarding induction",
+  "Collect your swipe card during Monday open night",
+  "Organise your tool inductions",
+] as const;
+
 const makerPlans: readonly Plan[] = [
   {
     name: "Concession",
@@ -161,6 +170,27 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
         Full-time Professionals
       </a>
     </nav>
+  </PixelPanel>
+</section>
+
+<section aria-labelledby="signup-steps-heading">
+  <PixelPanel class="flex flex-col gap-6 p-6 md:p-8">
+    <h2 id="signup-steps-heading" class="h2 text-foreground text-base leading-7 md:text-xl md:leading-8">
+      How to become a member
+    </h2>
+    <ol class="grid gap-4 md:grid-cols-5">
+      {
+        signupSteps.map((step, i) => (
+          <li class="border-border bg-muted flex items-start gap-3 border-4 p-4 md:flex-col">
+            <span class="bg-primary text-primary-foreground font-display flex size-8 shrink-0 items-center justify-center text-xs">
+              {i + 1}
+            </span>
+            <span class="text-foreground/90 text-sm leading-relaxed">{step}</span>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="text-muted-foreground text-sm">The total process typically takes 1-2 weeks.</p>
   </PixelPanel>
 </section>
 
