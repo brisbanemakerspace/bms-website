@@ -58,15 +58,59 @@ const title = "Brisbane Makerspace walkthrough video";
         const iframe = document.createElement("iframe");
         iframe.src = `https://www.youtube.com/embed/${box.dataset.video}?autoplay=1`;
         iframe.title = box.dataset.title ?? "Video";
-        iframe.className = "size-full";
+        iframe.className = "absolute inset-0 size-full opacity-0";
         iframe.allow =
           "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
         iframe.referrerPolicy = "strict-origin-when-cross-origin";
         iframe.allowFullscreen = true;
-        box.replaceChildren(iframe);
-        iframe.focus();
+
+        // The embed takes a while to load: keep the thumbnail, swap the play button for a stepped
+        // pixel spinner, and reveal the iframe only once it has loaded.
+        const spinner = document.createElement("div");
+        spinner.setAttribute("role", "status");
+        spinner.className =
+          "absolute inset-0 flex items-center justify-center bg-black/40 pointer-events-none";
+        spinner.innerHTML =
+          '<span class="sr-only">Loading video…</span>' +
+          '<span aria-hidden="true" class="border-secondary-500 size-12 video-spinner border-4 border-t-transparent md:size-16"></span>';
+
+        play.querySelector("span[aria-hidden]")?.classList.add("hidden");
+        box.classList.add("relative");
+        box.append(iframe, spinner);
+        // Never detach/re-attach the iframe (e.g. replaceChildren(iframe)): that reloads it, fires `load`
+        // again and loops, flickering the player. Remove the other children and leave it in place.
+        iframe.addEventListener(
+          "load",
+          () => {
+            iframe.classList.remove("opacity-0");
+            play.remove();
+            spinner.remove();
+            iframe.focus();
+          },
+          { once: true },
+        );
       });
     });
   };
   document.addEventListener("astro:page-load", init);
 </script>
+
+<style is:global>
+  /* Own keyframes: the motion catalog's `spin` is not emitted unless a theme animation token uses it. */
+  @keyframes video-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .video-spinner {
+    animation: video-spin 0.8s steps(8) infinite;
+  }
+  /* A loading indicator is essential feedback, so it is exempt from the global reduced-motion guard
+     (which forces every animation to a single 0.01ms run). Slower and stepped, never smooth or large. */
+  @media (prefers-reduced-motion: reduce) {
+    .video-spinner {
+      animation-duration: 1.6s !important;
+      animation-iteration-count: infinite !important;
+    }
+  }
+</style>
