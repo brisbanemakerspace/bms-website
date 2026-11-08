@@ -216,10 +216,10 @@ const facilities: readonly Facility[] = [
 
 <section aria-labelledby="webcams-heading">
   <PixelPanel class="flex flex-col items-start gap-3 p-6 md:p-8">
-    <h2 id="webcams-heading" class="h3 text-foreground">Peek inside the space</h2>
+    <h2 id="webcams-heading" class="h3 text-foreground">Peek inside the space 👀</h2>
     <p class="text-foreground/90 leading-relaxed">
       Curious what's happening at the makerspace right now? Our public webcams let you see snapshots from inside the space, 
-      no visit required! You can also see what our 3D printers are up to.{" "}<img
+      no visit required! You can also see what our 3D printers are up to or check out our internal wiki.{" "}<img
         src={printer3d.src}
         width={printer3d.width}
         height={printer3d.height}
@@ -228,14 +228,24 @@ const facilities: readonly Facility[] = [
         class="inline-block size-6 align-text-bottom [image-rendering:pixelated]"
       />
     </p>
-    <a
-      href={webcams}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase"
-    >
-      View our webcams
-    </a>
+    <div class="flex flex-wrap gap-3">
+      <a
+        href={webcams}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase"
+      >
+        View our webcams
+      </a>
+      <a
+        href={wikiPages.tools}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase"
+      >
+        View Wiki
+      </a>
+    </div>
   </PixelPanel>
 </section>
 
