@@ -29,7 +29,7 @@ export const GET: APIRoute = ({ site }) => {
     `- [Signup](${new URL("signup/", base).href})`,
     `- [Gift cards](${new URL("gift-cards/", base).href})`,
     `- [Mailing list](${new URL("mailing-list/", base).href})`,
-    `- [Media pack](${new URL("media-pack/", base).href})`,
+    `- [Brand and logo guidelines](${new URL("brand-guidelines/", base).href})`,
     `- [About](${new URL("about/", base).href})`,
     `- [Blog](${new URL("blog/", base).href})`,
     `- [Projects](${new URL("projects/", base).href})`,

@@ -160,6 +160,7 @@ export interface WorkshopProps {
   closing: readonly string[]; // paragraphs after the list
   accessibility: string;
   bookingId: string; // ClassBento booking-widget id
+  unavailable?: boolean; // shows a "Currently unavailable" banner on the index card
 }
 
 // events (regular meetups). See src/config/eventData.json.ts.

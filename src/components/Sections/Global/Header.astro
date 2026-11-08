@@ -21,6 +21,10 @@ import logo from "@images/bms-logo.svg";
 const pathname = Astro.url.pathname;
 // `undefined` when Discord is commented out of `socialPlatforms` - the button then simply isn't rendered.
 const discord = socialLink("discord");
+// Instagram and Facebook sit beside it, as plain pixel buttons in the default theme face.
+const otherSocials = [socialLink("instagram"), socialLink("facebook")].filter(
+  (link) => link !== undefined,
+);
 ---
 
 <header
@@ -72,6 +76,20 @@ const discord = socialLink("discord");
             <PixelIcon name={discord.name} size="md" />
           </a>
         )
+      }
+
+      {
+        otherSocials.map((link) => (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${link.label} (opens in a new tab)`}
+            class="pixel-btn size-9 shrink-0 before:hidden after:hidden"
+          >
+            <PixelIcon name={link.name} size="md" />
+          </a>
+        ))
       }
 
       {

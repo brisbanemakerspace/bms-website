@@ -40,6 +40,9 @@ if (isProductionDeploy && placeholderHosts.has(hostname)) {
 export default defineConfig({
   site,
 
+  // The page was renamed from /media-pack/.
+  redirects: { "/media-pack/": "/brand-guidelines/" },
+
   // Static except the unlisted `/contact-backup/` route (`prerender = false`: it receives the Resend
   // form POST). Everything else prerenders; the adapter serves the build on Cloudflare Workers.
   adapter: cloudflare({ imageService: "compile" }),

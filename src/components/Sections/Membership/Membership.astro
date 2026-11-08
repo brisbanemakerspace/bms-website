@@ -27,12 +27,14 @@ interface Plan {
 }
 
 const fees: Feature = {
-  text: "Additional charges may occur for some tools.",
-  label: "Check here.",
+  text: "Additional usage-based charges may occur for some tools - ",
+  label: "check here",
   href: feesUrl,
 };
-const tools = "Access to 3D printers, laser cutter, electronics and more*";
-const minTerm = "3 month minimum term (cancel anytime after that)";
+const tools = "Access to 3D printers, laser cutter, electronics, woodworking and more*";
+const minTerm = "3 month minimum term (cancel anytime after)";
+const warmFuzzy = "A warm fuzzy feeling for supporting our community space";
+const access = "24/7 access to the space and tools#";
 
 const makerPlans: readonly Plan[] = [
   {
@@ -41,11 +43,11 @@ const makerPlans: readonly Plan[] = [
     href: portalSignup,
     features: [
       tools,
+      access,
       fees,
-      "A warm fuzzy feeling for supporting our community",
-      minTerm,
-      "24/7 access",
-      "Personal commercial use^",
+      warmFuzzy,
+      minTerm,      
+      "Commercial use^",
       "Must present concession or healthcare card during signup",
     ],
   },
@@ -55,11 +57,10 @@ const makerPlans: readonly Plan[] = [
     href: portalSignup,
     features: [
       tools,
+      access,
       fees,
-      "A warm fuzzy feeling for supporting our community",
+      warmFuzzy,
       minTerm,
-      "24/7 access",
-      "No commercial use",
     ],
   },
   {
@@ -68,11 +69,11 @@ const makerPlans: readonly Plan[] = [
     href: portalSignup,
     features: [
       tools,
+      access,
       fees,
-      "A warm fuzzy feeling for supporting our community",
+      warmFuzzy,
       minTerm,
-      "24/7 access",
-      "Personal commercial use^",
+      "Commercial use^",
     ],
   },
 ];
@@ -87,8 +88,7 @@ const deskCommon: readonly Feature[] = [
     href: fairUseUrl,
   },
   deskTerm,
-  "High speed WiFi, unlimited visits and 24/7 access",
-  "Free meeting room use",
+  "High speed WiFi and unlimited 24/7 access#",
 ];
 
 const coworkingPlans: readonly Plan[] = [
@@ -139,7 +139,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 <section aria-labelledby="membership-intro-heading">
   <PixelPanel class="flex flex-col gap-4 p-6 md:p-8">
-    <h2 id="membership-intro-heading" class="h3 text-foreground">Do I need a membership?</h2>
+    <h2 id="membership-intro-heading" class="h2 text-foreground text-base leading-7 md:text-xl md:leading-8">Do I need a membership?</h2>
     <p class="text-foreground/90 leading-relaxed">
       You don't need a membership to attend our public <a href={eventsUrl} class={link}
         >meetups and events</a
@@ -174,9 +174,9 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       plans: makerPlans,
       footnote: (
         <>
-          * Our <a href={toolsUrl} class={link} {...ext}>fair use policy</a> applies. Tools require safety
-          induction before use. ^ Personal commercial use allows low volumes of sales on Etsy, at local
-          markets, etc.
+          <sup>*</sup> Our <a href={toolsUrl} class={link} {...ext}>fair use policy</a> applies and some tools require safety
+          induction before use. <sup>^</sup> Personal commercial use allows low volumes of sales on Etsy, at local
+          markets, etc. and does not allow high volume use or manufacturing. <sup>#</sup> Noise restrictions restrict access to loud tools between certain hours.
         </>
       ),
     },
@@ -188,8 +188,9 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       plans: coworkingPlans,
       footnote: (
         <>
-          * Our <a href={toolsUrl} class={link} {...ext}>fair use policy</a> applies. Tools require safety
-          induction before use. Limited additional storage options available from $100/mth with dedicated
+          <sup>*</sup> Our <a href={toolsUrl} class={link} {...ext}>fair use policy</a> applies and some tools require safety
+          induction before use. <sup>^</sup> Personal commercial use allows low volumes of sales on Etsy, at local
+          markets, etc. and does not allow high volume use or manufacturing. <sup>#</sup> Noise restrictions restrict access to loud tools between certain hours. Limited additional storage options available from $100/mth with dedicated
           desk memberships.
         </>
       ),
@@ -198,7 +199,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
     <section id={group.id} aria-labelledby={`${group.id}-heading`} class="scroll-mt-24">
       <div class="flex flex-col gap-6">
         <div class="flex flex-col gap-3">
-          <h2 id={`${group.id}-heading`} class="h3 text-foreground">
+          <h2 id={`${group.id}-heading`} class="h2 text-foreground text-base leading-7 md:text-xl md:leading-8">
             {group.title}
           </h2>
           <p class="text-foreground/90 leading-relaxed">{group.intro}</p>
@@ -236,7 +237,12 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
                           <span class="sr-only">Included</span>
                         </>
                       ) : (
-                        <span class="sr-only">Not included</span>
+                        <>
+                          <span class="text-muted-foreground font-display block text-sm leading-none" aria-hidden="true">
+                            X
+                          </span>
+                          <span class="sr-only">Not included</span>
+                        </>
                       )}
                     </td>
                   ))}

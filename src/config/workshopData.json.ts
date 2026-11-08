@@ -67,6 +67,7 @@ export const workshops = [
   },
   {
     slug: "led-lamp",
+    unavailable: true,
     title: "Laser Cut LED Lamp Workshop",
     listing: true,
     listPrice: "Sessions from $59 ($55 for 2 or more!)",

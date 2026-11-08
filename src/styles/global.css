@@ -215,10 +215,16 @@
      header toggle + MENU button and the hero/contact CTAs; size it with height / width / padding
      utilities at the call site. */
   .pixel-btn {
-    --pixel-btn-face: var(--color-secondary-500); /* #00bfdc BMS Blue (Alt) flat face */
+    --pixel-btn-face: var(
+      --color-secondary-500
+    ); /* #00bfdc BMS Blue (Alt) flat face */
     --pixel-btn-face-hover: var(--color-secondary-400); /* #1ccbe6 */
-    --pixel-btn-ink: var(--color-secondary-950); /* #002830 dark ink on cyan (7:1) */
-    --pixel-btn-depth: var(--color-secondary-600); /* #0099b3 inset shadow colour */
+    --pixel-btn-ink: var(
+      --color-secondary-950
+    ); /* #002830 dark ink on cyan (7:1) */
+    --pixel-btn-depth: var(
+      --color-secondary-600
+    ); /* #0099b3 inset shadow colour */
     @apply font-display relative inline-flex cursor-pointer items-center justify-center;
     background-color: var(--pixel-btn-face);
     color: var(--pixel-btn-ink);
@@ -229,6 +235,13 @@
     --pixel-btn-face-hover: var(--color-primary-400);
     --pixel-btn-ink: #ffffff; /* white ink on blue */
     --pixel-btn-depth: var(--color-primary-700);
+  }
+  /* Discord blurple (#5865F2) - brand colour, not a theme token, so it is the same in both themes. */
+  .pixel-btn--discord {
+    --pixel-btn-face: #5865f2;
+    --pixel-btn-face-hover: #6d79f5;
+    --pixel-btn-ink: #ffffff;
+    --pixel-btn-depth: #3c45a5;
   }
   /* the Figma contact SEND MESSAGE green - the action-green counterpart to `--blue`. Points at the
      fixed `--color-success-*` palette ramp (NOT the semantic `--success`, which flips per theme),

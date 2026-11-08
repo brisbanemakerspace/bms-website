@@ -5,21 +5,13 @@
 // submitting opens Mailchimp's confirmation page in a new tab. Styled with the site's own pixel
 // fields + `.pixel-btn`, not Mailchimp's embed CSS. To point it at another audience, replace the
 // `action` URL, the `tags` value and the honeypot field name (`b_<u>_<id>`) with the new embed code's.
-import { PixelIcon } from "@components/svg/pixel-icons";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
-import { socialLink } from "@config/socialData.json";
 
 const action =
   "https://space.us5.list-manage.com/subscribe/post?u=53abe625ad6dbf036f8815e97&id=bc5371e651&f_id=0041bdedf0";
 const honeypot = "b_53abe625ad6dbf036f8815e97_bc5371e651";
 const tag = "3701034";
-
-// Instagram + Facebook icons beside the Subscribe button. `undefined` (dropped) when a platform is
-// commented out of `socialPlatforms`.
-const socials = [socialLink("instagram"), socialLink("facebook")].filter(
-  (link) => link !== undefined,
-);
 
 const fieldClass =
   "bg-accent border-border rounded-none border-4 px-3 text-sm placeholder:text-muted-foreground";
@@ -80,26 +72,6 @@ const fieldClass =
       >
         Subscribe
       </button>
-
-      {
-        socials.length > 0 && (
-          <ul class="flex h-11 items-center gap-3">
-            {socials.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${link.label} (opens in a new tab)`}
-                  class="primary-focus text-info hover:text-success block transition-colors"
-                >
-                  <PixelIcon name={link.name} size="lg" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        )
-      }
     </form>
   </div>
 </section>

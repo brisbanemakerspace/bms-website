@@ -77,7 +77,15 @@ const reviews = [
     {
       listedWorkshops.map((workshop) => (
         <li class="flex">
-          <PixelPanel class="flex w-full flex-col gap-4 p-6">
+          <PixelPanel class="relative flex w-full flex-col gap-4 overflow-hidden p-6">
+            {workshop.unavailable && (
+              <div
+                class="bg-primary text-primary-foreground font-display pointer-events-none absolute top-[3.2rem] -right-14 z-10 w-60 rotate-45 py-2 pl-[0.1em] text-center text-[9px] leading-none tracking-[0.1em] uppercase shadow-[0_2px_0_0_var(--color-primary-700)]"
+                role="note"
+              >
+                Currently unavailable
+              </div>
+            )}
             {photos[workshop.slug] && (
               <Picture
                 src={photos[workshop.slug]!.image}

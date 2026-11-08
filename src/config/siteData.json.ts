@@ -64,7 +64,7 @@ const siteData = {
       signup: "/signup/",
       giftCards: "/gift-cards/",
       mailingList: "/mailing-list/",
-      mediaPack: "/media-pack/",
+      mediaPack: "/brand-guidelines/",
       membership: "/membership/",
       contact: "/contact/",
       donate: "/donate/",

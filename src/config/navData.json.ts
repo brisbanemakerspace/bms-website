@@ -2,7 +2,7 @@ import { type NavItemProps } from "./types/configDataTypes";
 
 /**
  * * Primary navigation - the header's link set, laid out like the old brisbanemaker.space menu:
- * VISIT · MEMBERSHIP · WORKSHOPS · ABOUT (a dropdown: Facilities, Contact, About, Events, Media Pack) · DONATE.
+ * VISIT · MEMBERSHIP · WORKSHOPS · ABOUT (a dropdown: Facilities, Contact, About, Events, Brand and Logo Guidelines) · DONATE.
  *
  * Labels are Title-case and uppercased in the UI (Press Start 2P). Hrefs carry the trailing slash
  * to match `astro.config.mjs` `trailingSlash: "always"`. An entry with `children` is a dropdown group
@@ -23,7 +23,7 @@ export const navItems = [
       { label: "Contact", href: "/contact/" },
       { label: "About", href: "/about/" },
       { label: "Events", href: "/events/" },
-      { label: "Media Pack", href: "/media-pack/" },
+      { label: "Brand and Logo Guidelines", href: "/brand-guidelines/" },
     ],
   },
 ] as const satisfies readonly NavItemProps[];

@@ -7,12 +7,20 @@ interface Props {
   feature: Feature;
 }
 const { feature } = Astro.props;
+// A trailing "*", "^" or "#" is a footnote marker: rendered as a superscript.
+const marked = (text: string) => {
+  const m = /^(.*?)([*^#])$/.exec(text);
+  return m ? ([m[1], m[2]] as const) : ([text, ""] as const);
+};
 const link = "text-info hover:text-success underline transition-colors";
 ---
 
 {
   typeof feature === "string" ? (
-    feature
+    <>
+      {marked(feature)[0]}
+      {marked(feature)[1] && <sup>{marked(feature)[1]}</sup>}
+    </>
   ) : (
     <>
       {feature.text}{" "}

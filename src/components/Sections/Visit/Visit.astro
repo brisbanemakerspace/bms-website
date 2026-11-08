@@ -8,6 +8,7 @@
 // visitors' data to Google until they choose to click.
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
 import MapEmbed from "@components/Sections/Global/MapEmbed.astro";
+import { PixelIcon } from "@components/svg/pixel-icons";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import siteData from "@config/siteData.json";
 import { socialHref } from "@config/socialData.json";
@@ -16,6 +17,10 @@ const discord = socialHref("discord");
 const eventsUrl = siteData.links.routes.events;
 const gettingThereUrl = siteData.links.wikiPages.gettingThere;
 const address = siteData.address;
+// Same links as the map section at the foot of the page.
+const mapQuery = encodeURIComponent(`${siteData.tabTitle} ${address}`);
+const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+const appleMapsUrl = `https://maps.apple.com/?q=${mapQuery}`;
 
 const travel = [
   {
@@ -54,8 +59,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       levels of support or service, we may not be a match.
     </p>
     <p class="text-foreground/90 leading-relaxed">
-      Our volunteers and members are regularly on-site throughout the week, but we don't employ staff
-      during normal business hours.
+      Our volunteers and members are regularly on-site throughout the week, but we don't employ staff.
     </p>
   </PixelPanel>
 </section>
@@ -66,6 +70,12 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       <h2 id="location-heading" class="h3 text-foreground">Our Address</h2>
       <address class="text-foreground/90 not-italic leading-relaxed">{address}</address>
       <p class="text-muted-foreground text-sm">Membership required outside of public events.</p>
+      <div class="flex flex-wrap gap-3">
+        <a href={googleMapsUrl} class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase" {...ext}>
+          Open in Google Maps
+        </a>
+        <a href={appleMapsUrl} class="pixel-btn px-5 py-3 text-xs uppercase" {...ext}>Open in Apple Maps</a>
+      </div>
     </PixelPanel>
   </section>
 
@@ -80,7 +90,9 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
       <p class="text-foreground/90 leading-relaxed">
         Join our Discord and ask a volunteer.
       </p>
-      <a href={discord} class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase" {...ext}>Join Discord</a>
+      <a href={discord} class="pixel-btn pixel-btn--discord gap-3 px-5 py-3 text-xs uppercase" {...ext}
+        ><PixelIcon name="discord" size="md" class="[&_path]:fill-white" />Join Discord</a
+      >
     </PixelPanel>
   </section>
 </div>
